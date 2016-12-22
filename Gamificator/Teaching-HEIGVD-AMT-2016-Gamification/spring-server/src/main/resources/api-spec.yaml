@@ -1,0 +1,377 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Gamification platform
+  description: |
+    **API specification of the Gamification platform**
+
+    You can try all HTTP operation described in this Swagger spec.
+    
+    Find source code of this API [here](https://github.com/sarrab/GamifyApp.git)
+host: localhost:8080
+basePath: /api
+schemes:
+  - http
+  - https
+paths:
+  /applications:
+    get: 
+      description: Retourne la liste de toutes les applications enregistrées
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK, Applications summary
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ApplicationDTO'
+    post:
+      description: Enregistre une application
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: Application to add
+          schema:
+            $ref: '#/definitions/Application'
+          required: true
+      responses:
+        201:
+          description: OK, Application created
+  /applications/{applicationId}:
+    get:
+      description: Retourne l'application dont le nom est spécifié dans le path
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: applicationId
+          description: Id de l'application
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Ok, Application details
+          schema:
+            $ref: '#/definitions/ApplicationDTO'
+    put:
+      description: Apporte des modifications à l'application
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: applicationId
+          description: Id de l'application
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: Modification of the application
+          schema:
+            $ref: '#/definitions/Application'
+          required: false
+      responses:
+        200:
+          description: OK, Application modified
+    delete:
+      description: Supprime une application
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: applicationId
+          description: Id de l'application
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: OK, Application deleted
+  /badges:
+    get: 
+      description: Retourne la liste de tous les badges de l'application 
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK, Badges summary
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BadgeDTO'
+    post:
+      description: Crée un badge dans l'application
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: Badge to add
+          schema:
+            $ref: '#/definitions/BadgeDTO'
+          required: true
+        - name: token
+          in: header
+          type: string
+          description: Identifient de l'application à laquelle appartient le badge
+          required: true
+      responses:
+        201:
+          description: OK, Badge created
+  /badges/{badgeId}:
+    get:
+      description: Retourne le badge dont l'id est spécifié dans le path
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: badgeId
+          description: Badge's id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Ok, Badge details
+          schema:
+            $ref: '#/definitions/BadgeDTO'
+    put:
+      description: Apporte des modifications au badge
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: token
+          in: header
+          type: string
+          description: Identifient de l'application à laquelle appartient le badge
+          required: true
+        - in: path
+          name: badgeId
+          description: Badge's id
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: Modification of the badge
+          schema:
+            $ref: '#/definitions/BadgeDTO'
+          required: false
+      responses:
+        200:
+          description: OK, Badge modified
+    delete:
+      description: Supprime le badge
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: badgeId
+          description: Badge's id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: OK, Badge deleted
+  /pointScales:
+    get: 
+      description: Retourne la liste de tous les pointScales de l'application 
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK, pointScales summary
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PointScaleDTO'
+    post:
+      description: Crée un pointScale dans l'application
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: PointScale to add
+          schema:
+            $ref: '#/definitions/PointScaleDTO'
+          required: true
+      responses:
+        201:
+          description: OK, PointScale created
+  /pointScales/{pointScaleId}:
+    get:
+      description: Retourne le pointScale dont l'id est spécifié dans le path
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: pointScaleId
+          description: PointScale's id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Ok, PointScale details
+          schema:
+            $ref: '#/definitions/PointScaleDTO'
+    put:
+      description: Apporte des modifications au pointScale
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: pointScaleId
+          description: PointScale's id
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: Modification of the pointScale
+          schema:
+            $ref: '#/definitions/PointScaleDTO'
+          required: false
+      responses:
+        200:
+          description: OK, PointScale modified
+    delete:
+      description: Supprime le pointScale
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: pointScaleId
+          description: PointScale's id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: OK, PointScale deleted
+  /events:
+    post:
+      description: Crée un évènement dans l'application
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: Event produced in the application
+          schema:
+            $ref: '#/definitions/EventDTO'
+          required: true
+      responses:
+        201:
+          description: OK, Event posted
+definitions:
+  ApplicationDTO:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+        description: Application's name
+      badges:
+        type: array
+        items:
+            type: string
+            format: uri
+        description: Liste de tous les badges d'une application
+  Application:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+        description: Application's name
+      badges:
+        type: array
+        items:
+            type: string
+            format: uri
+        description: Liste de tous les badges d'une application
+      password:
+        type: string
+        format: password
+        description: Mot de passe pour enregistrer l'application
+  BadgeDTO:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+        description: Badge name.
+      description:
+        type: string
+        description: Description du badge
+      imageURI:
+        type: string
+        format: uri
+        description: Image du badge
+      application:
+        type: integer
+        format: int64
+        description: Identifient de l'application à laquelle appartient le badge
+      
+  PointScaleDTO:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+        description: Badge name.
+      description:
+        type: string
+        description: Description du badge
+      nbrDePoints:
+        type: integer
+        format: int32    
+  EventDTO:
+    type: object
+    description: Evènement produit dans une application
+    properties: 
+      type:
+        type: string
+        description: type de l'évènement produit
+      applicationId: 
+        type: integer
+        format: int64
+        description: Id de l'application où se produit l'évènement
+      userId:
+        type: integer
+        format: int64
+        description: Id de l'utilisateur qui a produit l'évènement
+      timeStamp:
+        type: string
+        format: date-time
+        description: Temps au quel l'évènement a été produit dans l'application
+        
