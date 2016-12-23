@@ -18,17 +18,19 @@ import javax.persistence.Id;
  */
 @Entity
 public class Account implements Serializable {
+
     @Id
-   @GeneratedValue(strategy = GenerationType.AUTO) 
-  private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     @Column(unique = true)
-     private String password;
-     private String firstName;
+    private String password;
+    private String firstName;
     private String lastName;
-     private String username;
-     private String email;
-     
-     public Account(){}
+    private String username;
+    private String email;
+
+    public Account() {
+    }
 
     public Account(String password, String username, String email) {
         this.password = password;
@@ -83,8 +85,5 @@ public class Account implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-     
-     
-     
-    
+
 }

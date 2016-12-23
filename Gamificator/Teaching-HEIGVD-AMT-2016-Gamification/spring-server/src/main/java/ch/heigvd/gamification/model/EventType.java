@@ -6,6 +6,7 @@
 package ch.heigvd.gamification.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,25 +14,39 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Thibaut-PC
  */
-
 @Entity
 public class EventType implements Serializable {
+
     @Id
-   @GeneratedValue(strategy = GenerationType.AUTO) 
-  private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String eventName;
-    
-    
-     @ManyToOne(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Application app;
+
+    @OneToMany(mappedBy = "eventType")
+    private List<Rule> rules;
     
-    public EventType(){
-        
+     @OneToMany(mappedBy = "eventType")
+    private List<Event> events;
+
+    public EventType() {
+
+    }
+
+    public void setRules(List<Rule> rules) {
+        this.rules = rules;
+    }
+
+    public List<Rule> getRules() {
+        return rules;
     }
 
     public void setId(Long id) {
@@ -62,6 +77,5 @@ public class EventType implements Serializable {
     public void setApp(Application app) {
         this.app = app;
     }
-       
-    
+
 }

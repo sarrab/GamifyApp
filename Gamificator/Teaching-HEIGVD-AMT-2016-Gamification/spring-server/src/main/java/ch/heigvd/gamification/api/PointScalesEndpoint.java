@@ -6,8 +6,7 @@
 package ch.heigvd.gamification.api;
 
 import ch.heigvd.gamification.api.dto.PointScaleDTO;
-import ch.heigvd.gamification.dao.PointScaleRepository;
-import ch.heigvd.gamification.model.Badge;
+import ch.heigvd.gamification.services.dao.PointScaleRepository;
 import ch.heigvd.gamification.model.PointScale;
 import java.util.List;
 
@@ -17,7 +16,6 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,7 +72,7 @@ public class PointScalesEndpoint implements PointScalesApi {
     @Override
     @RequestMapping(value = "/{pointScaleId}", method = RequestMethod.PUT)
     public ResponseEntity<Void> pointScalesPointScaleIdPut(@ApiParam(value = "pointScaleId", required = true) @PathVariable("pointScaleId") Long pointScaleId, @ApiParam(value = "Modification of the pointScale") @RequestBody PointScaleDTO body) {
-        
+
         PointScale pointScale = pointscaleRepository.findOne(pointScaleId);
 
         if (!body.getDescription().equals(" ")) {
@@ -88,15 +86,23 @@ public class PointScalesEndpoint implements PointScalesApi {
         } else {
             body.setName(pointScale.getName());
         }
-          pointScale.setMinpoint(body.getNbrDePoints());
- 
+        pointScale.setMinpoint(body.getNbrDePoints());
+
         pointscaleRepository.save(pointScale);
         return new ResponseEntity(HttpStatus.OK);
     }
-@RequestMapping(method = RequestMethod.POST)
+
+    @RequestMapping(method = RequestMethod.POST)
     @Override
     public ResponseEntity<Void> pointScalesPost(@ApiParam(value = "PointScale to add", required = true) @RequestBody PointScaleDTO body) {
-        PointScale pointScale = new PointScale();
+        PointScale pointScale = new PointScale() ;
+      
+        
+        if(pointscaleRepository.findByName(body.getName()) != null){
+        
+        return new ResponseEntity("poinscat exist already", HttpStatus.CONFLICT);
+        }
+        
         if (body != null) {
             pointScale.setDescription(body.getDescription());
             pointScale.setId(body.getId());
@@ -111,19 +117,14 @@ public class PointScalesEndpoint implements PointScalesApi {
     }
 
     public PointScaleDTO toDTO(PointScale pointScale) {
-       PointScaleDTO pointscaledto = new PointScaleDTO();
-       
-       pointscaledto.setNbrDePoints(pointScale.getMinpoint());
-       pointscaledto.setDescription(pointScale.getDescription());
-       pointscaledto.setName(pointScale.getName());
-       pointscaledto.setId(pointScale.getId());
-              
-       return pointscaledto;
+        PointScaleDTO pointscaledto = new PointScaleDTO();
+
+        pointscaledto.setNbrDePoints(pointScale.getMinpoint());
+        pointscaledto.setDescription(pointScale.getDescription());
+        pointscaledto.setName(pointScale.getName());
+        pointscaledto.setId(pointScale.getId());
+
+        return pointscaledto;
     }
 
-
-    
-    
-    
-    
 }

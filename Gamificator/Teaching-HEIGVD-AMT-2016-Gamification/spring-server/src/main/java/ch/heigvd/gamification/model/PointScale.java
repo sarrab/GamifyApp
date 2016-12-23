@@ -6,26 +6,41 @@
 package ch.heigvd.gamification.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Thibaut-PC
  */
 @Entity
-public class PointScale implements Serializable  {
+public class PointScale implements Serializable {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) private
-     Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
     private String description;
     private int minpoint;
-   
-    public PointScale (){
-        
+    
+    @OneToMany(mappedBy = "pointscale")
+    private List<Rule> rules;
+
+    public List<Rule> getRules() {
+        return rules;
+    }
+
+    public void setRules(List<Rule> rules) {
+        this.rules = rules;
+    }
+
+    
+    public PointScale() {
+
     }
 
     public PointScale(String name, String description, int point) {
@@ -66,7 +81,4 @@ public class PointScale implements Serializable  {
         this.description = description;
     }
 
- 
-    
-    
 }

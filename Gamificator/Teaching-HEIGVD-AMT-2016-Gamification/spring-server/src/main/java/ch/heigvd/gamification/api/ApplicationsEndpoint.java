@@ -5,19 +5,23 @@
  */
 package ch.heigvd.gamification.api;
 
-import ch.heigvd.gamification.api.dto.Application;
+import ch.heigvd.gamification.model.Application;
 import ch.heigvd.gamification.api.dto.ApplicationDTO;
-import ch.heigvd.gamification.api.dto.BadgeDTO;
-import ch.heigvd.gamification.dao.ApplicationRepository;
-import ch.heigvd.gamification.model.Badge;
+import ch.heigvd.gamification.api.dto.Registration;
+import ch.heigvd.gamification.services.dao.ApplicationRepository;
+import ch.heigvd.gamification.services.dao.AuthenKeyRepository;
+import ch.heigvd.gamification.model.AuthenKey;
 import io.swagger.annotations.ApiParam;
-import java.net.URI;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static java.util.stream.Collectors.toList;
 import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +31,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
-import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  *
@@ -38,10 +41,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class ApplicationsEndpoint implements ApplicationsApi {
 
     ApplicationRepository apprepository;
+    AuthenKeyRepository authenRepository;
 
-    @Autowired
-    public ApplicationsEndpoint(ApplicationRepository app) {
-        this.apprepository = app;
+   
+ @Autowired
+    public ApplicationsEndpoint(ApplicationRepository apprepository, AuthenKeyRepository authenRepository) {
+        this.apprepository = apprepository;
+        this.authenRepository = authenRepository;
     }
 
     @Override
@@ -61,7 +67,7 @@ public class ApplicationsEndpoint implements ApplicationsApi {
     @RequestMapping(value = "/{applicationId}", method = RequestMethod.GET)
     public ResponseEntity<ApplicationDTO> applicationsApplicationIdGet(@ApiParam(value = "applicationId", required = true) @PathVariable("applicationId") Long applicationId) {
         ch.heigvd.gamification.model.Application app = apprepository.findOne(applicationId);
-        UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodName(BadgesEndpoint.class, "badgesGet").build();
+        UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodName(BadgesEndpoint.class,"badgesGet", 1).build();
         ApplicationDTO dto = toDTO(app, uriComponents);
 
         if (dto == null) {
@@ -71,10 +77,14 @@ public class ApplicationsEndpoint implements ApplicationsApi {
         }
     }
 
+   
     @Override
     @RequestMapping(value = "/{applicationId}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> applicationsApplicationIdPut(@ApiParam(value = "applicationId", required = true) @PathVariable("applicationId") Long applicationId, @ApiParam(value = "Modification of the application") @RequestBody Application body) {
-        ch.heigvd.gamification.model.Application app = apprepository.findOne(applicationId);
+    public ResponseEntity<Void> applicationsApplicationIdPut(@ApiParam(value = "Id de l'application", required = true) @PathVariable("applicationId") Long applicationId, @ApiParam(value = "Modification of the application") @RequestBody Registration body) {
+     
+        
+        
+      Application app = apprepository.findOne(applicationId);
 
         if (!body.getName().equals(" ")) {
             app.setName(body.getName());
@@ -95,30 +105,42 @@ public class ApplicationsEndpoint implements ApplicationsApi {
     @Override
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<ApplicationDTO>> applicationsGet() {
-        UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodName(BadgesEndpoint.class, "badgesGet").build();
+        UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodName(BadgesEndpoint.class, "badgesGet", 1).build();
         return new ResponseEntity<>(StreamSupport.stream(apprepository.findAll().spliterator(), true)
                 .map(p -> toDTO(p, uriComponents))
                 .collect(toList()), HttpStatus.OK);
     }
 
-    
-    @RequestMapping(method = RequestMethod.POST)
-    @Override
-    public ResponseEntity<Void> applicationsPost(@ApiParam(value = "applicationId", required = true) @RequestBody Application body) {
-        if (body != null) {
-            ch.heigvd.gamification.model.Application app = new ch.heigvd.gamification.model.Application();
-            app.setId(body.getId());
-            app.setName(body.getName());
-            app.setPassword(body.getPassword());
+   
 
-            apprepository.save(app);
-            return new ResponseEntity(body, HttpStatus.CREATED);
+    @Override
+    @RequestMapping(method = RequestMethod.POST)
+   public ResponseEntity<Void> applicationsPost(@ApiParam(value = "Application to add", required = true) @RequestBody Registration body) {
+       
+        if (body != null) {
+        
+            AuthenKey apiKey = new AuthenKey();
+            String password ="";
+            try {
+                password = ch.heigvd.gamification.model.Application.doHash(body.getPassword(), body.getUsername());
+            } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
+                Logger.getLogger(ApplicationsEndpoint.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        Application app = new Application(body.getName(), password, body.getUsername());    
+         
+        apiKey.setApp(app);
+        
+             apprepository.save(app);
+             authenRepository.save(apiKey);
+            return new ResponseEntity(HttpStatus.CREATED);
 
         } else {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
 
+    
     public ApplicationDTO toDTO(ch.heigvd.gamification.model.Application app, UriComponents uriComponents) {
 
         ApplicationDTO dto = new ApplicationDTO();
