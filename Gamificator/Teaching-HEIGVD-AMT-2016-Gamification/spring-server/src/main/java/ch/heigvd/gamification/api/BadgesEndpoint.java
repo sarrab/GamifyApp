@@ -57,7 +57,7 @@ public class BadgesEndpoint implements BadgesApi {
     @RequestMapping(value = "/{badgeId}", method = RequestMethod.DELETE)
      public ResponseEntity<Void> badgesBadgeIdDelete(@ApiParam(value = "badgeId", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "badgeId", required = true) @PathVariable("badgeId") Long badgeId) {
        
-         AuthenKey apiKey = authenKeyRepository.findByAppKey(xGamificationToken);
+            AuthenKey apiKey = authenKeyRepository.findByAppKey(xGamificationToken);
         if(apiKey == null){
         return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
         }

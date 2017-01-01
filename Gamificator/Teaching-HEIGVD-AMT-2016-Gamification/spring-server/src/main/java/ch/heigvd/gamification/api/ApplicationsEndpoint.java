@@ -16,8 +16,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -26,9 +25,6 @@ import static java.util.stream.Collectors.toList;
 import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
 
@@ -42,6 +38,7 @@ public class ApplicationsEndpoint implements ApplicationsApi {
 
     ApplicationRepository apprepository;
     AuthenKeyRepository authenRepository;
+    
 
    
  @Autowired
@@ -52,8 +49,16 @@ public class ApplicationsEndpoint implements ApplicationsApi {
 
     @Override
     @RequestMapping(value = "/{applicationId}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> applicationsApplicationIdDelete(@ApiParam(value = "applicationId", required = true) @PathVariable("applicationId") Long applicationId) {
-        ch.heigvd.gamification.model.Application app = apprepository.findOne(applicationId);
+    public ResponseEntity<Void> applicationsApplicationIdDelete(@ApiParam(value = "applicationId", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "applicationId", required = true) @PathVariable("applicationId") Long applicationId) {
+        
+        
+         AuthenKey apiKey = authenRepository.findByAppKey(xGamificationToken); 
+       if(apiKey == null){
+        return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+        }
+        
+        
+        Application app = apprepository.findOne(applicationId);
 
         if (app != null) {
             apprepository.delete(app);
@@ -65,8 +70,15 @@ public class ApplicationsEndpoint implements ApplicationsApi {
 
     @Override
     @RequestMapping(value = "/{applicationId}", method = RequestMethod.GET)
-    public ResponseEntity<ApplicationDTO> applicationsApplicationIdGet(@ApiParam(value = "applicationId", required = true) @PathVariable("applicationId") Long applicationId) {
-        ch.heigvd.gamification.model.Application app = apprepository.findOne(applicationId);
+     public ResponseEntity<ApplicationDTO> applicationsApplicationIdGet(@ApiParam(value = "applicationId", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "Id de l'application", required = true) @PathVariable("applicationId") Long applicationId) {
+     
+          AuthenKey apiKey = authenRepository.findByAppKey(xGamificationToken); 
+       if(apiKey == null){
+        return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+        }
+         
+         
+         Application app = apprepository.findOne(applicationId);
         UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodName(BadgesEndpoint.class,"badgesGet", 1).build();
         ApplicationDTO dto = toDTO(app, uriComponents);
 
@@ -80,11 +92,14 @@ public class ApplicationsEndpoint implements ApplicationsApi {
    
     @Override
     @RequestMapping(value = "/{applicationId}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> applicationsApplicationIdPut(@ApiParam(value = "Id de l'application", required = true) @PathVariable("applicationId") Long applicationId, @ApiParam(value = "Modification of the application") @RequestBody Registration body) {
-     
+   public ResponseEntity<Void> applicationsApplicationIdPut(@ApiParam(value = "applicationId", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "applicationId", required = true) @PathVariable("applicationId") Long applicationId, @ApiParam(value = "Modification of the application") @RequestBody Registration body) {
         
-        
-      Application app = apprepository.findOne(applicationId);
+       AuthenKey apiKey = authenRepository.findByAppKey(xGamificationToken); 
+       if(apiKey == null){
+        return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+        }
+       
+       Application app = apprepository.findOne(applicationId);
 
         if (!body.getName().equals(" ")) {
             app.setName(body.getName());
@@ -104,14 +119,19 @@ public class ApplicationsEndpoint implements ApplicationsApi {
 
     @Override
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<ApplicationDTO>> applicationsGet() {
-        UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodName(BadgesEndpoint.class, "badgesGet", 1).build();
+   public ResponseEntity<List<ApplicationDTO>> applicationsGet(@ApiParam(value = "token that identifies the app sending the request", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken) {
+        
+        AuthenKey apiKey = authenRepository.findByAppKey(xGamificationToken); 
+       if(apiKey == null){
+        return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+        }
+       UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodName(BadgesEndpoint.class, "badgesGet", 1).build();
         return new ResponseEntity<>(StreamSupport.stream(apprepository.findAll().spliterator(), true)
                 .map(p -> toDTO(p, uriComponents))
                 .collect(toList()), HttpStatus.OK);
     }
 
-   
+
 
     @Override
     @RequestMapping(method = RequestMethod.POST)
@@ -155,4 +175,12 @@ public class ApplicationsEndpoint implements ApplicationsApi {
         return dto;
 
     }
+
+
+   
+
+  
+    
+
+   
 }

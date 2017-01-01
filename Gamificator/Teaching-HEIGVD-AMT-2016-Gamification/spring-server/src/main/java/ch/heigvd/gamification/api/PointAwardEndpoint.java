@@ -89,9 +89,11 @@ public class PointAwardEndpoint implements PointsAwardsApi {
         }
     }
 
+   
+
     @Override
     @RequestMapping(value = "/{point award's id}", method = RequestMethod.GET)
-    public ResponseEntity<PointsAwardDTO> pointsAwardsIdGet(@ApiParam(value = "point award's id", required = true) @PathVariable("id") Long id) {
+    public ResponseEntity<PointsAwardDTO> pointsAwardsIdGet(@ApiParam(value = "token that identifies the app sending the request", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "point award's id", required = true) @PathVariable("id") Long id) {
         PointAwards pointAward = pointAwardsrepository.findOne(id);
         if (pointAward != null) {
 

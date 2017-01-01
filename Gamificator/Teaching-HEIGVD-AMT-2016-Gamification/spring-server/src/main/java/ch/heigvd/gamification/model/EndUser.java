@@ -9,11 +9,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -21,6 +24,11 @@ import javax.persistence.OneToMany;
  * @author Thibaut-PC
  */
 @Entity
+
+@NamedQueries({
+   
+@NamedQuery(name = "EndUser.getBestUsers", query = "SELECT e.id, e.name, SUM(p.point) FROM EndUser e, PointAwards p WHERE e.app = :app AND p.enduser = e GROUP BY p.enduser.id"),
+})
 public class EndUser implements Serializable {
 
     @Id
@@ -29,7 +37,7 @@ public class EndUser implements Serializable {
     
     private Long idapp;
     
-@OneToMany(mappedBy = "enduser")
+@OneToMany(mappedBy = "enduser", targetEntity=PointAwards.class, cascade = CascadeType.PERSIST)
     private List<PointAwards> pointAwards;
 
     
@@ -38,8 +46,10 @@ public class EndUser implements Serializable {
       
       
       
-    @OneToMany(mappedBy = "endUser")
+    @OneToMany(mappedBy = "endUser", targetEntity=BadgeAward.class, cascade = CascadeType.PERSIST)
     private List<BadgeAward> badgeAwards;
+    
+    
     public void setId(Long id) {
         this.id = id;
     }

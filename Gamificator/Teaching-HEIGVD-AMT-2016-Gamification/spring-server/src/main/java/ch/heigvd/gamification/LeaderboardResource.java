@@ -3,17 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.heigvd.gamification.api.helpers;
+package ch.heigvd.gamification;
 
 /**
  *
  * @author Thibaut-PC
  */
-public class ApiException extends Exception {
-    private int code;
-	public ApiException (int code, String msg) {
-		super(msg);
-		this.code = code;
-	}
-
+public class LeaderboardResource {
+    
 }

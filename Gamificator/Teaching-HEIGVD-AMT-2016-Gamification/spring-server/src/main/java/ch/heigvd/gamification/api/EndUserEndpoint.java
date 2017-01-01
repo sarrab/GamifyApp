@@ -98,10 +98,12 @@ public class EndUserEndpoint implements EndUserApi {
 
         if (app != null) {
 
-            EndUser endUser = endUserRepository.findByIdAndApp(endUserID, app);
-
+            EndUser endUser = endUserRepository.findByIdappAndApp(endUserID, app);
+  
+            
+            
             if (endUser != null) {
-
+      
                 System.out.println("endUserName" + endUserID);
                 System.out.println("endUser" + endUser.getID());
 

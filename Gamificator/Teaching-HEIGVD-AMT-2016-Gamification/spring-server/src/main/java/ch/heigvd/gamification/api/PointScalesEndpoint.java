@@ -6,8 +6,10 @@
 package ch.heigvd.gamification.api;
 
 import ch.heigvd.gamification.api.dto.PointScaleDTO;
+import ch.heigvd.gamification.model.AuthenKey;
 import ch.heigvd.gamification.services.dao.PointScaleRepository;
 import ch.heigvd.gamification.model.PointScale;
+import ch.heigvd.gamification.services.dao.AuthenKeyRepository;
 import java.util.List;
 
 import io.swagger.annotations.ApiParam;
@@ -16,11 +18,7 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -31,23 +29,37 @@ import org.springframework.web.bind.annotation.RestController;
 public class PointScalesEndpoint implements PointScalesApi {
 
     PointScaleRepository pointscaleRepository;
+    AuthenKeyRepository authenRepository;
 
     @Autowired
-    PointScalesEndpoint(PointScaleRepository pointRepository) {
-        this.pointscaleRepository = pointRepository;
+    public PointScalesEndpoint(PointScaleRepository pointscaleRepository, AuthenKeyRepository authenRepository) {
+        this.pointscaleRepository = pointscaleRepository;
+        this.authenRepository = authenRepository;
     }
 
     @Override
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<PointScaleDTO>> pointScalesGet() {
+    public ResponseEntity<List<PointScaleDTO>> pointScalesGet(@ApiParam(value = "token that identifies the app sending the request", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken) {
+
+        AuthenKey apiKey = authenRepository.findByAppKey(xGamificationToken);
+        if (apiKey == null) {
+            return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+        }
+
         return new ResponseEntity<List<PointScaleDTO>>(StreamSupport.stream(pointscaleRepository.findAll().spliterator(), true)
                 .map(p -> toDTO(p))
                 .collect(toList()), HttpStatus.OK);
     }
 
     @Override
-    @RequestMapping(value = "/{pointScaleName}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> pointScalesPointScaleIdDelete(@ApiParam(value = "pointScaleName", required = true) @PathVariable("pointScaleName") Long pointScaleId) {
+    @RequestMapping(value = "/{pointScaleId}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> pointScalesPointScaleIdDelete(@ApiParam(value = "pointScaleIdt", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "pointScaleId", required = true) @PathVariable("pointScaleId") Long pointScaleId) {
+
+        AuthenKey apiKey = authenRepository.findByAppKey(xGamificationToken);
+        if (apiKey == null) {
+            return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+        }
+
         PointScale pointScale = pointscaleRepository.findOne(pointScaleId);
 
         if (pointScale != null) {
@@ -59,8 +71,14 @@ public class PointScalesEndpoint implements PointScalesApi {
     }
 
     @Override
-    @RequestMapping(value = "/{pointScaleName}", method = RequestMethod.GET)
-    public ResponseEntity<PointScaleDTO> pointScalesPointScaleIdGet(@ApiParam(value = "pointScaleName", required = true) @PathVariable("pointScaleName") Long pointScaleId) {
+    @RequestMapping(value = "/{pointScaleId}", method = RequestMethod.GET)
+    public ResponseEntity<PointScaleDTO> pointScalesPointScaleIdGet(@ApiParam(value = "pointScaleId", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "pointScaleId", required = true) @PathVariable("pointScaleId") Long pointScaleId) {
+
+        AuthenKey apiKey = authenRepository.findByAppKey(xGamificationToken);
+        if (apiKey == null) {
+            return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+        }
+
         PointScale p = pointscaleRepository.findOne(pointScaleId);
 
         PointScaleDTO dto = toDTO(p);
@@ -71,7 +89,12 @@ public class PointScalesEndpoint implements PointScalesApi {
 
     @Override
     @RequestMapping(value = "/{pointScaleId}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> pointScalesPointScaleIdPut(@ApiParam(value = "pointScaleId", required = true) @PathVariable("pointScaleId") Long pointScaleId, @ApiParam(value = "Modification of the pointScale") @RequestBody PointScaleDTO body) {
+    public ResponseEntity<Void> pointScalesPointScaleIdPut(@ApiParam(value = "pointScaleId", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "pointScaleId", required = true) @PathVariable("pointScaleId") Long pointScaleId, @ApiParam(value = "Modification of the pointScale") @RequestBody PointScaleDTO body) {
+
+        AuthenKey apiKey = authenRepository.findByAppKey(xGamificationToken);
+        if (apiKey == null) {
+            return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+        }
 
         PointScale pointScale = pointscaleRepository.findOne(pointScaleId);
 
@@ -94,15 +117,21 @@ public class PointScalesEndpoint implements PointScalesApi {
 
     @RequestMapping(method = RequestMethod.POST)
     @Override
-    public ResponseEntity<Void> pointScalesPost(@ApiParam(value = "PointScale to add", required = true) @RequestBody PointScaleDTO body) {
-        PointScale pointScale = new PointScale() ;
-      
-        
-        if(pointscaleRepository.findByName(body.getName()) != null){
-        
-        return new ResponseEntity("poinscat exist already", HttpStatus.CONFLICT);
+
+    public ResponseEntity<Void> pointScalesPost(@ApiParam(value = "token that identifies the app sending the request", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "PointScale to add", required = true) @RequestBody PointScaleDTO body) {
+
+        AuthenKey apiKey = authenRepository.findByAppKey(xGamificationToken);
+        if (apiKey == null) {
+            return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
         }
-        
+
+        PointScale pointScale = new PointScale();
+
+        if (pointscaleRepository.findByName(body.getName()) != null) {
+
+            return new ResponseEntity("poinscat exist already", HttpStatus.CONFLICT);
+        }
+
         if (body != null) {
             pointScale.setDescription(body.getDescription());
             pointScale.setId(body.getId());

@@ -115,7 +115,7 @@ private   final ApplicationRepository ApplicationRepository;
 
         }
           
-       endUserRepository.save(enduser);
+      
        Event event = new Event();
         EventType eventype = null;
 

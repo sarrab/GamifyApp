@@ -23,168 +23,9 @@
       <file leaf-file-name="RuleEndpoint.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/RuleEndpoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="930">
-              <caret line="119" column="0" lean-forward="false" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+            <state relative-caret-position="337">
+              <caret line="185" column="51" lean-forward="false" selection-start-line="185" selection-start-column="51" selection-end-line="185" selection-end-column="51" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Function.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/src.zip!/java/util/function/Function.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="48" column="6" lean-forward="false" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="api-spec.yaml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/api-spec.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11070">
-              <caret line="757" column="14" lean-forward="false" selection-start-line="757" selection-start-column="14" selection-end-line="757" selection-end-column="14" />
-              <folding>
-                <marker date="1482401843000" expanded="true" signature="47:60" ph="Gamificati..." />
-                <marker date="1482401843000" expanded="true" signature="18103:18639" ph="Applicatio...: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="18103:21215" ph="definition...: &lt;13 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="18120:18126" ph="object" />
-                <marker date="1482401843000" expanded="true" signature="18131:18639" ph="properties: &lt;4 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="18149:18196" ph="id: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="18167:18174" ph="integer" />
-                <marker date="1482401843000" expanded="true" signature="18191:18196" ph="int64" />
-                <marker date="1482401843000" expanded="true" signature="18203:18269" ph="name: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="18223:18229" ph="string" />
-                <marker date="1482401843000" expanded="true" signature="18251:18269" ph="Applicatio..." />
-                <marker date="1482401843000" expanded="true" signature="18276:18431" ph="badges: &lt;3 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="18298:18303" ph="array" />
-                <marker date="1482401843000" expanded="true" signature="18312:18367" ph="items: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="18337:18343" ph="string" />
-                <marker date="1482401843000" expanded="true" signature="18364:18367" ph="uri" />
-                <marker date="1482401843000" expanded="true" signature="18389:18431" ph="Liste de t..." />
-                <marker date="1482401843000" expanded="true" signature="18438:18639" ph="password: &lt;3 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="18543:18549" ph="string" />
-                <marker date="1482401843000" expanded="true" signature="18566:18574" ph="password" />
-                <marker date="1482401843000" expanded="true" signature="18596:18639" ph="Mot de pas..." />
-                <marker date="1482401843000" expanded="true" signature="18642:19123" ph="BadgeDTO: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="18662:18668" ph="object" />
-                <marker date="1482401843000" expanded="true" signature="18673:19123" ph="properties: &lt;5 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="18691:18738" ph="id: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="18709:18716" ph="integer" />
-                <marker date="1482401843000" expanded="true" signature="18733:18738" ph="int64" />
-                <marker date="1482401843000" expanded="true" signature="18745:18804" ph="name: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="18765:18771" ph="string" />
-                <marker date="1482401843000" expanded="true" signature="18793:18804" ph="Badge name..." />
-                <marker date="1482401843000" expanded="true" signature="18811:18886" ph="descriptio...: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="18838:18844" ph="string" />
-                <marker date="1482401843000" expanded="true" signature="18866:18886" ph="Descriptio..." />
-                <marker date="1482401843000" expanded="true" signature="18893:18979" ph="imageURI: &lt;3 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="18917:18923" ph="string" />
-                <marker date="1482401843000" expanded="true" signature="18940:18943" ph="uri" />
-                <marker date="1482401843000" expanded="true" signature="18965:18979" ph="Image du b..." />
-                <marker date="1482401843000" expanded="true" signature="18986:19123" ph="applicatio...: &lt;3 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="19013:19020" ph="integer" />
-                <marker date="1482401843000" expanded="true" signature="19037:19042" ph="int64" />
-                <marker date="1482401843000" expanded="true" signature="19064:19123" ph="Identifien..." />
-                <marker date="1482401843000" expanded="true" signature="19127:19439" ph="PointScale...: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="19152:19158" ph="object" />
-                <marker date="1482401843000" expanded="true" signature="19163:19439" ph="properties: &lt;4 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="19181:19228" ph="id: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="19199:19206" ph="integer" />
-                <marker date="1482401843000" expanded="true" signature="19223:19228" ph="int64" />
-                <marker date="1482401843000" expanded="true" signature="19235:19294" ph="name: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="19255:19261" ph="string" />
-                <marker date="1482401843000" expanded="true" signature="19283:19294" ph="Badge name..." />
-                <marker date="1482401843000" expanded="true" signature="19301:19376" ph="descriptio...: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="19328:19334" ph="string" />
-                <marker date="1482401843000" expanded="true" signature="19356:19376" ph="Descriptio..." />
-                <marker date="1482401843000" expanded="true" signature="19383:19439" ph="nbrDePoint...: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="19410:19417" ph="integer" />
-                <marker date="1482401843000" expanded="true" signature="19434:19439" ph="int32" />
-                <marker date="1482401843000" expanded="true" signature="19442:19969" ph="EventDTO: &lt;3 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="19462:19468" ph="object" />
-                <marker date="1482401843000" expanded="true" signature="19486:19524" ph="Evènement ..." />
-                <marker date="1482401843000" expanded="true" signature="19529:19969" ph="properties: &lt;4 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="19547:19622" ph="type: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="19567:19573" ph="string" />
-                <marker date="1482401843000" expanded="true" signature="19595:19622" ph="type de l'..." />
-                <marker date="1482401843000" expanded="true" signature="19629:19747" ph="userId: &lt;3 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="19651:19658" ph="integer" />
-                <marker date="1482401843000" expanded="true" signature="19675:19680" ph="int64" />
-                <marker date="1482401843000" expanded="true" signature="19702:19747" ph="Id de l'ut..." />
-                <marker date="1482401843000" expanded="true" signature="19754:19825" ph="properties: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="19780:19785" ph="array" />
-                <marker date="1482401843000" expanded="true" signature="19794:19825" ph="items: &lt;1 key&gt;" />
-                <marker date="1482401843000" expanded="true" signature="19819:19825" ph="string" />
-                <marker date="1482401843000" expanded="true" signature="19832:19969" ph="timeStamp: &lt;3 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="19857:19863" ph="string" />
-                <marker date="1482401843000" expanded="true" signature="19880:19889" ph="date-time" />
-                <marker date="1482401843000" expanded="true" signature="19911:19969" ph="Temps au q..." />
-                <marker date="1482401843000" expanded="true" signature="19972:20098" ph="Credential...: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="19995:20001" ph="object" />
-                <marker date="1482401843000" expanded="true" signature="20006:20098" ph="properties: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20024:20061" ph="applicatio...: &lt;1 key&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20055:20061" ph="string" />
-                <marker date="1482401843000" expanded="true" signature="20068:20098" ph="password: &lt;1 key&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20092:20098" ph="string" />
-                <marker date="1482401843000" expanded="true" signature="20101:20218" ph="User: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20117:20123" ph="object" />
-                <marker date="1482401843000" expanded="true" signature="20128:20218" ph="properties: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20146:20174" ph="userId: &lt;1 key&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20168:20174" ph="string" />
-                <marker date="1482401843000" expanded="true" signature="20181:20218" ph="numberOfEv...: &lt;1 key&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20211:20218" ph="integer" />
-                <marker date="1482401843000" expanded="true" signature="20221:20304" ph="Token: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20238:20244" ph="object" />
-                <marker date="1482401843000" expanded="true" signature="20249:20304" ph="properties: &lt;1 key&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20267:20304" ph="applicatio...: &lt;1 key&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20298:20304" ph="string" />
-                <marker date="1482401843000" expanded="true" signature="20307:20700" ph="RuleDTO: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20326:20332" ph="object" />
-                <marker date="1482401843000" expanded="true" signature="20337:20700" ph="properties: &lt;6 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20355:20402" ph="id: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20373:20380" ph="integer" />
-                <marker date="1482401843000" expanded="true" signature="20397:20402" ph="int64" />
-                <marker date="1482401843000" expanded="true" signature="20409:20474" ph="event: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20430:20436" ph="string" />
-                <marker date="1482401843000" expanded="true" signature="20458:20474" ph="type d'évè..." />
-                <marker date="1482401843000" expanded="true" signature="20481:20544" ph="action: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20503:20509" ph="string" />
-                <marker date="1482401843000" expanded="true" signature="20531:20544" ph="type d'act..." />
-                <marker date="1482401843000" expanded="true" signature="20551:20583" ph="pointScale: &lt;1 key&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20577:20583" ph="string" />
-                <marker date="1482401843000" expanded="true" signature="20590:20641" ph="points: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20612:20619" ph="integer" />
-                <marker date="1482401843000" expanded="true" signature="20636:20641" ph="int32" />
-                <marker date="1482401843000" expanded="true" signature="20648:20700" ph="badgeId: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20671:20678" ph="integer" />
-                <marker date="1482401843000" expanded="true" signature="20695:20700" ph="int64" />
-                <marker date="1482401843000" expanded="true" signature="20704:20956" ph="PointsAwar...: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20730:20736" ph="object" />
-                <marker date="1482401843000" expanded="true" signature="20741:20956" ph="properties: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20759:20850" ph="motif: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20780:20786" ph="string" />
-                <marker date="1482401843000" expanded="true" signature="20808:20850" ph="Raison pou..." />
-                <marker date="1482401843000" expanded="true" signature="20857:20956" ph="points: &lt;3 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20879:20886" ph="integer" />
-                <marker date="1482401843000" expanded="true" signature="20903:20908" ph="int64" />
-                <marker date="1482401843000" expanded="true" signature="20930:20956" ph="Nombre de ..." />
-                <marker date="1482401843000" expanded="true" signature="20960:21215" ph="EndUserRep...: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="20992:20998" ph="object" />
-                <marker date="1482401843000" expanded="true" signature="21003:21215" ph="properties: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="21021:21109" ph="badge: &lt;2 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="21044:21049" ph="array" />
-                <marker date="1482401843000" expanded="true" signature="21060:21109" ph="items: &lt;1 key&gt;" />
-                <marker date="1482401843000" expanded="true" signature="21085:21109" ph="##/definiti..." />
-                <marker date="1482401843000" expanded="true" signature="21116:21215" ph="points: &lt;3 keys&gt;" />
-                <marker date="1482401843000" expanded="true" signature="21138:21145" ph="integer" />
-                <marker date="1482401843000" expanded="true" signature="21162:21167" ph="int64" />
-                <marker date="1482401843000" expanded="true" signature="21189:21215" ph="Nombre de ..." />
-                <marker date="1482401843000" expanded="true" signature="21261:21310" ph="token that..." />
-                <marker date="1482401843000" expanded="true" signature="21321:21341" ph="X-Gamifica..." />
-                <marker date="1482401843000" expanded="true" signature="21350:21356" ph="header" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -192,19 +33,43 @@
       <file leaf-file-name="PointAwardEndpoint.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/PointAwardEndpoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1080">
-              <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+            <state relative-caret-position="337">
+              <caret line="91" column="3" lean-forward="false" selection-start-line="91" selection-start-column="3" selection-end-line="91" selection-end-column="3" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EndUserEndpoint.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EndUserEndpoint.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/EndUserEndpoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="735">
-              <caret line="172" column="72" lean-forward="false" selection-start-line="172" selection-start-column="72" selection-end-line="172" selection-end-column="72" />
-              <folding />
+            <state relative-caret-position="2220">
+              <caret line="177" column="46" lean-forward="false" selection-start-line="177" selection-start-column="46" selection-end-line="177" selection-end-column="46" />
+              <folding>
+                <marker date="1482921084000" expanded="true" signature="5775:5832" ph="@{...}" />
+                <marker date="1482921084000" expanded="true" signature="6067:6620" ph="{...}" />
+                <marker date="1482921084000" expanded="true" signature="6626:6703" ph="@{...}" />
+                <marker date="1482921084000" expanded="true" signature="6954:7504" ph="{...}" />
+                <marker date="1482921084000" expanded="true" signature="7510:7568" ph="@{...}" />
+                <marker date="1482921084000" expanded="true" signature="7891:8946" ph="{...}" />
+                <marker date="1482921084000" expanded="true" signature="8952:9026" ph="@{...}" />
+                <marker date="1482921084000" expanded="true" signature="9280:10004" ph="{...}" />
+                <marker date="1482921084000" expanded="true" signature="10010:10084" ph="@{...}" />
+                <marker date="1482921084000" expanded="true" signature="10400:11217" ph="{...}" />
+                <marker date="1482921084000" expanded="true" signature="11264:11396" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LeaderboardEndpoint.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/LeaderboardEndpoint.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="780">
+              <caret line="56" column="8" lean-forward="false" selection-start-line="99" selection-start-column="81" selection-end-line="99" selection-end-column="82" />
+              <folding>
+                <marker date="1482861874000" expanded="true" signature="229:283" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -212,10 +77,10 @@
       <file leaf-file-name="AuthEndpoint.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/AuthEndpoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
+            <state relative-caret-position="180">
               <caret line="33" column="13" lean-forward="false" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#0#2779#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -226,7 +91,13 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
               <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-              <folding />
+              <folding>
+                <element signature="e#0#2108#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#1114#1115#0" expanded="false" />
+                <element signature="e#1166#1167#0" expanded="false" />
+                <marker date="1482406553000" expanded="true" signature="1269:1337" ph="@{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -234,8 +105,28 @@
       <file leaf-file-name="ApplicationsEndpoint.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/ApplicationsEndpoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+            <state relative-caret-position="1650">
+              <caret line="135" column="4" lean-forward="false" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LeaderboardDTO.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/target/generated-sources/swagger/src/main/java/ch/heigvd/gamification/api/dto/LeaderboardDTO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="21" column="22" lean-forward="false" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PointScalesEndpoint.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/PointScalesEndpoint.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1612">
+              <caret line="157" column="0" lean-forward="false" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -244,18 +135,8 @@
       <file leaf-file-name="BadgesEndpoint.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/BadgesEndpoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="637">
-              <caret line="78" column="8" lean-forward="false" selection-start-line="78" selection-start-column="8" selection-end-line="78" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EndUserReputationDTO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/target/generated-sources/swagger/src/main/java/ch/heigvd/gamification/api/dto/EndUserReputationDTO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state relative-caret-position="802">
+              <caret line="210" column="38" lean-forward="false" selection-start-line="210" selection-start-column="38" selection-end-line="210" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -286,14 +167,16 @@
         <option value="$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/AuthEndpoint.java" />
         <option value="$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/EventsEndpoint.java" />
         <option value="$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/PointawardEndpoint.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/LeaderboardEndpoint.java" />
         <option value="$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/UsersEndpoint.java" />
         <option value="$PROJECT_DIR$/src/main/resources/api-spec.yaml" />
-        <option value="$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/PointAwardEndpoint.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/BadgesEndpoint.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/RuleEndpoint.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/ApplicationsEndpoint.java" />
         <option value="$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/EndUserEndpoint.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/LeaderboardEndpoint.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/PointAwardEndpoint.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/PointScalesEndpoint.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/RuleEndpoint.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/BadgesEndpoint.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/ApplicationsEndpoint.java" />
+        <option value="$PROJECT_DIR$/target/generated-sources/swagger/src/main/java/ch/heigvd/gamification/api/dto/LeaderboardDTO.java" />
       </list>
     </option>
   </component>
@@ -330,8 +213,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -572,7 +454,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -986,16 +869,17 @@
       <workItem from="1481559351877" duration="3505000" />
       <workItem from="1481658806251" duration="5614000" />
       <workItem from="1481837759419" duration="1708000" />
-      <workItem from="1481882824501" duration="2933000" />
+      <workItem from="1481882824501" duration="3221000" />
+      <workItem from="1482749088636" duration="3361000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13760000" />
+    <option name="totallyTimeSpent" value="17409000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="1133" extended-state="1" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1920" height="1133" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1020,7 +904,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298872" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1048,158 +932,10 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/target/generated-sources/swagger/src/main/java/ch/heigvd/gamification/api/dto/BadgeDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/api-spec.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11070">
           <caret line="738" column="16" lean-forward="false" selection-start-line="738" selection-start-column="16" selection-end-line="738" selection-end-column="16" />
-          <folding>
-            <marker date="1482401843000" expanded="true" signature="47:60" ph="Gamificati..." />
-            <marker date="1482401843000" expanded="true" signature="18103:18639" ph="Applicatio...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18103:21215" ph="definition...: &lt;13 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18120:18126" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="18131:18639" ph="properties: &lt;4 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18149:18196" ph="id: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18167:18174" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="18191:18196" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="18203:18269" ph="name: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18223:18229" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="18251:18269" ph="Applicatio..." />
-            <marker date="1482401843000" expanded="true" signature="18276:18431" ph="badges: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18298:18303" ph="array" />
-            <marker date="1482401843000" expanded="true" signature="18312:18367" ph="items: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18337:18343" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="18364:18367" ph="uri" />
-            <marker date="1482401843000" expanded="true" signature="18389:18431" ph="Liste de t..." />
-            <marker date="1482401843000" expanded="true" signature="18438:18639" ph="password: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18543:18549" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="18566:18574" ph="password" />
-            <marker date="1482401843000" expanded="true" signature="18596:18639" ph="Mot de pas..." />
-            <marker date="1482401843000" expanded="true" signature="18642:19123" ph="BadgeDTO: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18662:18668" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="18673:19123" ph="properties: &lt;5 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18691:18738" ph="id: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18709:18716" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="18733:18738" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="18745:18804" ph="name: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18765:18771" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="18793:18804" ph="Badge name..." />
-            <marker date="1482401843000" expanded="true" signature="18811:18886" ph="descriptio...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18838:18844" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="18866:18886" ph="Descriptio..." />
-            <marker date="1482401843000" expanded="true" signature="18893:18979" ph="imageURI: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18917:18923" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="18940:18943" ph="uri" />
-            <marker date="1482401843000" expanded="true" signature="18965:18979" ph="Image du b..." />
-            <marker date="1482401843000" expanded="true" signature="18986:19123" ph="applicatio...: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19013:19020" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="19037:19042" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="19064:19123" ph="Identifien..." />
-            <marker date="1482401843000" expanded="true" signature="19127:19439" ph="PointScale...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19152:19158" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="19163:19439" ph="properties: &lt;4 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19181:19228" ph="id: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19199:19206" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="19223:19228" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="19235:19294" ph="name: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19255:19261" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="19283:19294" ph="Badge name..." />
-            <marker date="1482401843000" expanded="true" signature="19301:19376" ph="descriptio...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19328:19334" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="19356:19376" ph="Descriptio..." />
-            <marker date="1482401843000" expanded="true" signature="19383:19439" ph="nbrDePoint...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19410:19417" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="19434:19439" ph="int32" />
-            <marker date="1482401843000" expanded="true" signature="19442:19969" ph="EventDTO: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19462:19468" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="19486:19524" ph="Evènement ..." />
-            <marker date="1482401843000" expanded="true" signature="19529:19969" ph="properties: &lt;4 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19547:19622" ph="type: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19567:19573" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="19595:19622" ph="type de l'..." />
-            <marker date="1482401843000" expanded="true" signature="19629:19747" ph="userId: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19651:19658" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="19675:19680" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="19702:19747" ph="Id de l'ut..." />
-            <marker date="1482401843000" expanded="true" signature="19754:19825" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19780:19785" ph="array" />
-            <marker date="1482401843000" expanded="true" signature="19794:19825" ph="items: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19819:19825" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="19832:19969" ph="timeStamp: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19857:19863" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="19880:19889" ph="date-time" />
-            <marker date="1482401843000" expanded="true" signature="19911:19969" ph="Temps au q..." />
-            <marker date="1482401843000" expanded="true" signature="19972:20098" ph="Credential...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19995:20001" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="20006:20098" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20024:20061" ph="applicatio...: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20055:20061" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20068:20098" ph="password: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20092:20098" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20101:20218" ph="User: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20117:20123" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="20128:20218" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20146:20174" ph="userId: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20168:20174" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20181:20218" ph="numberOfEv...: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20211:20218" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="20221:20304" ph="Token: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20238:20244" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="20249:20304" ph="properties: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20267:20304" ph="applicatio...: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20298:20304" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20307:20700" ph="RuleDTO: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20326:20332" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="20337:20700" ph="properties: &lt;6 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20355:20402" ph="id: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20373:20380" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="20397:20402" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="20409:20474" ph="event: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20430:20436" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20458:20474" ph="type d'évè..." />
-            <marker date="1482401843000" expanded="true" signature="20481:20544" ph="action: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20503:20509" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20531:20544" ph="type d'act..." />
-            <marker date="1482401843000" expanded="true" signature="20551:20583" ph="pointScale: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20577:20583" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20590:20641" ph="points: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20612:20619" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="20636:20641" ph="int32" />
-            <marker date="1482401843000" expanded="true" signature="20648:20700" ph="badgeId: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20671:20678" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="20695:20700" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="20704:20956" ph="PointsAwar...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20730:20736" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="20741:20956" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20759:20850" ph="motif: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20780:20786" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20808:20850" ph="Raison pou..." />
-            <marker date="1482401843000" expanded="true" signature="20857:20956" ph="points: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20879:20886" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="20903:20908" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="20930:20956" ph="Nombre de ..." />
-            <marker date="1482401843000" expanded="true" signature="20960:21215" ph="EndUserRep...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20992:20998" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="21003:21215" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="21021:21109" ph="badge: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="21044:21049" ph="array" />
-            <marker date="1482401843000" expanded="true" signature="21060:21109" ph="items: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="21085:21109" ph="##/definiti..." />
-            <marker date="1482401843000" expanded="true" signature="21116:21215" ph="points: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="21138:21145" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="21162:21167" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="21189:21215" ph="Nombre de ..." />
-            <marker date="1482401843000" expanded="true" signature="21261:21310" ph="token that..." />
-            <marker date="1482401843000" expanded="true" signature="21321:21341" ph="X-Gamifica..." />
-            <marker date="1482401843000" expanded="true" signature="21350:21356" ph="header" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1215,7 +951,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="14" column="8" lean-forward="false" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="20" />
-          <folding />
+          <folding>
+            <marker date="1482861874000" expanded="true" signature="229:283" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1223,7 +961,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1482921084000" expanded="true" signature="5775:5832" ph="@{...}" />
+            <marker date="1482921084000" expanded="true" signature="6067:6620" ph="{...}" />
+            <marker date="1482921084000" expanded="true" signature="6626:6703" ph="@{...}" />
+            <marker date="1482921084000" expanded="true" signature="6954:7504" ph="{...}" />
+            <marker date="1482921084000" expanded="true" signature="7510:7568" ph="@{...}" />
+            <marker date="1482921084000" expanded="true" signature="7891:8946" ph="{...}" />
+            <marker date="1482921084000" expanded="true" signature="8952:9026" ph="@{...}" />
+            <marker date="1482921084000" expanded="true" signature="9280:10004" ph="{...}" />
+            <marker date="1482921084000" expanded="true" signature="10010:10084" ph="@{...}" />
+            <marker date="1482921084000" expanded="true" signature="10400:11217" ph="{...}" />
+            <marker date="1482921084000" expanded="true" signature="11264:11396" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1247,25 +997,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="31" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#4765#0" expanded="false" />
-            <marker date="1482309359000" expanded="false" signature="229:1004" ph="..." />
-            <marker date="1482309359000" expanded="true" signature="1006:1032" ph="/**...*/" />
-            <marker date="1482309359000" expanded="true" signature="1033:1087" ph="@{...}" />
-            <marker date="1482309359000" expanded="false" signature="1274:1285" ph=" { " />
-            <marker date="1482309359000" expanded="false" signature="1329:1335" ph=" }" />
-            <marker date="1482309359000" expanded="true" signature="1341:1398" ph="@{...}" />
-            <marker date="1482309359000" expanded="true" signature="1463:1686" ph="{...}" />
-            <marker date="1482309359000" expanded="true" signature="1692:1781" ph="@{...}" />
-            <marker date="1482309359000" expanded="true" signature="1948:2263" ph="{...}" />
-            <marker date="1482309359000" expanded="true" signature="2269:2355" ph="@{...}" />
-            <marker date="1482309359000" expanded="true" signature="2528:2732" ph="{...}" />
-            <marker date="1482309359000" expanded="true" signature="2738:2822" ph="@{...}" />
-            <marker date="1482309359000" expanded="true" signature="3067:3673" ph="{...}" />
-            <marker date="1482309359000" expanded="true" signature="3679:3737" ph="@{...}" />
-            <marker date="1482309359000" expanded="true" signature="3875:4374" ph="{...}" />
-            <marker date="1482309359000" expanded="true" signature="4430:4761" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1289,146 +1021,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12270">
           <caret line="818" column="16" lean-forward="false" selection-start-line="818" selection-start-column="16" selection-end-line="818" selection-end-column="16" />
-          <folding>
-            <marker date="1482401843000" expanded="true" signature="47:60" ph="Gamificati..." />
-            <marker date="1482401843000" expanded="true" signature="18103:18639" ph="Applicatio...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18103:21215" ph="definition...: &lt;13 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18120:18126" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="18131:18639" ph="properties: &lt;4 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18149:18196" ph="id: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18167:18174" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="18191:18196" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="18203:18269" ph="name: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18223:18229" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="18251:18269" ph="Applicatio..." />
-            <marker date="1482401843000" expanded="true" signature="18276:18431" ph="badges: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18298:18303" ph="array" />
-            <marker date="1482401843000" expanded="true" signature="18312:18367" ph="items: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18337:18343" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="18364:18367" ph="uri" />
-            <marker date="1482401843000" expanded="true" signature="18389:18431" ph="Liste de t..." />
-            <marker date="1482401843000" expanded="true" signature="18438:18639" ph="password: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18543:18549" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="18566:18574" ph="password" />
-            <marker date="1482401843000" expanded="true" signature="18596:18639" ph="Mot de pas..." />
-            <marker date="1482401843000" expanded="true" signature="18642:19123" ph="BadgeDTO: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18662:18668" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="18673:19123" ph="properties: &lt;5 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18691:18738" ph="id: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18709:18716" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="18733:18738" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="18745:18804" ph="name: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18765:18771" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="18793:18804" ph="Badge name..." />
-            <marker date="1482401843000" expanded="true" signature="18811:18886" ph="descriptio...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18838:18844" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="18866:18886" ph="Descriptio..." />
-            <marker date="1482401843000" expanded="true" signature="18893:18979" ph="imageURI: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18917:18923" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="18940:18943" ph="uri" />
-            <marker date="1482401843000" expanded="true" signature="18965:18979" ph="Image du b..." />
-            <marker date="1482401843000" expanded="true" signature="18986:19123" ph="applicatio...: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19013:19020" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="19037:19042" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="19064:19123" ph="Identifien..." />
-            <marker date="1482401843000" expanded="true" signature="19127:19439" ph="PointScale...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19152:19158" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="19163:19439" ph="properties: &lt;4 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19181:19228" ph="id: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19199:19206" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="19223:19228" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="19235:19294" ph="name: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19255:19261" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="19283:19294" ph="Badge name..." />
-            <marker date="1482401843000" expanded="true" signature="19301:19376" ph="descriptio...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19328:19334" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="19356:19376" ph="Descriptio..." />
-            <marker date="1482401843000" expanded="true" signature="19383:19439" ph="nbrDePoint...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19410:19417" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="19434:19439" ph="int32" />
-            <marker date="1482401843000" expanded="true" signature="19442:19969" ph="EventDTO: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19462:19468" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="19486:19524" ph="Evènement ..." />
-            <marker date="1482401843000" expanded="true" signature="19529:19969" ph="properties: &lt;4 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19547:19622" ph="type: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19567:19573" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="19595:19622" ph="type de l'..." />
-            <marker date="1482401843000" expanded="true" signature="19629:19747" ph="userId: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19651:19658" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="19675:19680" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="19702:19747" ph="Id de l'ut..." />
-            <marker date="1482401843000" expanded="true" signature="19754:19825" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19780:19785" ph="array" />
-            <marker date="1482401843000" expanded="true" signature="19794:19825" ph="items: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19819:19825" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="19832:19969" ph="timeStamp: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19857:19863" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="19880:19889" ph="date-time" />
-            <marker date="1482401843000" expanded="true" signature="19911:19969" ph="Temps au q..." />
-            <marker date="1482401843000" expanded="true" signature="19972:20098" ph="Credential...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19995:20001" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="20006:20098" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20024:20061" ph="applicatio...: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20055:20061" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20068:20098" ph="password: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20092:20098" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20101:20218" ph="User: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20117:20123" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="20128:20218" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20146:20174" ph="userId: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20168:20174" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20181:20218" ph="numberOfEv...: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20211:20218" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="20221:20304" ph="Token: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20238:20244" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="20249:20304" ph="properties: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20267:20304" ph="applicatio...: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20298:20304" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20307:20700" ph="RuleDTO: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20326:20332" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="20337:20700" ph="properties: &lt;6 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20355:20402" ph="id: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20373:20380" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="20397:20402" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="20409:20474" ph="event: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20430:20436" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20458:20474" ph="type d'évè..." />
-            <marker date="1482401843000" expanded="true" signature="20481:20544" ph="action: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20503:20509" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20531:20544" ph="type d'act..." />
-            <marker date="1482401843000" expanded="true" signature="20551:20583" ph="pointScale: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20577:20583" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20590:20641" ph="points: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20612:20619" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="20636:20641" ph="int32" />
-            <marker date="1482401843000" expanded="true" signature="20648:20700" ph="badgeId: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20671:20678" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="20695:20700" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="20704:20956" ph="PointsAwar...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20730:20736" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="20741:20956" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20759:20850" ph="motif: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20780:20786" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20808:20850" ph="Raison pou..." />
-            <marker date="1482401843000" expanded="true" signature="20857:20956" ph="points: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20879:20886" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="20903:20908" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="20930:20956" ph="Nombre de ..." />
-            <marker date="1482401843000" expanded="true" signature="20960:21215" ph="EndUserRep...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20992:20998" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="21003:21215" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="21021:21109" ph="badge: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="21044:21049" ph="array" />
-            <marker date="1482401843000" expanded="true" signature="21060:21109" ph="items: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="21085:21109" ph="##/definiti..." />
-            <marker date="1482401843000" expanded="true" signature="21116:21215" ph="points: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="21138:21145" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="21162:21167" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="21189:21215" ph="Nombre de ..." />
-            <marker date="1482401843000" expanded="true" signature="21261:21310" ph="token that..." />
-            <marker date="1482401843000" expanded="true" signature="21321:21341" ph="X-Gamifica..." />
-            <marker date="1482401843000" expanded="true" signature="21350:21356" ph="header" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1444,7 +1036,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="14" column="8" lean-forward="false" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="20" />
-          <folding />
+          <folding>
+            <marker date="1482861874000" expanded="true" signature="229:283" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1452,7 +1046,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1482921084000" expanded="true" signature="5775:5832" ph="@{...}" />
+            <marker date="1482921084000" expanded="true" signature="6067:6620" ph="{...}" />
+            <marker date="1482921084000" expanded="true" signature="6626:6703" ph="@{...}" />
+            <marker date="1482921084000" expanded="true" signature="6954:7504" ph="{...}" />
+            <marker date="1482921084000" expanded="true" signature="7510:7568" ph="@{...}" />
+            <marker date="1482921084000" expanded="true" signature="7891:8946" ph="{...}" />
+            <marker date="1482921084000" expanded="true" signature="8952:9026" ph="@{...}" />
+            <marker date="1482921084000" expanded="true" signature="9280:10004" ph="{...}" />
+            <marker date="1482921084000" expanded="true" signature="10010:10084" ph="@{...}" />
+            <marker date="1482921084000" expanded="true" signature="10400:11217" ph="{...}" />
+            <marker date="1482921084000" expanded="true" signature="11264:11396" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1468,25 +1074,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="31" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#4765#0" expanded="false" />
-            <marker date="1482309359000" expanded="false" signature="229:1004" ph="..." />
-            <marker date="1482309359000" expanded="true" signature="1006:1032" ph="/**...*/" />
-            <marker date="1482309359000" expanded="true" signature="1033:1087" ph="@{...}" />
-            <marker date="1482309359000" expanded="false" signature="1274:1285" ph=" { " />
-            <marker date="1482309359000" expanded="false" signature="1329:1335" ph=" }" />
-            <marker date="1482309359000" expanded="true" signature="1341:1398" ph="@{...}" />
-            <marker date="1482309359000" expanded="true" signature="1463:1686" ph="{...}" />
-            <marker date="1482309359000" expanded="true" signature="1692:1781" ph="@{...}" />
-            <marker date="1482309359000" expanded="true" signature="1948:2263" ph="{...}" />
-            <marker date="1482309359000" expanded="true" signature="2269:2355" ph="@{...}" />
-            <marker date="1482309359000" expanded="true" signature="2528:2732" ph="{...}" />
-            <marker date="1482309359000" expanded="true" signature="2738:2822" ph="@{...}" />
-            <marker date="1482309359000" expanded="true" signature="3067:3673" ph="{...}" />
-            <marker date="1482309359000" expanded="true" signature="3679:3737" ph="@{...}" />
-            <marker date="1482309359000" expanded="true" signature="3875:4374" ph="{...}" />
-            <marker date="1482309359000" expanded="true" signature="4430:4761" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1494,7 +1082,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1535,7 +1122,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1770">
           <caret line="150" column="8" lean-forward="false" selection-start-line="150" selection-start-column="8" selection-end-line="151" selection-end-column="49" />
-          <folding />
+          <folding>
+            <element signature="e#0#2108#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1114#1115#0" expanded="false" />
+            <element signature="e#1166#1167#0" expanded="false" />
+            <marker date="1482406553000" expanded="true" signature="1269:1337" ph="@{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1551,7 +1144,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="615">
           <caret line="53" column="0" lean-forward="true" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#0#2779#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1567,7 +1162,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1620,44 +1214,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/PointScalesEndpoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#4765#0" expanded="false" />
-            <marker date="1482309359000" expanded="false" signature="229:1004" ph="..." />
-            <marker date="1482309359000" expanded="true" signature="1006:1032" ph="/**...*/" />
-            <marker date="1482309359000" expanded="true" signature="1033:1087" ph="@{...}" />
-            <marker date="1482309359000" expanded="false" signature="1274:1285" ph=" { " />
-            <marker date="1482309359000" expanded="false" signature="1329:1335" ph=" }" />
-            <marker date="1482309359000" expanded="true" signature="1341:1398" ph="@{...}" />
-            <marker date="1482309359000" expanded="true" signature="1463:1686" ph="{...}" />
-            <marker date="1482309359000" expanded="true" signature="1692:1781" ph="@{...}" />
-            <marker date="1482309359000" expanded="true" signature="1948:2263" ph="{...}" />
-            <marker date="1482309359000" expanded="true" signature="2269:2355" ph="@{...}" />
-            <marker date="1482309359000" expanded="true" signature="2528:2732" ph="{...}" />
-            <marker date="1482309359000" expanded="true" signature="2738:2822" ph="@{...}" />
-            <marker date="1482309359000" expanded="true" signature="3067:3673" ph="{...}" />
-            <marker date="1482309359000" expanded="true" signature="3679:3737" ph="@{...}" />
-            <marker date="1482309359000" expanded="true" signature="3875:4374" ph="{...}" />
-            <marker date="1482309359000" expanded="true" signature="4430:4761" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/target/generated-sources/swagger/src/main/java/ch/heigvd/gamification/api/dto/BadgeDTO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/LeaderboardEndpoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="19" column="8" lean-forward="false" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -1675,154 +1235,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11070">
           <caret line="757" column="14" lean-forward="false" selection-start-line="757" selection-start-column="14" selection-end-line="757" selection-end-column="14" />
-          <folding>
-            <marker date="1482401843000" expanded="true" signature="47:60" ph="Gamificati..." />
-            <marker date="1482401843000" expanded="true" signature="18103:18639" ph="Applicatio...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18103:21215" ph="definition...: &lt;13 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18120:18126" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="18131:18639" ph="properties: &lt;4 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18149:18196" ph="id: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18167:18174" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="18191:18196" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="18203:18269" ph="name: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18223:18229" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="18251:18269" ph="Applicatio..." />
-            <marker date="1482401843000" expanded="true" signature="18276:18431" ph="badges: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18298:18303" ph="array" />
-            <marker date="1482401843000" expanded="true" signature="18312:18367" ph="items: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18337:18343" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="18364:18367" ph="uri" />
-            <marker date="1482401843000" expanded="true" signature="18389:18431" ph="Liste de t..." />
-            <marker date="1482401843000" expanded="true" signature="18438:18639" ph="password: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18543:18549" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="18566:18574" ph="password" />
-            <marker date="1482401843000" expanded="true" signature="18596:18639" ph="Mot de pas..." />
-            <marker date="1482401843000" expanded="true" signature="18642:19123" ph="BadgeDTO: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18662:18668" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="18673:19123" ph="properties: &lt;5 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18691:18738" ph="id: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18709:18716" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="18733:18738" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="18745:18804" ph="name: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18765:18771" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="18793:18804" ph="Badge name..." />
-            <marker date="1482401843000" expanded="true" signature="18811:18886" ph="descriptio...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18838:18844" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="18866:18886" ph="Descriptio..." />
-            <marker date="1482401843000" expanded="true" signature="18893:18979" ph="imageURI: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="18917:18923" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="18940:18943" ph="uri" />
-            <marker date="1482401843000" expanded="true" signature="18965:18979" ph="Image du b..." />
-            <marker date="1482401843000" expanded="true" signature="18986:19123" ph="applicatio...: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19013:19020" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="19037:19042" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="19064:19123" ph="Identifien..." />
-            <marker date="1482401843000" expanded="true" signature="19127:19439" ph="PointScale...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19152:19158" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="19163:19439" ph="properties: &lt;4 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19181:19228" ph="id: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19199:19206" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="19223:19228" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="19235:19294" ph="name: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19255:19261" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="19283:19294" ph="Badge name..." />
-            <marker date="1482401843000" expanded="true" signature="19301:19376" ph="descriptio...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19328:19334" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="19356:19376" ph="Descriptio..." />
-            <marker date="1482401843000" expanded="true" signature="19383:19439" ph="nbrDePoint...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19410:19417" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="19434:19439" ph="int32" />
-            <marker date="1482401843000" expanded="true" signature="19442:19969" ph="EventDTO: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19462:19468" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="19486:19524" ph="Evènement ..." />
-            <marker date="1482401843000" expanded="true" signature="19529:19969" ph="properties: &lt;4 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19547:19622" ph="type: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19567:19573" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="19595:19622" ph="type de l'..." />
-            <marker date="1482401843000" expanded="true" signature="19629:19747" ph="userId: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19651:19658" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="19675:19680" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="19702:19747" ph="Id de l'ut..." />
-            <marker date="1482401843000" expanded="true" signature="19754:19825" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19780:19785" ph="array" />
-            <marker date="1482401843000" expanded="true" signature="19794:19825" ph="items: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19819:19825" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="19832:19969" ph="timeStamp: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19857:19863" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="19880:19889" ph="date-time" />
-            <marker date="1482401843000" expanded="true" signature="19911:19969" ph="Temps au q..." />
-            <marker date="1482401843000" expanded="true" signature="19972:20098" ph="Credential...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="19995:20001" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="20006:20098" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20024:20061" ph="applicatio...: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20055:20061" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20068:20098" ph="password: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20092:20098" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20101:20218" ph="User: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20117:20123" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="20128:20218" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20146:20174" ph="userId: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20168:20174" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20181:20218" ph="numberOfEv...: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20211:20218" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="20221:20304" ph="Token: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20238:20244" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="20249:20304" ph="properties: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20267:20304" ph="applicatio...: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20298:20304" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20307:20700" ph="RuleDTO: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20326:20332" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="20337:20700" ph="properties: &lt;6 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20355:20402" ph="id: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20373:20380" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="20397:20402" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="20409:20474" ph="event: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20430:20436" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20458:20474" ph="type d'évè..." />
-            <marker date="1482401843000" expanded="true" signature="20481:20544" ph="action: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20503:20509" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20531:20544" ph="type d'act..." />
-            <marker date="1482401843000" expanded="true" signature="20551:20583" ph="pointScale: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20577:20583" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20590:20641" ph="points: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20612:20619" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="20636:20641" ph="int32" />
-            <marker date="1482401843000" expanded="true" signature="20648:20700" ph="badgeId: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20671:20678" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="20695:20700" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="20704:20956" ph="PointsAwar...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20730:20736" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="20741:20956" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20759:20850" ph="motif: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20780:20786" ph="string" />
-            <marker date="1482401843000" expanded="true" signature="20808:20850" ph="Raison pou..." />
-            <marker date="1482401843000" expanded="true" signature="20857:20956" ph="points: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20879:20886" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="20903:20908" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="20930:20956" ph="Nombre de ..." />
-            <marker date="1482401843000" expanded="true" signature="20960:21215" ph="EndUserRep...: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="20992:20998" ph="object" />
-            <marker date="1482401843000" expanded="true" signature="21003:21215" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="21021:21109" ph="badge: &lt;2 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="21044:21049" ph="array" />
-            <marker date="1482401843000" expanded="true" signature="21060:21109" ph="items: &lt;1 key&gt;" />
-            <marker date="1482401843000" expanded="true" signature="21085:21109" ph="##/definiti..." />
-            <marker date="1482401843000" expanded="true" signature="21116:21215" ph="points: &lt;3 keys&gt;" />
-            <marker date="1482401843000" expanded="true" signature="21138:21145" ph="integer" />
-            <marker date="1482401843000" expanded="true" signature="21162:21167" ph="int64" />
-            <marker date="1482401843000" expanded="true" signature="21189:21215" ph="Nombre de ..." />
-            <marker date="1482401843000" expanded="true" signature="21261:21310" ph="token that..." />
-            <marker date="1482401843000" expanded="true" signature="21321:21341" ph="X-Gamifica..." />
-            <marker date="1482401843000" expanded="true" signature="21350:21356" ph="header" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/PointAwardEndpoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1080">
-          <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1844,66 +1256,115 @@
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/src.zip!/java/util/function/Function.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
+        <state relative-caret-position="375">
           <caret line="48" column="6" lean-forward="false" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="6" />
-          <folding />
+          <folding>
+            <element signature="e#0#2870#0" expanded="false" />
+            <element signature="e#2837#2838#0" expanded="false" />
+            <element signature="e#2866#2867#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/target/generated-sources/swagger/src/main/java/ch/heigvd/gamification/api/dto/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="775">
-          <caret line="142" column="55" lean-forward="true" selection-start-line="142" selection-start-column="55" selection-end-line="142" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/RuleEndpoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="930">
-          <caret line="119" column="0" lean-forward="false" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/BadgesEndpoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="637">
-          <caret line="78" column="8" lean-forward="false" selection-start-line="78" selection-start-column="8" selection-end-line="78" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/ApplicationsEndpoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/target/generated-sources/swagger/src/main/java/ch/heigvd/gamification/api/dto/Application.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/EventsEndpoint.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="e#0#2108#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1114#1115#0" expanded="false" />
+            <element signature="e#1166#1167#0" expanded="false" />
+            <marker date="1482406553000" expanded="true" signature="1269:1337" ph="@{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/AuthEndpoint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
+        <state relative-caret-position="180">
           <caret line="33" column="13" lean-forward="false" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#2779#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/EndUserEndpoint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="172" column="72" lean-forward="false" selection-start-line="172" selection-start-column="72" selection-end-line="172" selection-end-column="72" />
+        <state relative-caret-position="2220">
+          <caret line="177" column="46" lean-forward="false" selection-start-line="177" selection-start-column="46" selection-end-line="177" selection-end-column="46" />
+          <folding>
+            <marker date="1482921084000" expanded="true" signature="5775:5832" ph="@{...}" />
+            <marker date="1482921084000" expanded="true" signature="6067:6620" ph="{...}" />
+            <marker date="1482921084000" expanded="true" signature="6626:6703" ph="@{...}" />
+            <marker date="1482921084000" expanded="true" signature="6954:7504" ph="{...}" />
+            <marker date="1482921084000" expanded="true" signature="7510:7568" ph="@{...}" />
+            <marker date="1482921084000" expanded="true" signature="7891:8946" ph="{...}" />
+            <marker date="1482921084000" expanded="true" signature="8952:9026" ph="@{...}" />
+            <marker date="1482921084000" expanded="true" signature="9280:10004" ph="{...}" />
+            <marker date="1482921084000" expanded="true" signature="10010:10084" ph="@{...}" />
+            <marker date="1482921084000" expanded="true" signature="10400:11217" ph="{...}" />
+            <marker date="1482921084000" expanded="true" signature="11264:11396" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/LeaderboardEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="780">
+          <caret line="56" column="8" lean-forward="false" selection-start-line="99" selection-start-column="81" selection-end-line="99" selection-end-column="82" />
+          <folding>
+            <marker date="1482861874000" expanded="true" signature="229:283" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/PointAwardEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="91" column="3" lean-forward="false" selection-start-line="91" selection-start-column="3" selection-end-line="91" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/PointScalesEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1612">
+          <caret line="157" column="0" lean-forward="false" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/RuleEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="185" column="51" lean-forward="false" selection-start-line="185" selection-start-column="51" selection-end-line="185" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/BadgesEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="802">
+          <caret line="210" column="38" lean-forward="false" selection-start-line="210" selection-start-column="38" selection-end-line="210" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/heigvd/gamification/api/ApplicationsEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1650">
+          <caret line="135" column="4" lean-forward="false" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/generated-sources/swagger/src/main/java/ch/heigvd/gamification/api/dto/LeaderboardDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="21" column="22" lean-forward="false" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
           <folding />
         </state>
       </provider>
