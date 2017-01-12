@@ -61,9 +61,9 @@ public class BadgesEndpoint implements BadgesApi {
         if(apiKey == null){
         return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
         }
-        Badge badge = badgeRepository.findOne(badgeId);
-        Application app = apiKey.getApp();
         
+        Application app = apiKey.getApp();
+         Badge badge = badgeRepository.findByIdAndApp(badgeId, app);
         
         
         if (badge != null && app != null  ) {
@@ -84,8 +84,9 @@ public class BadgesEndpoint implements BadgesApi {
         return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
         }
          
-        Badge badge = badgeRepository.findOne(badgeId);
+       
         Application app = apiKey.getApp();
+         Badge badge = badgeRepository.findByIdAndApp(badgeId, app);
         if(app != null && badge != null){
         BadgeDTO dto = toDTO(badge);
         dto.setId(badge.getId());
@@ -115,25 +116,32 @@ public class BadgesEndpoint implements BadgesApi {
         
         if(app != null){
         
-        Badge badge = badgeRepository.findOne(badgeId);
+        Badge badge = badgeRepository.findByIdAndApp(badgeId, app);
 
+        if(body.getDescription()!= null){
+        
         if (!body.getDescription().equals(" ")) {
             badge.setDescription(body.getDescription());
         } else {
             body.setDescription(badge.getDescription());
         }
-        if (!body.getImageURI().equals(" ")) {
+        }
+        
+        if(body.getImageURI()!= null){
+        if (!body.getImageURI().equals(" ") || body.getImageURI()!= null) {
             badge.setImage(body.getImageURI());
         } else {
             body.setImageURI(badge.getImage());
         }
-
-        if (!body.getName().equals(" ")) {
+      }
+        if(body.getName() != null){ 
+        if (!body.getName().equals(" ") || body.getName()!= null) {
             badge.setName(body.getName());
         } else {
             body.setName(badge.getName());
         }
-
+        }
+        
         badgeRepository.save(badge);
         return new ResponseEntity(HttpStatus.OK);
         }
@@ -212,7 +220,7 @@ public class BadgesEndpoint implements BadgesApi {
         badgedto.setImageURI(badge.getImage());
         badgedto.setName(badge.getName());
 
-        badgedto.setApplication(badge.getApp().getId());
+        badgedto.setApplication(badge.getApp().getUsername());
 
         return badgedto;
     }

@@ -37,7 +37,7 @@ public class Application implements Serializable {
     @OneToMany(mappedBy = "app")
     private List<Badge> badges;
     
-     @OneToOne(mappedBy = "app", fetch = FetchType.EAGER)
+     @OneToOne(mappedBy = "app", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
       
     private AuthenKey appKey;
     
@@ -53,6 +53,7 @@ public class Application implements Serializable {
     @Column(unique = true)
     private String name;
     private String password;
+     @Column(unique = true)
      private String username;
 
     public Application(String name, String password, String username) {

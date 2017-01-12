@@ -38,27 +38,18 @@ public class ApplicationsEndpoint implements ApplicationsApi {
 
     ApplicationRepository apprepository;
     AuthenKeyRepository authenRepository;
-    
 
-   
- @Autowired
+    @Autowired
     public ApplicationsEndpoint(ApplicationRepository apprepository, AuthenKeyRepository authenRepository) {
         this.apprepository = apprepository;
         this.authenRepository = authenRepository;
     }
 
     @Override
-    @RequestMapping(value = "/{applicationId}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> applicationsApplicationIdDelete(@ApiParam(value = "applicationId", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "applicationId", required = true) @PathVariable("applicationId") Long applicationId) {
-        
-        
-         AuthenKey apiKey = authenRepository.findByAppKey(xGamificationToken); 
-       if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
-        }
-        
-        
-        Application app = apprepository.findOne(applicationId);
+    @RequestMapping(value = "/{applicationUsername}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> applicationsApplicationUsernameDelete(@ApiParam(value = "applicationUsername", required = true) @PathVariable("applicationUsername") String applicationUsername) {
+
+        Application app = apprepository.findByUsername(applicationUsername);
 
         if (app != null) {
             apprepository.delete(app);
@@ -69,17 +60,11 @@ public class ApplicationsEndpoint implements ApplicationsApi {
     }
 
     @Override
-    @RequestMapping(value = "/{applicationId}", method = RequestMethod.GET)
-     public ResponseEntity<ApplicationDTO> applicationsApplicationIdGet(@ApiParam(value = "applicationId", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "Id de l'application", required = true) @PathVariable("applicationId") Long applicationId) {
-     
-          AuthenKey apiKey = authenRepository.findByAppKey(xGamificationToken); 
-       if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
-        }
-         
-         
-         Application app = apprepository.findOne(applicationId);
-        UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodName(BadgesEndpoint.class,"badgesGet", 1).build();
+    @RequestMapping(value = "/{applicationUsername}", method = RequestMethod.GET)
+    public ResponseEntity<ApplicationDTO> applicationsApplicationUsernameGet(@ApiParam(value = "applicationUsername", required = true) @PathVariable("applicationUsername") String applicationUsername) {
+
+        Application app = apprepository.findByUsername(applicationUsername);
+        UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodName(BadgesEndpoint.class, "badgesGet", 1).build();
         ApplicationDTO dto = toDTO(app, uriComponents);
 
         if (dto == null) {
@@ -89,70 +74,89 @@ public class ApplicationsEndpoint implements ApplicationsApi {
         }
     }
 
-   
     @Override
-    @RequestMapping(value = "/{applicationId}", method = RequestMethod.PUT)
-   public ResponseEntity<Void> applicationsApplicationIdPut(@ApiParam(value = "applicationId", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "applicationId", required = true) @PathVariable("applicationId") Long applicationId, @ApiParam(value = "Modification of the application") @RequestBody Registration body) {
-        
-       AuthenKey apiKey = authenRepository.findByAppKey(xGamificationToken); 
-       if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
-        }
-       
-       Application app = apprepository.findOne(applicationId);
+    @RequestMapping(value = "/{applicationUsername}", method = RequestMethod.PUT)
+    public ResponseEntity<Void> applicationsApplicationUsernamePut(@ApiParam(value = "applicationUsername", required = true) @PathVariable("applicationUsername") String applicationUsername, @ApiParam(value = "Modification of the application") @RequestBody Registration body) {
 
-        if (!body.getName().equals(" ")) {
-            app.setName(body.getName());
-        } else {
-            body.setName(app.getName());
+        Application app = apprepository.findByUsername(applicationUsername);
+
+        if (body.getName() != null) {
+            if (!body.getName().equals(" ")) {
+                app.setName(body.getName());
+            } else {
+                body.setName(app.getName());
+            }
         }
 
-        if (!body.getPassword().equals(" ")) {
-            app.setPassword(body.getPassword());
-        } else {
-            body.setPassword(app.getPassword());
-        }
+        if (body.getPassword() != null || body.getUsername() != null) {
 
+            if (body.getPassword() != null && !body.getPassword().equals(" ")) {
+                String password = "";
+                try {
+                    if (body.getUsername() != null && !body.getUsername().equals(" ")) {
+                        password = Application.doHash(body.getPassword(), body.getUsername());
+                    } else {
+                        password = Application.doHash(body.getPassword(), app.getUsername());
+                    }
+                } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
+                    Logger.getLogger(ApplicationsEndpoint.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                app.setPassword(password);
+            }
+            if (body.getUsername() != null && !body.getUsername().equals(" ")) {
+                String password = "";
+                try {
+                    if (body.getPassword() != null && !body.getPassword().equals(" ")) {
+                        password = Application.doHash(body.getPassword(), body.getUsername());
+                    } else {
+                        password = Application.doHash(app.getPassword(), body.getUsername());
+                    }
+                } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
+                    Logger.getLogger(ApplicationsEndpoint.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                app.setUsername(body.getUsername());
+                app.setPassword(password);
+            }
+
+        }
         apprepository.save(app);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @Override
     @RequestMapping(method = RequestMethod.GET)
-   public ResponseEntity<List<ApplicationDTO>> applicationsGet(@ApiParam(value = "token that identifies the app sending the request", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken) {
-        
-        AuthenKey apiKey = authenRepository.findByAppKey(xGamificationToken); 
-       if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
-        }
-       UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodName(BadgesEndpoint.class, "badgesGet", 1).build();
+    public ResponseEntity<List<ApplicationDTO>> applicationsGet() {
+
+        UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodName(BadgesEndpoint.class, "badgesGet", 1).build();
         return new ResponseEntity<>(StreamSupport.stream(apprepository.findAll().spliterator(), true)
                 .map(p -> toDTO(p, uriComponents))
                 .collect(toList()), HttpStatus.OK);
     }
 
-
-
     @Override
     @RequestMapping(method = RequestMethod.POST)
-   public ResponseEntity<Void> applicationsPost(@ApiParam(value = "Application to add", required = true) @RequestBody Registration body) {
-       
+    public ResponseEntity<Void> applicationsPost(@ApiParam(value = "Application to add", required = true) @RequestBody Registration body) {
+
         if (body != null) {
-        
+
             AuthenKey apiKey = new AuthenKey();
-            String password ="";
+            String password = "";
             try {
                 password = ch.heigvd.gamification.model.Application.doHash(body.getPassword(), body.getUsername());
             } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
                 Logger.getLogger(ApplicationsEndpoint.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
-        Application app = new Application(body.getName(), password, body.getUsername());    
-         
-        apiKey.setApp(app);
-        
-             apprepository.save(app);
-             authenRepository.save(apiKey);
+
+            Application app = new Application(body.getName(), password, body.getUsername());
+
+            apiKey.setApp(app);
+            try {
+                apprepository.save(app);
+            } catch (javax.persistence.PersistenceException e) {
+                return new ResponseEntity("username already use", HttpStatus.UNPROCESSABLE_ENTITY);
+            }
+            authenRepository.save(apiKey);
             return new ResponseEntity(HttpStatus.CREATED);
 
         } else {
@@ -160,27 +164,20 @@ public class ApplicationsEndpoint implements ApplicationsApi {
         }
     }
 
-    
     public ApplicationDTO toDTO(ch.heigvd.gamification.model.Application app, UriComponents uriComponents) {
 
         ApplicationDTO dto = new ApplicationDTO();
-       List<String> urls = new ArrayList<>();
-       app.getBadges().stream().forEach((badge) -> {
-           urls.add(uriComponents.toString() + badge.getId());
+        List<String> urls = new ArrayList<>();
+        app.getBadges().stream().forEach((badge) -> {
+            urls.add(uriComponents.toString() + badge.getId());
         });
         dto.setBadges(urls);
         dto.setId(app.getId());
         dto.setName(app.getName());
+        dto.setUsername(app.getUsername());
 
         return dto;
 
     }
 
-
-   
-
-  
-    
-
-   
 }

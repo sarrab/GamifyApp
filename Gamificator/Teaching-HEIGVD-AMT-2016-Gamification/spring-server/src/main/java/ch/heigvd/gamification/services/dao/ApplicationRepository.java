@@ -14,7 +14,7 @@ import org.springframework.data.repository.CrudRepository;
  * @author Thibaut-PC
  */
 public interface ApplicationRepository extends CrudRepository<Application, Long> {
-   Application findByName (String name);
+   Application findByUsername (String name);
    Application findByAppKey(AuthenKey key);
    Application findByAppKeyAppKey(String keyvalue);
    Application findByPassword(String password);

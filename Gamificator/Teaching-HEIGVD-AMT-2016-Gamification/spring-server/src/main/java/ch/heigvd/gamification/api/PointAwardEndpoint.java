@@ -59,7 +59,7 @@ public class PointAwardEndpoint implements PointsAwardsApi {
         Application app = apiKey.getApp();
            
            if(app != null){
-        List<EndUser> endUsers = (List<EndUser>) endUserRepository.findAllByApp(applicationRepository.findByName(xGamificationToken));
+        List<EndUser> endUsers = (List<EndUser>) endUserRepository.findAllByApp(applicationRepository.findByUsername(app.getUsername()));
         List<PointAwards> pointAwards = new ArrayList<>();
         List<PointsAwardDTO> pointAwardDTOs = new ArrayList<>();
         endUsers.stream().forEach((e) -> {

@@ -47,7 +47,7 @@ public class AuthEndpoint implements AuthenticationsApi {
      @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity authenticateApplicationAndGetToken(@ApiParam(value = "The info required to authenticate an application", required = true) @RequestBody Credentials body) {
 
-        String username = body.getApplicationName();
+        String username = body.getApplicationUsername();
         
         String password = body.getPassword();
         
@@ -68,7 +68,7 @@ public class AuthEndpoint implements AuthenticationsApi {
             token.setApplicationName(appKey.getAppKey());
             return ResponseEntity.ok(token);
         } else {
-             System.err.println("nom autorisé");
+             System.err.println("nom autorisé" +  password + "" + username + " "  + body.getPassword());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
         }
