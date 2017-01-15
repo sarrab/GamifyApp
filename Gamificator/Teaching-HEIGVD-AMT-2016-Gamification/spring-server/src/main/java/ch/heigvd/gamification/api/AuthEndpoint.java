@@ -47,12 +47,16 @@ public class AuthEndpoint implements AuthenticationsApi {
      @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity authenticateApplicationAndGetToken(@ApiParam(value = "The info required to authenticate an application", required = true) @RequestBody Credentials body) {
 
-        String username = body.getApplicationUsername();
+    
+        
+        Application app1 = applicationsRepository.findByName(body.getApplicationName());
+        
+        if(app1 != null){
         
         String password = body.getPassword();
         
         try {
-            password = Application.doHash(password, username);
+            password = Application.doHash(password, app1.getSel());
             
         } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
             Logger.getLogger(AuthEndpoint.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,10 +72,16 @@ public class AuthEndpoint implements AuthenticationsApi {
             token.setApplicationName(appKey.getAppKey());
             return ResponseEntity.ok(token);
         } else {
-             System.err.println("nom autorisé" +  password + "" + username + " "  + body.getPassword());
+             System.err.println("nom autorisé" +  password + "" + app1.getSel() + " "  + body.getPassword());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
         }
 
     }
+    
+    
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+
+}
+
 }

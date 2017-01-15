@@ -83,21 +83,21 @@ BadgeRepository badgeRepository;
         
         System.out.println("Gnerate application");  
         
-        Application app1 = applicationRepository.save(new Application("app1", "app1_t", "stackoverflow"));
+        Application app1 = applicationRepository.save(new Application("app1", "app1_t"));
         AuthenKey apiKey1 = new AuthenKey();
         app1.setAppKey(apiKey1);
-        Application app2 = applicationRepository.save(new Application("app2", "app2_t", "gaps"));
+        Application app2 = applicationRepository.save(new Application("app2", "app2_t"));
         
         AuthenKey apiKey2 = new AuthenKey();
         app2.setAppKey(apiKey2);
          
-      Application app3 = applicationRepository.save(new Application("app3", "app3_t", "www"));
+      Application app3 = applicationRepository.save(new Application("app3", "app3_t"));
          
       
       AuthenKey apiKey3 = new AuthenKey();
         app3.setAppKey(apiKey2);
       
-      Application app4 = applicationRepository.save(new Application("app4", "app4_t", "siteZero"));
+      Application app4 = applicationRepository.save(new Application("app4", "app4_t"));
           
      AuthenKey apiKey4 = new AuthenKey();
         app1.setAppKey(apiKey4);

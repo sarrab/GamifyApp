@@ -7,8 +7,10 @@ package ch.heigvd.gamification.model;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,13 +56,26 @@ public class Application implements Serializable {
     private String name;
     private String password;
      @Column(unique = true)
-     private String username;
+    
+     private String sel;
+     
+     
 
-    public Application(String name, String password, String username) {
+  public final String nextSessionId() {
+      SecureRandom random = new SecureRandom();
+    return new BigInteger(130, random).toString(32);
+  }
+
+    public Application(String name, String password) {
        
         this.name = name;
-        this.password = password;
-        this.username = username;
+        this.sel = this.nextSessionId();
+          try {
+                 this.password = doHash(password, sel);
+            } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
+                Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
     }
 
 
@@ -69,21 +84,26 @@ public class Application implements Serializable {
     public Application() {
 
     }
+    
+    public String getSel(){
+    
+    return this.sel;
+    
+    }
+    
+    public void setSel(String str){
+    
+    this.sel = str;
+    }
 
     public AuthenKey getAppKey() {
         return appKey;
     }
 
-    public String getUsername() {
-        return username;
-    }
+   
 
     public void setAppKey(AuthenKey appKey) {
         this.appKey = appKey;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
   
@@ -170,7 +190,7 @@ public class Application implements Serializable {
         for (int i = 0; i < byteData.length; i++) {
             sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
         }
-
+   System.out.println("password" + sb.toString());
         return sb.toString();
     }  
     

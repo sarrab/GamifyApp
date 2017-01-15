@@ -8,6 +8,7 @@ package ch.heigvd.gamification.services.dao;
 
 import ch.heigvd.gamification.model.Application;
 import ch.heigvd.gamification.model.Badge;
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -18,4 +19,5 @@ public interface BadgeRepository  extends CrudRepository<Badge, Long>{
     
     Badge findByName(String name);
     Badge findByIdAndApp(Long id, Application app);
+    List<Badge> findAllByApp(Application app);
 }

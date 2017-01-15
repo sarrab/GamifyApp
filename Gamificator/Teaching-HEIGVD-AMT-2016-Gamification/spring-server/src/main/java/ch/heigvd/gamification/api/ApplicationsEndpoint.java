@@ -49,7 +49,7 @@ public class ApplicationsEndpoint implements ApplicationsApi {
     @RequestMapping(value = "/{applicationUsername}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> applicationsApplicationUsernameDelete(@ApiParam(value = "applicationUsername", required = true) @PathVariable("applicationUsername") String applicationUsername) {
 
-        Application app = apprepository.findByUsername(applicationUsername);
+        Application app = apprepository.findByName(applicationUsername);
 
         if (app != null) {
             apprepository.delete(app);
@@ -63,7 +63,7 @@ public class ApplicationsEndpoint implements ApplicationsApi {
     @RequestMapping(value = "/{applicationUsername}", method = RequestMethod.GET)
     public ResponseEntity<ApplicationDTO> applicationsApplicationUsernameGet(@ApiParam(value = "applicationUsername", required = true) @PathVariable("applicationUsername") String applicationUsername) {
 
-        Application app = apprepository.findByUsername(applicationUsername);
+        Application app = apprepository.findByName(applicationUsername);
         UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodName(BadgesEndpoint.class, "badgesGet", 1).build();
         ApplicationDTO dto = toDTO(app, uriComponents);
 
@@ -78,7 +78,7 @@ public class ApplicationsEndpoint implements ApplicationsApi {
     @RequestMapping(value = "/{applicationUsername}", method = RequestMethod.PUT)
     public ResponseEntity<Void> applicationsApplicationUsernamePut(@ApiParam(value = "applicationUsername", required = true) @PathVariable("applicationUsername") String applicationUsername, @ApiParam(value = "Modification of the application") @RequestBody Registration body) {
 
-        Application app = apprepository.findByUsername(applicationUsername);
+        Application app = apprepository.findByName(applicationUsername);
 
         if (body.getName() != null) {
             if (!body.getName().equals(" ")) {
@@ -87,39 +87,28 @@ public class ApplicationsEndpoint implements ApplicationsApi {
                 body.setName(app.getName());
             }
         }
-
-        if (body.getPassword() != null || body.getUsername() != null) {
-
-            if (body.getPassword() != null && !body.getPassword().equals(" ")) {
-                String password = "";
+        
+          if(body.getPassword()!= null){
+            
+            if(!body.getPassword().equals(" ")){
                 try {
-                    if (body.getUsername() != null && !body.getUsername().equals(" ")) {
-                        password = Application.doHash(body.getPassword(), body.getUsername());
-                    } else {
-                        password = Application.doHash(body.getPassword(), app.getUsername());
-                    }
-                } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
+                    String password = Application.doHash(body.getPassword(), app.getSel());
+                    System.out.println("mot de passe update" + password);
+                    app.setPassword(password);
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(ApplicationsEndpoint.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NoSuchAlgorithmException ex) {
                     Logger.getLogger(ApplicationsEndpoint.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
-                app.setPassword(password);
+            
+            
             }
-            if (body.getUsername() != null && !body.getUsername().equals(" ")) {
-                String password = "";
-                try {
-                    if (body.getPassword() != null && !body.getPassword().equals(" ")) {
-                        password = Application.doHash(body.getPassword(), body.getUsername());
-                    } else {
-                        password = Application.doHash(app.getPassword(), body.getUsername());
-                    }
-                } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
-                    Logger.getLogger(ApplicationsEndpoint.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                app.setUsername(body.getUsername());
-                app.setPassword(password);
-            }
-
+            
         }
+
+      
+
+        
         apprepository.save(app);
         return new ResponseEntity(HttpStatus.OK);
     }
@@ -142,13 +131,8 @@ public class ApplicationsEndpoint implements ApplicationsApi {
 
             AuthenKey apiKey = new AuthenKey();
             String password = "";
-            try {
-                password = ch.heigvd.gamification.model.Application.doHash(body.getPassword(), body.getUsername());
-            } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
-                Logger.getLogger(ApplicationsEndpoint.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            Application app = new Application(body.getName(), password, body.getUsername());
+           
+            Application app = new Application(body.getName(), body.getPassword());
 
             apiKey.setApp(app);
             try {
@@ -174,7 +158,7 @@ public class ApplicationsEndpoint implements ApplicationsApi {
         dto.setBadges(urls);
         dto.setId(app.getId());
         dto.setName(app.getName());
-        dto.setUsername(app.getUsername());
+      
 
         return dto;
 

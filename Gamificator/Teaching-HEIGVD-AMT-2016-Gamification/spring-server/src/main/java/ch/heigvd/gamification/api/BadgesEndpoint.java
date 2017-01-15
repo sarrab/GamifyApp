@@ -168,7 +168,7 @@ public class BadgesEndpoint implements BadgesApi {
          Application app = apiKey.getApp();
          
          if(app != null){
-        return new ResponseEntity<>(StreamSupport.stream(badgeRepository.findAll().spliterator(), true)
+        return new ResponseEntity<>(StreamSupport.stream(badgeRepository.findAllByApp(app).spliterator(), true)
                 .map(p -> toDTO(p))
                 .collect(toList()), HttpStatus.OK);
          }
@@ -219,8 +219,8 @@ public class BadgesEndpoint implements BadgesApi {
         badgedto.setId(badge.getId());
         badgedto.setImageURI(badge.getImage());
         badgedto.setName(badge.getName());
-
-        badgedto.setApplication(badge.getApp().getUsername());
+       
+        badgedto.setApplicationName(badge.getApp().getName());
 
         return badgedto;
     }
