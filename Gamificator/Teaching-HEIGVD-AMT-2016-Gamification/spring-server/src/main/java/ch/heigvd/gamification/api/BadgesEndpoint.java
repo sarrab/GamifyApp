@@ -189,8 +189,10 @@ public class BadgesEndpoint implements BadgesApi {
        if(apiKey == null){
        return new ResponseEntity(HttpStatus.UNAUTHORIZED);
        }
+       
        Application app = apiKey.getApp();
-
+       if(badgeRepository.findByName(body.getName()) != null)
+            return new ResponseEntity("name already use", HttpStatus.UNPROCESSABLE_ENTITY);
         if (body != null && app != null) {
             Badge badge = new Badge();
             badge.setDescription(body.getDescription());

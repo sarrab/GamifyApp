@@ -46,8 +46,8 @@ public class ApplicationsEndpoint implements ApplicationsApi {
     }
 
     @Override
-    @RequestMapping(value = "/{applicationUsername}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> applicationsApplicationUsernameDelete(@ApiParam(value = "applicationUsername", required = true) @PathVariable("applicationUsername") String applicationUsername) {
+    @RequestMapping(value = "/applicationName}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void>  applicationsApplicationNameDelete(@ApiParam(value = "applicationName", required = true) @PathVariable("applicationName") String applicationUsername) {
 
         Application app = apprepository.findByName(applicationUsername);
 
@@ -60,8 +60,8 @@ public class ApplicationsEndpoint implements ApplicationsApi {
     }
 
     @Override
-    @RequestMapping(value = "/{applicationUsername}", method = RequestMethod.GET)
-    public ResponseEntity<ApplicationDTO> applicationsApplicationUsernameGet(@ApiParam(value = "applicationUsername", required = true) @PathVariable("applicationUsername") String applicationUsername) {
+    @RequestMapping(value = "/{applicationName}", method = RequestMethod.GET)
+    public ResponseEntity<ApplicationDTO> applicationsApplicationNameGet(@ApiParam(value = "applicationName", required = true) @PathVariable("applicationName") String applicationUsername) {
 
         Application app = apprepository.findByName(applicationUsername);
         UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodName(BadgesEndpoint.class, "badgesGet", 1).build();
@@ -75,16 +75,16 @@ public class ApplicationsEndpoint implements ApplicationsApi {
     }
 
     @Override
-    @RequestMapping(value = "/{applicationUsername}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> applicationsApplicationUsernamePut(@ApiParam(value = "applicationUsername", required = true) @PathVariable("applicationUsername") String applicationUsername, @ApiParam(value = "Modification of the application") @RequestBody Registration body) {
+    @RequestMapping(value = "/{applicationName}", method = RequestMethod.PUT)
+    public ResponseEntity<Void> applicationsApplicationNamePut(@ApiParam(value = "applicationName", required = true) @PathVariable("applicationName") String applicationUsername, @ApiParam(value = "Modification of the application") @RequestBody Registration body) {
 
         Application app = apprepository.findByName(applicationUsername);
 
-        if (body.getName() != null) {
-            if (!body.getName().equals(" ")) {
-                app.setName(body.getName());
+        if (body.getApplicationName() != null) {
+            if (!body.getApplicationName().equals(" ")) {
+                app.setName(body.getApplicationName());
             } else {
-                body.setName(app.getName());
+                body.setApplicationName(app.getName());
             }
         }
         
@@ -131,14 +131,20 @@ public class ApplicationsEndpoint implements ApplicationsApi {
 
             AuthenKey apiKey = new AuthenKey();
             String password = "";
+            
+            if(apprepository.findByName(body.getApplicationName())!= null){
+               
+                System.out.println(body.getApplicationName());
+             return new ResponseEntity("name already use", HttpStatus.UNPROCESSABLE_ENTITY);
+          }
            
-            Application app = new Application(body.getName(), body.getPassword());
+            Application app = new Application(body.getApplicationName(), body.getPassword());
 
             apiKey.setApp(app);
             try {
                 apprepository.save(app);
             } catch (javax.persistence.PersistenceException e) {
-                return new ResponseEntity("username already use", HttpStatus.UNPROCESSABLE_ENTITY);
+               return new ResponseEntity("name already use", HttpStatus.UNPROCESSABLE_ENTITY);
             }
             authenRepository.save(apiKey);
             return new ResponseEntity(HttpStatus.CREATED);
@@ -157,7 +163,7 @@ public class ApplicationsEndpoint implements ApplicationsApi {
         });
         dto.setBadges(urls);
         dto.setId(app.getId());
-        dto.setName(app.getName());
+        dto.setApplicationName(app.getName());
       
 
         return dto;

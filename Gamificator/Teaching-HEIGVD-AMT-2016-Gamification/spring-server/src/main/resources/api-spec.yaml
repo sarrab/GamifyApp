@@ -16,7 +16,7 @@ schemes:
 paths:
   /applications:
     get: 
-      description: Retourne la liste de toutes les applications enregistrÃƒÆ’Ã‚Â©es
+      description: Give list of all applications
       produces:
         - application/json
       responses:
@@ -27,7 +27,7 @@ paths:
             items:
               $ref: '#/definitions/ApplicationDTO'
     post:
-      description: Enregistre une application
+      description: Register a new application
       consumes:
         - application/json
       produces:
@@ -42,15 +42,15 @@ paths:
       responses:
         201:
           description: OK, Application created
-  /applications/{applicationUsername}:
+  /applications/{applicationName}:
     get:
-      description: Retourne l'application dont le nom est spÃƒÆ’Ã‚Â©cifiÃƒÆ’Ã‚Â© dans le path
+      description: Give the application summary 
       produces:
         - application/json
       parameters:
         - in: path
-          name: applicationUsername
-          description: Nom d'utilisateur de l'application
+          name: applicationName
+          description: Name of the application
           required: true
           type: string
       responses:
@@ -59,15 +59,15 @@ paths:
           schema:
             $ref: '#/definitions/ApplicationDTO'
     put:
-      description: Apporte des modifications ÃƒÂ  l'application
+      description: Modify the application
       consumes:
         - application/json
       produces:
         - application/json
       parameters:
         - in: path
-          name: applicationUsername
-          description: Nom d'utilisateur de l'application
+          name: applicationName
+          description: Name of the application
           required: true
           type: string
         - name: body
@@ -80,13 +80,13 @@ paths:
         200:
           description: OK, Application modified
     delete:
-      description: Supprime une application
+      description: Delete an application
       produces:
         - application/json
       parameters:
         - in: path
-          name: applicationUsername
-          description: Nom d'utilisateur de l'application
+          name: applicationName
+          description: Name of the application
           required: true
           type: string
       responses:
@@ -94,7 +94,7 @@ paths:
           description: OK, Application deleted
   /badges:
     get: 
-      description: Retourne la liste de tous les badges de l'application 
+      description: Give the list of all badges in the application 
       produces:
         - application/json
       parameters:
@@ -107,7 +107,7 @@ paths:
             items:
               $ref: '#/definitions/BadgeDTO'
     post:
-      description: CrÃƒÆ’Ã‚Â©e un badge dans l'application
+      description: Create a badge in the application
       consumes:
         - application/json
       produces:
@@ -125,7 +125,7 @@ paths:
           description: OK, Badge created
   /badges/{badgeId}:
     get:
-      description: Retourne le badge dont l'id est spÃƒÆ’Ã‚Â©cifiÃƒÆ’Ã‚Â© dans le path
+      description: Give the badge details
       consumes:
         - application/json
       produces:
@@ -144,7 +144,7 @@ paths:
           schema:
             $ref: '#/definitions/BadgeDTO'
     put:
-      description: Apporte des modifications au badge
+      description: Modify a badge
       consumes:
         - application/json
       produces:
@@ -167,7 +167,7 @@ paths:
         200:
           description: OK, Badge modified
     delete:
-      description: Supprime le badge
+      description: Delete the badge
       produces:
         - application/json
       parameters:
@@ -183,7 +183,7 @@ paths:
           description: OK, Badge deleted
   /pointScales:
     get: 
-      description: Retourne la liste de tous les pointScales de l'application 
+      description: Give the list of all pointScales of the application 
       produces:
         - application/json
       parameters:
@@ -196,7 +196,7 @@ paths:
             items:
               $ref: '#/definitions/PointScaleDTO'
     post:
-      description: CrÃƒÆ’Ã‚Â©e un pointScale dans l'application
+      description: Create a pointScale in the application
       consumes:
         - application/json
       produces:
@@ -214,7 +214,7 @@ paths:
           description: OK, PointScale created
   /pointScales/{pointScaleId}:
     get:
-      description: Retourne le pointScale dont l'id est spÃƒÆ’Ã‚Â©cifiÃƒÆ’Ã‚Â© dans le path
+      description: Give the pointScale details
       produces:
         - application/json
       parameters:
@@ -231,7 +231,7 @@ paths:
           schema:
             $ref: '#/definitions/PointScaleDTO'
     put:
-      description: Apporte des modifications au pointScale
+      description: Modify the pointScale
       consumes:
         - application/json
       produces:
@@ -254,7 +254,7 @@ paths:
         200:
           description: OK, PointScale modified
     delete:
-      description: Supprime le pointScale
+      description: Delete the pointScale
       produces:
         - application/json
       parameters:
@@ -363,7 +363,7 @@ paths:
             $ref: '#/definitions/RuleDTO'
   /rules/{ruleId}:
     get:
-      description: Retourne la rÃƒÆ’Ã‚Â¨gle dont l'id est spÃƒÆ’Ã‚Â©cifiÃƒÆ’Ã‚Â© dans le path
+      description: Give the rule details
       produces:
         - application/json
       parameters:
@@ -380,7 +380,7 @@ paths:
           schema:
             $ref: '#/definitions/RuleDTO'
     put:
-      description: Apporte des modifications ÃƒÆ’Ã‚Â  la rÃƒÆ’Ã‚Â¨gle
+      description: Modify the rule
       consumes:
         - application/json
       produces:
@@ -403,7 +403,7 @@ paths:
         200:
           description: OK, Rule modified
     delete:
-      description: Supprime une rÃƒÆ’Ã‚Â¨gle
+      description: Delete a rule
       produces:
         - application/json
       parameters:
@@ -419,7 +419,7 @@ paths:
           description: OK, Rule deleted
   /pointsAwards:
     get:
-      description: Retourne l'ensemble des points gagnÃƒÆ’Ã‚Â©s par un utilisateur
+      description: Give the set of points earned by the user
       produces:
         - application/json
       parameters:
@@ -431,26 +431,25 @@ paths:
           schema:
             $ref: '#/definitions/PointsAwardDTO'
     post:
-      description: crÃƒÆ’Ã‚Â©e un point award pour un utilisateur
+      description: Create a point award for a user
       produces:
         - application/json
       parameters:
         - $ref: '#/parameters/TokenHeader'
         - in: body
           name: body
-          description: paramÃƒÆ’Ã‚Â¨tres de la rÃƒÆ’Ã‚Â©compence crÃƒÆ’Ã‚Â©ÃƒÆ’Ã‚Â©e
           schema:
             $ref: '#/definitions/PointsAwardDTO'
           required: true
       responses:
         201:
           description:
-            OK award crÃƒÆ’Ã‚Â©ÃƒÆ’Ã‚Â©
+            OK award created
           schema:
             $ref: '#/definitions/PointsAwardDTO'
   /pointsAwards/{id}:
     get:
-      description: Retourne le point award dont l'id est spÃƒÆ’Ã‚Â©cifiÃƒÆ’Ã‚Â© dans le path
+      description: Give pointAward details
       produces:
         - application/json
       parameters:
@@ -467,7 +466,7 @@ paths:
           schema:
             $ref: '#/definitions/PointsAwardDTO'
     put:
-      description: Apporte des modifications ÃƒÆ’Ã‚Â  un point award
+      description: Modify point award
       consumes:
         - application/json
       produces:
@@ -490,7 +489,7 @@ paths:
         200:
           description: OK, point award modified
     delete:
-      description: Supprime un point award
+      description: Delete a point award
       produces:
         - application/json
       parameters:
@@ -505,14 +504,14 @@ paths:
           description: OK, point award deleted
   /leaderboard:
     get:
-      description: Retourne les meilleurs utilisateurs
+      description: Give the list of best users
       produces:
         - application/json
       parameters:
         - $ref: '#/parameters/TokenHeader'
         - in: query
           name: size
-          description: nombre de leaders ÃƒÆ’Ã‚Â  afficher
+          description: number of leader to send
           required: false
           type: integer
           format: int32
@@ -524,7 +523,7 @@ paths:
             $ref: '#/definitions/LeaderboardDTO'
   /endUser:
     get:
-      description: Retourne tous les utilisateurs de l'application
+      description: Give the list of all users in an application
       produces:
         - application/json
       parameters:
@@ -538,27 +537,26 @@ paths:
             items:
              $ref: '#/definitions/EndUserDTO'
     post:
-      description: crÃƒÆ’Ã‚Â©e un utilisateur
+      description: Create an end user
       produces:
         - application/json
       parameters:
         - $ref: '#/parameters/TokenHeader'
         - in: body
           name: body
-          description: donnÃƒÆ’Ã‚Â©es de l'utilisateur
           schema:
             $ref: '#/definitions/EndUserDTO'
           required: true
       responses:
         201:
           description:
-            OK utilisateur crÃƒÆ’Ã‚Â©ÃƒÆ’Ã‚Â©
+            OK endUser created
           schema:
             $ref: '#/definitions/EndUserDTO'
             
   /endUser/{endUser'ID}/reputation:
     get:
-      description: Retourne tous les utilisateurs de l'application
+      description: Give the reputation of a user
       produces:
         - application/json
       parameters:
@@ -573,12 +571,12 @@ paths:
       responses:
         200:
           description:
-              liste des utilisateurs
+              List of users
           schema:
             $ref: '#/definitions/EndUserReputationDTO'
   /endUser/{endUser'ID}/badges:
     get:
-      description: Retourne tous les utilisateurs de l'application
+      description: Give all badges of a user
       produces:
         - application/json
       parameters:
@@ -597,7 +595,7 @@ paths:
             
   /endUser/{id}:
     get:
-      description: Retourne l'utilisateur dont l'id est spÃƒÆ’Ã‚Â©cifiÃƒÆ’Ã‚Â© dans le path
+      description: User details
       produces:
         - application/json
       parameters:
@@ -614,7 +612,7 @@ paths:
           schema:
             $ref: '#/definitions/EndUserDTO'
     put:
-      description: Apporte des modifications sur un utilisateur
+      description: Modify a user
       consumes:
         - application/json
       produces:
@@ -638,7 +636,7 @@ paths:
           description: OK, user updated
           
     delete:
-      description: Supprime un utilisateur
+      description: Delete a user
       produces:
         - application/json
       parameters:
@@ -658,29 +656,29 @@ definitions:
     properties:
       name:
         type: string
-        description: Nom de l'utilisateur
+        description: user's name
   LeaderboardDTO:
     type: object
     properties:
       points:
         type: integer
         format: int32
-        description: Nombre de points obtenus par un leader
+        description: Number of points earned by a leader
       name:
         type: string
-        description: Nom du leader
+        description: Name of the leader
       badges:
         type: array
         items:
             type: string
-        description: Liste de tous les nom des badges d'un leader
+        description: List of badges of a leader
   ApplicationDTO:
     type: object
     properties:
       id:
         type: integer
         format: int64
-      name:
+      applicationName:
         type: string
         description: Name of the application
       badges:
@@ -695,7 +693,7 @@ definitions:
       id:
         type: integer
         format: int64
-      name:
+      applicationName:
         type: string
         description: Name of the application
       password:
@@ -739,15 +737,15 @@ definitions:
         
   EventDTO:
     type: object
-    description: EvÃƒÆ’Ã‚Â¨nement produit dans une application
+    description: Event produced in an application
     properties:
       type:
         type: string
-        description: type de l'ÃƒÆ’Ã‚Â©vÃƒÆ’Ã‚Â¨nement produit
+        description: type of event
       userId:
         type: integer
         format: int64
-        description: Id de l'utilisateur qui a produit l'ÃƒÆ’Ã‚Â©vÃƒÆ’Ã‚Â¨nement
+        description: Id of the user producing the event
       properties:
         type: array
         items:
@@ -755,7 +753,7 @@ definitions:
       timeStamp:
         type: string
         format: date-time
-        description: Temps au quel l'ÃƒÆ’Ã‚Â©vÃƒÆ’Ã‚Â¨nement a ÃƒÆ’Ã‚Â©tÃƒÆ’Ã‚Â© produit dans l'application
+        description: Time when event is posted
   Credentials:
     type: object
     properties:
@@ -783,10 +781,10 @@ definitions:
         format: int64
       event:
         type: string
-        description: type d'ÃƒÆ’Ã‚Â©vÃƒÆ’Ã‚Â¨nement
+        description: type of event
       action:
         type: string
-        description: type d'action
+        description: type of action
       pointScale:
         type: string
       points:
@@ -804,11 +802,11 @@ definitions:
     properties:
       motif:
         type: string
-        description: Raison pour laquelle le point est attribuÃƒÆ’Ã‚Â©
+        description: Raison for giving a point
       points:
         type: integer
         format: int64
-        description: Nombre de points attribuÃƒÆ’Ã‚Â©s
+        description: Nomber of points given
 
   EndUserReputationDTO:
     type: object
@@ -820,7 +818,7 @@ definitions:
       points:
         type: integer
         format: int64
-        description: Nombre de points attribuÃƒÆ’Ã‚Â©s
+        description: Nomber of points given
 
 parameters:
   TokenHeader:

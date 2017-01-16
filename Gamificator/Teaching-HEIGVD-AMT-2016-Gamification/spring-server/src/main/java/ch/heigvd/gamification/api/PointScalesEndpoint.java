@@ -129,7 +129,7 @@ public class PointScalesEndpoint implements PointScalesApi {
 
         if (pointscaleRepository.findByName(body.getName()) != null) {
 
-            return new ResponseEntity("poinscat exist already", HttpStatus.CONFLICT);
+            return new ResponseEntity("poinscat exist already", HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
         if (body != null) {
