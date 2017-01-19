@@ -54,7 +54,7 @@ public class PointAwardEndpoint implements PointsAwardsApi {
           AuthenKey apiKey = authenKeyRepository.findByAppKey(xGamificationToken);
           
             if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
         Application app = apiKey.getApp();
            
@@ -111,7 +111,7 @@ public class PointAwardEndpoint implements PointsAwardsApi {
         AuthenKey apiKey = authenKeyRepository.findByAppKey(xGamificationToken);
           
             if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
         Application app = apiKey.getApp();
            
@@ -154,7 +154,7 @@ public class PointAwardEndpoint implements PointsAwardsApi {
         AuthenKey apiKey = authenKeyRepository.findByAppKey(xGamificationToken);
           
             if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
         Application app = apiKey.getApp();
         

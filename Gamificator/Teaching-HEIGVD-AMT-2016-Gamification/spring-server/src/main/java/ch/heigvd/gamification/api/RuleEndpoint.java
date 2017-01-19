@@ -68,7 +68,7 @@ public class RuleEndpoint implements RulesApi {
         AuthenKey apiKey = authenkeyRepository.findByAppKey(xGamificationToken);
 
         if (apiKey == null) {
-            return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
         Application app = apiKey.getApp();
 
@@ -89,7 +89,7 @@ public class RuleEndpoint implements RulesApi {
         AuthenKey apiKey = authenkeyRepository.findByAppKey(xGamificationToken);
 
         if (apiKey == null) {
-            return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         };
 
         Application app = apiKey.getApp();
@@ -117,7 +117,7 @@ public class RuleEndpoint implements RulesApi {
 
             } else {
 
-                return new ResponseEntity("pointScale is not exist", HttpStatus.BAD_REQUEST);
+                return new ResponseEntity("pointScale is not exist", HttpStatus.NOT_FOUND);
 
             }
             ActionType actiontype = new ActionType();
@@ -180,7 +180,7 @@ public class RuleEndpoint implements RulesApi {
 
         AuthenKey apiKey = authenkeyRepository.findByAppKey(xGamificationToken);
         if (apiKey == null) {
-            return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
 
         Rule rule = rulerepository.findOne(ruleId);
@@ -189,7 +189,7 @@ public class RuleEndpoint implements RulesApi {
             rulerepository.delete(rule);
             return new ResponseEntity(HttpStatus.OK);
         } else {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -208,7 +208,7 @@ public class RuleEndpoint implements RulesApi {
             return new ResponseEntity(dto, HttpStatus.OK);
         } else {
 
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
 
     }
@@ -223,7 +223,7 @@ public class RuleEndpoint implements RulesApi {
         AuthenKey apiKey = authenkeyRepository.findByAppKey(xGamificationToken);
 
         if (apiKey == null) {
-            return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
 
         Application app = apiKey.getApp();

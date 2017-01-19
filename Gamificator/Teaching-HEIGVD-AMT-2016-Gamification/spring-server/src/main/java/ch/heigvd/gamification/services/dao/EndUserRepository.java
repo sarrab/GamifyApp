@@ -8,7 +8,9 @@ package ch.heigvd.gamification.services.dao;
 import ch.heigvd.gamification.model.Application;
 import ch.heigvd.gamification.model.EndUser;
 import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
@@ -19,7 +21,7 @@ public interface EndUserRepository extends JpaRepository<EndUser, Long>  {
     
     
     
-    List <EndUser> getBestUsers();
+    List <Object[]> getBestUsers(@Param("app") Application app);
     EndUser findByName (String name);
     
     

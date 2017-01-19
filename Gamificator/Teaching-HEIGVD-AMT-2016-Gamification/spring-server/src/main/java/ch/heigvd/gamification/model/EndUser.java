@@ -27,7 +27,7 @@ import javax.persistence.OneToMany;
 
 @NamedQueries({
    
-@NamedQuery(name = "EndUser.getBestUsers", query = "SELECT e.id, e.name, SUM(p.point) FROM EndUser e, PointAwards p WHERE e.app = :app AND p.enduser = e GROUP BY p.enduser.id"),
+@NamedQuery(name = "EndUser.getBestUsers", query = "SELECT e, p.pointScale, SUM(p.point) FROM EndUser e, PointAwards p WHERE e.app = :app AND p.enduser = e GROUP BY p.enduser.id, p.pointScale.id"),
 })
 public class EndUser implements Serializable {
 

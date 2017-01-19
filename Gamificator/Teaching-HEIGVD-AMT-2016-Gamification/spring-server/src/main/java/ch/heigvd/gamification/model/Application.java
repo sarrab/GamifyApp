@@ -39,17 +39,17 @@ public class Application implements Serializable {
     @OneToMany(mappedBy = "app")
     private List<Badge> badges;
     
-     @OneToOne(mappedBy = "app", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    
+    @OneToOne(mappedBy = "app", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
       
     private AuthenKey appKey;
     
-     @OneToMany(mappedBy = "app")
+    @OneToMany(mappedBy = "app", cascade = CascadeType.REMOVE)  
     private List<Event> event;
-
-    @OneToMany(mappedBy = "app")
+ @OneToMany(mappedBy = "app", cascade = CascadeType.REMOVE)
     private List<EndUser> endusers;
 
-    @OneToMany(mappedBy = "app")
+  @OneToMany(mappedBy = "app", cascade = CascadeType.REMOVE)    
     private List<EventType> eventypes;
 
     @Column(unique = true)

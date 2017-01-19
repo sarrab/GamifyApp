@@ -43,7 +43,7 @@ public class PointScalesEndpoint implements PointScalesApi {
 
         AuthenKey apiKey = authenRepository.findByAppKey(xGamificationToken);
         if (apiKey == null) {
-            return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
 
         return new ResponseEntity<List<PointScaleDTO>>(StreamSupport.stream(pointscaleRepository.findAll().spliterator(), true)
@@ -57,7 +57,7 @@ public class PointScalesEndpoint implements PointScalesApi {
 
         AuthenKey apiKey = authenRepository.findByAppKey(xGamificationToken);
         if (apiKey == null) {
-            return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
 
         PointScale pointScale = pointscaleRepository.findOne(pointScaleId);
@@ -66,7 +66,7 @@ public class PointScalesEndpoint implements PointScalesApi {
             pointscaleRepository.delete(pointScale);
             return new ResponseEntity(HttpStatus.OK);
         } else {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -76,11 +76,14 @@ public class PointScalesEndpoint implements PointScalesApi {
 
         AuthenKey apiKey = authenRepository.findByAppKey(xGamificationToken);
         if (apiKey == null) {
-            return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
 
         PointScale p = pointscaleRepository.findOne(pointScaleId);
 
+        if(p == null)
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        
         PointScaleDTO dto = toDTO(p);
         dto.setId(p.getId());
 
@@ -93,10 +96,14 @@ public class PointScalesEndpoint implements PointScalesApi {
 
         AuthenKey apiKey = authenRepository.findByAppKey(xGamificationToken);
         if (apiKey == null) {
-            return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
 
         PointScale pointScale = pointscaleRepository.findOne(pointScaleId);
+        
+        if(pointScale == null){
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
 
         if (!body.getDescription().equals(" ")) {
             pointScale.setDescription(body.getDescription());
@@ -122,7 +129,7 @@ public class PointScalesEndpoint implements PointScalesApi {
 
         AuthenKey apiKey = authenRepository.findByAppKey(xGamificationToken);
         if (apiKey == null) {
-            return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
 
         PointScale pointScale = new PointScale();

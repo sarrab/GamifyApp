@@ -69,28 +69,29 @@ public class LeaderboardEndpoint implements LeaderboardApi{
         
         List<LeaderboardDTO> results = new ArrayList<>();
         
-         List<EndUser> endUsers = endUserRepository.getBestUsers();
+         List<Object[]> endUsers = endUserRepository.getBestUsers(app);
         
         
         for(int i = 0; i < size; ++i){
             
-        int somme = 0;
+        Long somme = 0l;
         LeaderboardDTO tmp = new LeaderboardDTO();
-          tmp.setName(endUsers.get(i).getName());
-           for(PointAwards p : endUsers.get(i).getPointAwards()){
-              
-             somme+=p.getPoint();
-           }
-        tmp.setPoints(somme);
+        EndUser enduser = (EndUser)endUsers.get(i)[0];
+          tmp.setName(enduser.getName());
+           somme = (Long)endUsers.get(i)[2];
+        tmp.setPoints(somme.intValue());
           List<String> names = new ArrayList<>();
-       for(BadgeAward badge : endUsers.get(i).getBadgeAwards()){
+       for(BadgeAward badge : enduser.getBadgeAwards()){
         names.add(badge.getBadge().getName());
        
          
        }
         
        tmp.setBadges(names);
-         results.add(tmp);
+       
+       if(!results.contains(tmp)) {
+           results.add(tmp);
+       } 
         }
         
       

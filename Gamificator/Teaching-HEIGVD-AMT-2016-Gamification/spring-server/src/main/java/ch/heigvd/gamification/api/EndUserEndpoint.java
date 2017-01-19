@@ -55,7 +55,7 @@ public class EndUserEndpoint implements EndUserApi {
         AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
           
             if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
         Application app = apiKey.getApp();
 
@@ -79,6 +79,8 @@ public class EndUserEndpoint implements EndUserApi {
                 });
                 return new ResponseEntity(badgesDTO, HttpStatus.OK);
             }
+            else
+                return new ResponseEntity(HttpStatus.NOT_FOUND);
 
         }
 
@@ -92,7 +94,7 @@ public class EndUserEndpoint implements EndUserApi {
        AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
           
             if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
         Application app = apiKey.getApp();
 
@@ -134,6 +136,9 @@ public class EndUserEndpoint implements EndUserApi {
 
                 return new ResponseEntity(dto, HttpStatus.OK);
             }
+            else{
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            }
 
         }
 
@@ -151,7 +156,7 @@ public class EndUserEndpoint implements EndUserApi {
         AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
           
             if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
         Application app = apiKey.getApp();
         if(app != null){
@@ -168,7 +173,7 @@ public class EndUserEndpoint implements EndUserApi {
 AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
           
             if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
         Application app = apiKey.getApp();
         if (app != null) {
@@ -178,7 +183,7 @@ AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
             return new ResponseEntity(HttpStatus.OK);
         } else {
 
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
 
         }
 
@@ -192,7 +197,7 @@ AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
         AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
           
             if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
         Application app = apiKey.getApp();
         EndUser endUser = new EndUser();
@@ -228,7 +233,7 @@ AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
       AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
           
             if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
         Application app = apiKey.getApp();
         if (app != null) {
@@ -242,7 +247,10 @@ AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
                 
                 return new ResponseEntity(endUserDto, HttpStatus.OK);
             }
-
+            else{
+            
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            }
         }
 
         return new ResponseEntity("no content available", HttpStatus.BAD_REQUEST);
@@ -255,7 +263,7 @@ AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
         AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
           
             if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
         Application app = apiKey.getApp();
 
@@ -275,6 +283,10 @@ AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
 
                 }
 
+            }
+            else{
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            
             }
 
             endUserRepository.save(endUser);

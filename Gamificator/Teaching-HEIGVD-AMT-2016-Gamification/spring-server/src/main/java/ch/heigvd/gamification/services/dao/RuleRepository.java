@@ -5,7 +5,9 @@
  */
 package ch.heigvd.gamification.services.dao;
 
+import ch.heigvd.gamification.model.Event;
 import ch.heigvd.gamification.model.Rule;
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 /**

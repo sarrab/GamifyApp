@@ -55,7 +55,7 @@ public class ApplicationsEndpoint implements ApplicationsApi {
             apprepository.delete(app);
             return new ResponseEntity(HttpStatus.OK);
         } else {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -68,7 +68,7 @@ public class ApplicationsEndpoint implements ApplicationsApi {
         ApplicationDTO dto = toDTO(app, uriComponents);
 
         if (dto == null) {
-            return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(dto, HttpStatus.OK);
         }
@@ -79,6 +79,10 @@ public class ApplicationsEndpoint implements ApplicationsApi {
     public ResponseEntity<Void> applicationsApplicationNamePut(@ApiParam(value = "applicationName", required = true) @PathVariable("applicationName") String applicationUsername, @ApiParam(value = "Modification of the application") @RequestBody Registration body) {
 
         Application app = apprepository.findByName(applicationUsername);
+        
+        if(app == null){
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
 
         if (body.getApplicationName() != null) {
             if (!body.getApplicationName().equals(" ")) {
