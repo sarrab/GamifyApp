@@ -24,19 +24,21 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author Thibaut-PC
  */
 @Entity
+@Table(name="application")
 public class Application implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(mappedBy = "app")
+    @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)
     private List<Badge> badges;
     
     
@@ -44,19 +46,20 @@ public class Application implements Serializable {
       
     private AuthenKey appKey;
     
-    @OneToMany(mappedBy = "app", cascade = CascadeType.REMOVE)  
+    @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)  
     private List<Event> event;
- @OneToMany(mappedBy = "app", cascade = CascadeType.REMOVE)
+ @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)
     private List<EndUser> endusers;
 
-  @OneToMany(mappedBy = "app", cascade = CascadeType.REMOVE)    
+  @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)    
     private List<EventType> eventypes;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String name;
-    private String password;
-     @Column(unique = true)
     
+     @Column(nullable = false)
+    private String password;
+     @Column(unique = true, nullable = false)
      private String sel;
      
      

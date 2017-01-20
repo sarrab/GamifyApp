@@ -46,7 +46,7 @@ public class ApplicationsEndpoint implements ApplicationsApi {
     }
 
     @Override
-    @RequestMapping(value = "/applicationName}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{applicationName}", method = RequestMethod.DELETE)
     public ResponseEntity<Void>  applicationsApplicationNameDelete(@ApiParam(value = "applicationName", required = true) @PathVariable("applicationName") String applicationUsername) {
 
         Application app = apprepository.findByName(applicationUsername);

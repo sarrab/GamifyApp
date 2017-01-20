@@ -31,10 +31,10 @@ public class EventType implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Application app;
 
-    @OneToMany(mappedBy = "eventType")
+    @OneToMany(mappedBy = "eventType", cascade = CascadeType.ALL)
     private List<Rule> rules;
     
-     @OneToMany(mappedBy = "eventType")
+     @OneToMany(mappedBy = "eventType", cascade = CascadeType.ALL)
     private List<Event> events;
 
     public EventType() {
