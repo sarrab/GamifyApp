@@ -96,7 +96,7 @@ public class BadgesEndpoint implements BadgesApi {
             return new ResponseEntity<>(dto, HttpStatus.OK);
         }
         }
-        return new ResponseEntity("no content is available", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity("no content is available", HttpStatus.NOT_FOUND);
     }
 
 
@@ -109,7 +109,7 @@ public class BadgesEndpoint implements BadgesApi {
    
        AuthenKey apiKey = authenKeyRepository.findByAppKey(xGamificationToken); 
        if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
         Application app = apiKey.getApp();
         
@@ -117,7 +117,9 @@ public class BadgesEndpoint implements BadgesApi {
         if(app != null){
         
         Badge badge = badgeRepository.findByIdAndApp(badgeId, app);
-
+          if(badge == null)
+                return new ResponseEntity("no content is available", HttpStatus.NOT_FOUND);
+              
         if(body.getDescription()!= null){
         
         if (!body.getDescription().equals(" ")) {
