@@ -65,6 +65,12 @@ public class ApplicationsEndpoint implements ApplicationsApi {
 
         Application app = apprepository.findByName(applicationUsername);
         UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodName(BadgesEndpoint.class, "badgesGet", 1).build();
+        
+           if(app == null){
+           
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+           }
+           
         ApplicationDTO dto = toDTO(app, uriComponents);
 
         if (dto == null) {
