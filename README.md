@@ -30,9 +30,9 @@ To execute the application, you may follow these steps:
 - Build the docker images `docker-compose build`
 - Run the topology `docker-compose up` 
 - Go to /spring-server folder and run `mvn compile spring-boot:run`
-- - Or open Netbeans (it was tested with this IDE but nothing is against another one)
-- - click open existing project
-- - and add costumized goal `spring-boot:run` and click on it
+⋅⋅* Or open Netbeans (it was tested with this IDE but nothing is against another one)
+⋅⋅* click open existing project
+⋅⋅* and add costumized goal `spring-boot:run` and click on it
 - The application should be deployed (it will run Tomcat)
 
 ##Technologies
@@ -58,6 +58,9 @@ You can see the documentation on the ``/docs`` dirctory of this repo.
 In order to test our platform, we created a Java project. It is in this repo at the same level as the implementation of the platform.
 The purpose of automated testing is to test API endpoints.
 To do this, we used the framework [Cucumber](https: //cucumber.io/).
+
+To run the tests, you may follow these steps:
+
 1. check that the application has been started successfully.
 2. Open the project with an IDE (Netbeans for example).
 3. click Test
