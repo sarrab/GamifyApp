@@ -22,6 +22,8 @@ public interface EndUserRepository extends JpaRepository<EndUser, Long>  {
     
     
     List <Object[]> getBestUsers(@Param("app") Application app);
+    
+    List <Object[]> getBestBadgeUsers(@Param("app") Application app);
     EndUser findByName (String name);
     
     

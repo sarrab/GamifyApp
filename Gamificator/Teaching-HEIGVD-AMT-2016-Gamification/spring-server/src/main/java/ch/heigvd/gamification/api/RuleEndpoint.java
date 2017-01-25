@@ -46,11 +46,12 @@ public class RuleEndpoint implements RulesApi {
     ActionPointRepository actionPointsrepository;
     ActionTypeRepository actionTypeRepository;
     AuthenKeyRepository authenkeyRepository;
-    final String ACTION_TYPE_POINT_FINAL = "AwardPoints";
-    final String ACTION_TYPE_BADGE_FINAL = "AwardBadge";
+     PointScaleRepository pointscaleRepository;
+    final String ACTION_TYPE_POINT_FINAL = "ActionPoints";
+    final String ACTION_TYPE_BADGE_FINAL = "ActionBadge";
 
     @Autowired
-    public RuleEndpoint(RuleRepository rulerepository, PointScaleRepository pointScaleRepository, EventTypeRepository eventTypeRepository, ApplicationRepository applicationRepository, BadgeRepository badgerepository, ActionBadgeRepository actionBadgerepository, ActionPointRepository actionPointsrepository, ActionTypeRepository actionTypeRepository, AuthenKeyRepository authenkeyRepository) {
+    public RuleEndpoint(RuleRepository rulerepository, PointScaleRepository pointScaleRepository, EventTypeRepository eventTypeRepository, ApplicationRepository applicationRepository, BadgeRepository badgerepository, ActionBadgeRepository actionBadgerepository, ActionPointRepository actionPointsrepository, ActionTypeRepository actionTypeRepository, AuthenKeyRepository authenkeyRepository, PointScaleRepository p) {
         this.rulerepository = rulerepository;
         this.pointScaleRepository = pointScaleRepository;
         this.eventTypeRepository = eventTypeRepository;
@@ -60,6 +61,7 @@ public class RuleEndpoint implements RulesApi {
         this.actionPointsrepository = actionPointsrepository;
         this.actionTypeRepository = actionTypeRepository;
         this.authenkeyRepository = authenkeyRepository;
+        this.pointScaleRepository = p;
     }
 
     @Override
@@ -126,19 +128,21 @@ public class RuleEndpoint implements RulesApi {
             actiontype = actionTypeRepository.findOne(body.getActionId());
 
             if (actiontype == null) {
+               
                 if (body.getAction().equalsIgnoreCase(ACTION_TYPE_POINT_FINAL)) {
 
-                    ActionPoints actionpoint = new ActionPoints();
+                   // ActionPoints actionpoint = new ActionPoints();
 
                     ActionPoints actionpoint1 = new ActionPoints();
-                    actionpoint1.setNombrePoint(body.getPoints());
+                    PointScale p = pointScaleRepository.findByName(body.getPointScale());
+                    actionpoint1.setNombrePoint(p.getMinpoint());
                     actionpoint1.setName("ActionPoints");
                     actiontype = actionpoint1;
 
                     actionTypeRepository.save(actiontype);
 
                 }
-
+                System.out.println(body.getAction());
                 if (body.getAction().equals(ACTION_TYPE_BADGE_FINAL)) {
                     ActionBadge actionbadge = new ActionBadge();
                     Badge badge;

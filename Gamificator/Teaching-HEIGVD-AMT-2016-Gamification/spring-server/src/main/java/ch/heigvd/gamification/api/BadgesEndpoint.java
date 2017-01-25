@@ -193,9 +193,10 @@ public class BadgesEndpoint implements BadgesApi {
        }
        
        Application app = apiKey.getApp();
-       if(badgeRepository.findByName(body.getName()) != null)
-            return new ResponseEntity("name already use", HttpStatus.UNPROCESSABLE_ENTITY);
+       
         if (body != null && app != null) {
+            if(badgeRepository.findByNameAndApp(body.getName(), app) != null)
+            return new ResponseEntity("name already use", HttpStatus.UNPROCESSABLE_ENTITY);
             Badge badge = new Badge();
             badge.setDescription(body.getDescription());
             badge.setName(body.getName());

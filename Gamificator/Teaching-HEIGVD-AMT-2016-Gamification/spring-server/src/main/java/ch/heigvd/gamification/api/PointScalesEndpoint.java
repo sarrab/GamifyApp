@@ -15,7 +15,9 @@ import java.util.List;
 import io.swagger.annotations.ApiParam;
 import static java.util.stream.Collectors.toList;
 import java.util.stream.StreamSupport;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,13 +30,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/PointScale")
 public class PointScalesEndpoint implements PointScalesApi {
 
-    PointScaleRepository pointscaleRepository;
-    AuthenKeyRepository authenRepository;
+    private PointScaleRepository pointscaleRepository;
+    private AuthenKeyRepository authenRepository;
+    private final HttpServletRequest request;
 
     @Autowired
-    public PointScalesEndpoint(PointScaleRepository pointscaleRepository, AuthenKeyRepository authenRepository) {
+    public PointScalesEndpoint(PointScaleRepository pointscaleRepository, AuthenKeyRepository authenRepository, HttpServletRequest req) {
         this.pointscaleRepository = pointscaleRepository;
         this.authenRepository = authenRepository;
+        this.request = req;
     }
 
     @Override
@@ -81,9 +85,10 @@ public class PointScalesEndpoint implements PointScalesApi {
 
         PointScale p = pointscaleRepository.findOne(pointScaleId);
 
-        if(p == null)
+        if (p == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
-        
+        }
+
         PointScaleDTO dto = toDTO(p);
         dto.setId(p.getId());
 
@@ -100,9 +105,9 @@ public class PointScalesEndpoint implements PointScalesApi {
         }
 
         PointScale pointScale = pointscaleRepository.findOne(pointScaleId);
-        
-        if(pointScale == null){
-        return new ResponseEntity(HttpStatus.NOT_FOUND);
+
+        if (pointScale == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
 
         if (!body.getDescription().equals(" ")) {
@@ -141,11 +146,18 @@ public class PointScalesEndpoint implements PointScalesApi {
 
         if (body != null) {
             pointScale.setDescription(body.getDescription());
-            pointScale.setId(body.getId());
             pointScale.setName(body.getName());
             pointScale.setMinpoint(body.getNbrDePoints());
             pointscaleRepository.save(pointScale);
-            return new ResponseEntity(HttpStatus.CREATED);
+
+            StringBuffer location = request.getRequestURL();
+            if (!location.toString().endsWith("/")) {
+                location.append("/");
+            }
+            location.append(pointScale.getId().toString());
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Location", location.toString());
+            return new ResponseEntity<>(headers, HttpStatus.CREATED);
 
         } else {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
