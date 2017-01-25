@@ -72,8 +72,8 @@ Then I receive 401 code status
 
 Scenario: Check that is not possible to see a pointScale with a wrong application's token
 Given I have a pointScale payload
-When I POST it to the /pointScales endpoint 
 And I have a wrong token
+When I POST it to the /pointScales endpoint 
 When I send a GET on the /pointScales endpoint
 Then I receive 401 code status 
 
