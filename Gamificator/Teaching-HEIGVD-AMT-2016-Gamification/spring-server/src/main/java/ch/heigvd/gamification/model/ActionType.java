@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,18 +7,31 @@
 package ch.heigvd.gamification.model;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 /**
  *
  * @author Thibaut-PC
  */
-
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="TYPE_ACTION")
+@DiscriminatorValue("MERE")
 public class ActionType implements Serializable {
+  
+    
+    @OneToMany(mappedBy = "actionType")
+    private List<Rule> rules;
 
     public void setId(Long id) {
         this.id = id;
@@ -26,15 +40,27 @@ public class ActionType implements Serializable {
     public Long getId() {
         return id;
     }
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) private
-   	Long id;
-   private String name;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String name;
+
+    public void setRules(List<Rule> rules) {
+        this.rules = rules;
+    }
     
-   public ActionType(){
-       
-   }
+    
+    @Transient
+
+
+    public List<Rule> getRules() {
+        return rules;
+    }
+
+    public ActionType() {
+
+    }
 
     public ActionType(String name) {
         this.name = name;
@@ -47,5 +73,5 @@ public class ActionType implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
+
 }

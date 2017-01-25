@@ -5,13 +5,15 @@
  */
 package ch.heigvd.gamification.model;
 
-import ch.heigvd.gamification.model.ActionType;
-import ch.heigvd.gamification.model.Badge;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 /**
  *
@@ -19,15 +21,26 @@ import javax.persistence.ManyToOne;
  */
 
 @Entity
+@DiscriminatorValue("ActionBadge")
 public class ActionBadge extends ActionType {
     
    
      @ManyToOne(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
     private Badge badge;
+     
+     
     
     public ActionBadge(){
         
     }
+    
+    
+  @Transient
+public String getDiscriminatorValue(){
+    DiscriminatorValue val = this.getClass().getAnnotation( DiscriminatorValue.class );
+
+    return val == null ? null : val.value();
+}
 
     public ActionBadge(Badge badge, String name) {
         

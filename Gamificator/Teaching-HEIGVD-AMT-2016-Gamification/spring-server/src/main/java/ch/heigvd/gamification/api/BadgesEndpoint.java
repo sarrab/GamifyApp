@@ -6,9 +6,11 @@
 package ch.heigvd.gamification.api;
 
 import ch.heigvd.gamification.api.dto.BadgeDTO;
-import ch.heigvd.gamification.dao.ApplicationRepository;
-import ch.heigvd.gamification.dao.BadgeRepository;
+import ch.heigvd.gamification.services.dao.ApplicationRepository;
+import ch.heigvd.gamification.services.dao.AuthenKeyRepository;
+import ch.heigvd.gamification.services.dao.BadgeRepository;
 import ch.heigvd.gamification.model.Application;
+import ch.heigvd.gamification.model.AuthenKey;
 import ch.heigvd.gamification.model.Badge;
 import java.util.List;
 
@@ -41,130 +43,190 @@ public class BadgesEndpoint implements BadgesApi {
 
     BadgeRepository badgeRepository;
     ApplicationRepository apprepository;
-     UriComponentsBuilder ucBuilder;
-    
-   
+    UriComponentsBuilder ucBuilder;
+    AuthenKeyRepository authenKeyRepository;
 
-    
-    @Autowired
-    public BadgesEndpoint(BadgeRepository badgeRepository, ApplicationRepository apprepository) {
+     @Autowired
+    public BadgesEndpoint(BadgeRepository badgeRepository, ApplicationRepository apprepository, AuthenKeyRepository authenKeyRepository) {
         this.badgeRepository = badgeRepository;
         this.apprepository = apprepository;
- 
+        this.authenKeyRepository = authenKeyRepository;
     }
 
-   
     @Override
-    @RequestMapping(value = "/{badgeName}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> badgesBadgeIdDelete(@ApiParam(value = "badgeName", required = true) @PathVariable("badgeName") Long badgeId) {
-        Badge badge = badgeRepository.findOne(badgeId);
-
-        if (badge != null) {
+    @RequestMapping(value = "/{badgeId}", method = RequestMethod.DELETE)
+     public ResponseEntity<Void> badgesBadgeIdDelete(@ApiParam(value = "badgeId", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "badgeId", required = true) @PathVariable("badgeId") Long badgeId) {
+       
+            AuthenKey apiKey = authenKeyRepository.findByAppKey(xGamificationToken);
+        if(apiKey == null){
+        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
+        }
+        
+        Application app = apiKey.getApp();
+         Badge badge = badgeRepository.findByIdAndApp(badgeId, app);
+        
+        
+        if (badge != null && app != null  ) {
             badgeRepository.delete(badge);
             return new ResponseEntity(HttpStatus.OK);
         } else {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("no content is valid", HttpStatus.NOT_FOUND);
         }
     }
 
+    
     @Override
-    @RequestMapping(value = "/{badgeName}", method = RequestMethod.GET)
-    public ResponseEntity<BadgeDTO> badgesBadgeIdGet(@ApiParam(value = "badgeName", required = true) @PathVariable("badgeName") Long badgeId) {
-        Badge badge = badgeRepository.findOne(badgeId);
-                
+    @RequestMapping(value = "/{badgeId}", method = RequestMethod.GET)
+    public ResponseEntity<BadgeDTO> badgesBadgeIdGet(@ApiParam(value = "token that identifies the app sending the request", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "Badge's id", required = true) @PathVariable("badgeId") Long badgeId) {
+       
+        AuthenKey apiKey = authenKeyRepository.findByAppKey(xGamificationToken);
+           if(apiKey == null){
+        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
+        }
+         
+       
+        Application app = apiKey.getApp();
+         Badge badge = badgeRepository.findByIdAndApp(badgeId, app);
+        if(app != null && badge != null){
         BadgeDTO dto = toDTO(badge);
         dto.setId(badge.getId());
         if (dto == null) {
-            return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(dto, HttpStatus.OK);
         }
+        }
+        return new ResponseEntity("no content is available", HttpStatus.NOT_FOUND);
     }
+
+
+    
+   
 
     @Override
     @RequestMapping(value = "/{badgeId}", method = RequestMethod.PUT)
-     public ResponseEntity<Void> badgesBadgeIdPut(@ApiParam(value = "badgeId", required = true) @RequestHeader(value = "token", required = true) String token, @ApiParam(value = "badgeId", required = true) @PathVariable("badgeId") Long badgeId, @ApiParam(value = "Modification of the badge") @RequestBody BadgeDTO body) {
+    public ResponseEntity<Void> badgesBadgeIdPut(@ApiParam(value = "token that identifies the app sending the request", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "Badge's id", required = true) @PathVariable("badgeId") Long badgeId, @ApiParam(value = "Modification of the badge") @RequestBody BadgeDTO body) {
+   
+       AuthenKey apiKey = authenKeyRepository.findByAppKey(xGamificationToken); 
+       if(apiKey == null){
+        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
+        }
+        Application app = apiKey.getApp();
         
-        Badge badge = badgeRepository.findOne(badgeId);
-      
-
+        
+        if(app != null){
+        
+        Badge badge = badgeRepository.findByIdAndApp(badgeId, app);
+          if(badge == null)
+                return new ResponseEntity("no content is available", HttpStatus.NOT_FOUND);
+              
+        if(body.getDescription()!= null){
+        
         if (!body.getDescription().equals(" ")) {
             badge.setDescription(body.getDescription());
         } else {
             body.setDescription(badge.getDescription());
         }
-        if (!body.getImageURI().equals(" ")) {
+        }
+        
+        if(body.getImageURI()!= null){
+        if (!body.getImageURI().equals(" ") || body.getImageURI()!= null) {
             badge.setImage(body.getImageURI());
         } else {
             body.setImageURI(badge.getImage());
         }
-
-        if (!body.getName().equals(" ")) {
+      }
+        if(body.getName() != null){ 
+        if (!body.getName().equals(" ") || body.getName()!= null) {
             badge.setName(body.getName());
         } else {
             body.setName(badge.getName());
         }
-           
+        }
+        
         badgeRepository.save(badge);
         return new ResponseEntity(HttpStatus.OK);
+        }
+        
+        else{
+        
+        return new ResponseEntity("no content is available", HttpStatus.NOT_FOUND);
+        
+        }
     }
 
-     
     @Override
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<BadgeDTO>>badgesGet() {
-        return new ResponseEntity<>(StreamSupport.stream(badgeRepository.findAll().spliterator(), true)
+    public ResponseEntity<List<BadgeDTO>> badgesGet(@ApiParam(value = "token that identifies the app sending the request", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken) {
+ 
+          AuthenKey apiKey = authenKeyRepository.findByAppKey(xGamificationToken);
+        
+             
+       //Application app = apprepository.findByAppKey(apiKey);
+       if(apiKey == null){
+       return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+       }
+         
+         Application app = apiKey.getApp();
+         
+         if(app != null){
+        return new ResponseEntity<>(StreamSupport.stream(badgeRepository.findAllByApp(app).spliterator(), true)
                 .map(p -> toDTO(p))
                 .collect(toList()), HttpStatus.OK);
+         }
+       return new ResponseEntity("no content available", HttpStatus.BAD_REQUEST);
+        
     }
 
-    
+   
+
+
     @Override
     @RequestMapping(method = RequestMethod.POST)
-     public ResponseEntity<Void> badgesPost(@ApiParam(value = "Badge to add", required = true) @RequestBody BadgeDTO body, @ApiParam(value = "Identifient de l'application à laquelle appartient le badge", required = true) @RequestHeader(value = "token", required = true) String token) {
-    
-         Application app = apprepository.findByName(token);
-         
-         
-        if (body != null && app !=null) {
+    public ResponseEntity<Void> badgesPost(@ApiParam(value = "Badge to add", required = true) @RequestBody BadgeDTO body, @ApiParam(value = "token that identifies the app sending the request", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken) {
+        AuthenKey apiKey = authenKeyRepository.findByAppKey(xGamificationToken);
+        
+             
+       //Application app = apprepository.findByAppKey(apiKey);
+       if(apiKey == null){
+       return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+       }
+       
+       Application app = apiKey.getApp();
+       if(badgeRepository.findByName(body.getName()) != null)
+            return new ResponseEntity("name already use", HttpStatus.UNPROCESSABLE_ENTITY);
+        if (body != null && app != null) {
             Badge badge = new Badge();
             badge.setDescription(body.getDescription());
             badge.setName(body.getName());
             badge.setImage(body.getImageURI());
             badge.setApp(app);
             badgeRepository.save(badge);
-            
-        HttpHeaders responseHeaders = new HttpHeaders();
-         
-              
-         UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodName(BadgesEndpoint.class, "badgesBadgeIdGet", badge.getId()).build();
-            
-         URI locationUri = uriComponents.toUri();
-          responseHeaders.add("Location", locationUri.toString());           
+
+            HttpHeaders responseHeaders = new HttpHeaders();
+
+            UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodName(BadgesEndpoint.class, "badgesBadgeIdGet", 1, badge.getId()).build();
+
+            URI locationUri = uriComponents.toUri();
+            responseHeaders.add("Location", uriComponents.toString());
             return new ResponseEntity<>(responseHeaders, HttpStatus.CREATED);
 
         } else {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("no content is available" , HttpStatus.BAD_REQUEST);
         }
     }
 
-   
     public BadgeDTO toDTO(Badge badge) {
-      BadgeDTO badgedto = new BadgeDTO();
-      
-      badgedto.setDescription(badge.getDescription());
-      badgedto.setId(badge.getId());
-      badgedto.setImageURI(badge.getImage());
-      badgedto.setName(badge.getName());
-      
-     badgedto.setApplication(badge.getApp().getId());
-      
-      return badgedto;
+        BadgeDTO badgedto = new BadgeDTO();
+
+        badgedto.setDescription(badge.getDescription());
+        badgedto.setId(badge.getId());
+        badgedto.setImageURI(badge.getImage());
+        badgedto.setName(badge.getName());
+       
+        badgedto.setApplicationName(badge.getApp().getName());
+
+        return badgedto;
     }
 
-    
-
-    
-    
-    
 }
