@@ -75,4 +75,4 @@ To run the tests, you may follow these steps:
 3. click Test
 
 ###Collaborators
-Togue Kamga Thibaut, Norah Jeannine et Sarra Berich
+Togue Kamga Thibaut, Norah Jeannine and Sarra Berich
