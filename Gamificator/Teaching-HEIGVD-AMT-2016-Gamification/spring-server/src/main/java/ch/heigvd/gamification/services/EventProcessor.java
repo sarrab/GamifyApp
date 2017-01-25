@@ -66,7 +66,7 @@ private   final ApplicationRepository ApplicationRepository;
     
  
  final String ACTION_TYPE_POINT_FINAL = "ActionPoints";
-    final String ACTION_TYPE_BADGE_FINAL = "AwardBadge";
+    final String ACTION_TYPE_BADGE_FINAL = "ActionBadge";
     
     ActionPointRepository actionPointRepository;
 
@@ -134,17 +134,18 @@ private   final ApplicationRepository ApplicationRepository;
         if (rules.size() > 0) {
              
             for (Rule r : rules) {
+                 
 
-                 if(r.getActionType().getName().equalsIgnoreCase(ACTION_TYPE_POINT_FINAL)) {
+                 if( r.getActionType().getDiscriminatorValue().equalsIgnoreCase(ACTION_TYPE_POINT_FINAL)) {
                    
                          //ActionPoints actionPoint = actionPointRepository.findByName(r.getActionType().getName());
-                      
+                         System.err.println("le type d'événement n'existe pas");
                        ActionPoints ap = (ActionPoints) r.getActionType();
                        pointAwardsrepository.save(new PointAwards(enduser, ap.getNombrePoint(), r.getPointscale()));
                  }
                  
-                  if(r.getActionType().getName().equalsIgnoreCase(ACTION_TYPE_BADGE_FINAL)){
-                  
+                  if( r.getActionType().getDiscriminatorValue().equalsIgnoreCase(ACTION_TYPE_BADGE_FINAL)){
+                        System.err.println("le type d'événement n'existe pas2");
                         ActionBadge ab = (ActionBadge) r.getActionType();
                         badgeAwardRepository.save(new BadgeAward(timestamp.toDate(), ab.getBadge(), enduser));
                 }

@@ -18,6 +18,7 @@ import org.springframework.data.repository.CrudRepository;
 public interface BadgeRepository  extends CrudRepository<Badge, Long>{
     
     Badge findByName(String name);
+    Badge findByNameAndApp(String name, Application app);
     Badge findByIdAndApp(Long id, Application app);
     List<Badge> findAllByApp(Application app);
 }

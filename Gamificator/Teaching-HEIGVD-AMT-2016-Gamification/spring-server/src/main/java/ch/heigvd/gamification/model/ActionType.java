@@ -51,7 +51,12 @@ public class ActionType implements Serializable {
     }
     
     
-    @Transient
+     @Transient
+    public String getDiscriminatorValue(){
+        DiscriminatorValue val = this.getClass().getAnnotation( DiscriminatorValue.class );
+
+        return val == null ? null : val.value();
+    }
 
 
     public List<Rule> getRules() {

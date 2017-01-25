@@ -509,12 +509,6 @@ paths:
         - application/json
       parameters:
         - $ref: '#/parameters/TokenHeader'
-        - in: query
-          name: size
-          description: number of leader to send
-          required: false
-          type: integer
-          format: int32
       responses:
         200:
           description:
@@ -657,6 +651,9 @@ definitions:
       name:
         type: string
         description: user's name
+      id:
+        type: integer
+        format: int64
   LeaderboardDTO:
     type: object
     properties:
@@ -664,9 +661,15 @@ definitions:
         type: integer
         format: int32
         description: Number of points earned by a leader
+      endUserId:
+        type: integer
+        format: int64
       name:
         type: string
         description: Name of the leader
+      namePointscale:
+        type: string
+        description: Name of the leader  
       badges:
         type: array
         items:

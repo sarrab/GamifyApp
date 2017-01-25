@@ -53,6 +53,10 @@ public class Application implements Serializable {
 
   @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)    
     private List<EventType> eventypes;
+  
+  
+  @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)    
+    private List<PointScale> pointScale ;
 
     @Column(unique = true, nullable = false)
     private String name;
