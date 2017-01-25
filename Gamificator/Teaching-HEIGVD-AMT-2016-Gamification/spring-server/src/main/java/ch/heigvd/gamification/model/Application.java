@@ -6,11 +6,16 @@
 package ch.heigvd.gamification.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,68 +23,145 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author Thibaut-PC
  */
-
 @Entity
+@Table(name="application")
 public class Application implements Serializable {
-     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) private
-     Long id;
-     
-   @Column(unique=true)
-    private String name;
-    private String description;
-    private String password;
 
-    public void setPassword(String password) {
-        this.password = password;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)
+    private List<Badge> badges;
+    
+    
+    @OneToOne(mappedBy = "app", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+      
+    private AuthenKey appKey;
+    
+    @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)  
+    private List<Event> event;
+ @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)
+    private List<EndUser> endusers;
+
+  @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)    
+    private List<EventType> eventypes;
+  
+  
+  @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)    
+    private List<PointScale> pointScale ;
+
+    @Column(unique = true, nullable = false)
+    private String name;
+    
+     @Column(nullable = false)
+    private String password;
+     @Column(unique = true, nullable = false)
+     private String sel;
+     
+     
+
+  public final String nextSessionId() {
+      SecureRandom random = new SecureRandom();
+    return new BigInteger(130, random).toString(32);
+  }
+
+    public Application(String name, String password) {
+       
+        this.name = name;
+        this.sel = this.nextSessionId();
+          try {
+                 this.password = doHash(password, sel);
+            } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
+                Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
     }
 
+
+    
+
+    public Application() {
+
+    }
+    
+    public String getSel(){
+    
+    return this.sel;
+    
+    }
+    
+    public void setSel(String str){
+    
+    this.sel = str;
+    }
+
+    public AuthenKey getAppKey() {
+        return appKey;
+    }
+
+   
+
+    public void setAppKey(AuthenKey appKey) {
+        this.appKey = appKey;
+    }
+
+  
+   public List<Event> getEvent() {
+        return event;
+    }
+
+    public void setEvent(List<Event> event) {
+        this.event = event;
+    }
+    
+    public void setPassword(String password) {
+      /*try {
+            this.password = doHash(password,getUsername());
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+      
+      this.password = password;
+    }
+
+    
     public String getPassword() {
         return password;
     }
-    //@ElementCollection(targetClass=String.class)
-    //private List<String> badges = new ArrayList<>();
     
-    @OneToMany(mappedBy = "app")
-    private List<Badge> badges;
+
+    public List<EventType> getEventypes() {
+        return eventypes;
+    }
+
+    public void setEventypes(List<EventType> eventypes) {
+        this.eventypes = eventypes;
+    }
 
     public List<Badge> getBadges() {
         return badges;
     }
 
+    public void setEndusers(List<EndUser> endusers) {
+        this.endusers = endusers;
+    }
+
+    public List<EndUser> getEndusers() {
+        return endusers;
+    }
+
     public void setBadges(List<Badge> badges) {
         this.badges = badges;
     }
-    
-     @ManyToOne(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
-    private Account creator;
-     
-     
-    private Boolean enable;
-    
-      public Application(){
-          
-      }
-
-    public Application(String name, String description, Account creator, Boolean enable) {
-        this.name = name;
-        this.description = description;
-        this.creator = creator;
-        this.enable = enable;
-    }
-
-    public void setEnable(Boolean enable) {
-        this.enable = enable;
-    }
-
-    public Boolean getEnable() {
-        return enable;
-    }
+ 
 
     public Long getId() {
         return id;
@@ -89,14 +171,6 @@ public class Application implements Serializable {
         return name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public Account getCreator() {
-        return creator;
-    }
-    
     public void setId(Long id) {
         this.id = id;
     }
@@ -105,13 +179,29 @@ public class Application implements Serializable {
         this.name = name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setCreator(Account creator) {
-        this.creator = creator;
-    }
-              
+    public void add(EndUser endUser){
+     this.endusers.add(endUser);
     
+    }
+    public static void setw(){
+    }
+    
+  public static String doHash(String password, String salt) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        digest.reset();
+        digest.update(salt.getBytes());
+
+        byte[] byteData = digest.digest(password.getBytes("UTF-8"));
+
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < byteData.length; i++) {
+            sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+        }
+   System.out.println("password" + sb.toString());
+        return sb.toString();
+    }  
+    
+  
+  
+
 }

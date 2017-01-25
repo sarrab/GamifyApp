@@ -92,7 +92,18 @@
       <scope>provided</scope>
     </dependency>
     <!--SpringFox dependencies -->
- 
+ <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-entitymanager</artifactId>
+    </dependency> 
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+    </dependency>
     <dependency>
       <groupId>io.springfox</groupId>
       <artifactId>springfox-swagger2</artifactId>
@@ -154,3 +165,5 @@
       </dependency>
   </dependencies>
 </project>
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms P

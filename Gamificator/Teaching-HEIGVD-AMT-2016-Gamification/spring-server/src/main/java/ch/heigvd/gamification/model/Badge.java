@@ -6,13 +6,15 @@
 package ch.heigvd.gamification.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -25,19 +27,31 @@ public class Badge implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    public String image;
-    public String name;
-    public String description;
+    private String image;
+    @Column(nullable = false)
+    private String name;
     
-     @ManyToOne
+     @Column(nullable = false)
+    private String description;
+
+    @ManyToOne
     Application app;
-     
-     
-     
+
+    @OneToMany(mappedBy = "badge",  cascade = CascadeType.ALL)
+    private List<BadgeAward> badgeAwards;
+
+    
+   
+
     public Badge() {
-        
+
     }
 
+    public List<BadgeAward> getBadgeAwards() {
+        return badgeAwards;
+    }
+
+   
     public void setApp(Application app) {
         this.app = app;
     }
@@ -72,6 +86,11 @@ public class Badge implements Serializable {
     public String getDescription() {
         return description;
     }
+
+    public void setBadgeAwards(List<BadgeAward> badgeAwards) {
+        this.badgeAwards = badgeAwards;
+    }
+
 
     public void setImage(String image) {
         this.image = image;
