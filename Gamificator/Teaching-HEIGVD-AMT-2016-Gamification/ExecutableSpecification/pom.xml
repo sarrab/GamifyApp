@@ -159,9 +159,9 @@
       <version>${swagger-core-version}</version>
     </dependency>
     <dependency>
-      <groupId>ch.heigvd.amt.gamification</groupId>
-      <artifactId>ExecutableSpecification</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <groupId>io.swagger</groupId>
+      <artifactId>swagger-spring</artifactId>
+      <version>1.0.0</version>
       <scope>test</scope>
       <type>jar</type>
     </dependency>
