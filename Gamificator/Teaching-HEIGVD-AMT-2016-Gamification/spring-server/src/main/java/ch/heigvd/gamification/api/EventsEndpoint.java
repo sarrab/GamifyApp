@@ -24,48 +24,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/events")
 public class EventsEndpoint implements EventsApi {
-    
-    
-    
-    EventProcessor eventProcessor;
-    
+
+    private final EventProcessor eventProcessor;
+
     @Autowired
 
     public EventsEndpoint(EventProcessor eventProcessor) {
         this.eventProcessor = eventProcessor;
     }
 
-    
-    /**
-     *
-     * @param xGamificationToken
-     * @param event
-     * @return
-     */
-    
-    
     @Override
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity reportEvent(@ApiParam(value = "token that identifies the app sending the request", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "The event that occured in the realm of the gamified application", required = true) @RequestBody EventDTO event) {
- 
+
         try {
             eventProcessor.processEvent(xGamificationToken, event);
-        }
-        catch (DataIntegrityViolationException e) {
-            // We relaunch the request when it fails
+        } catch (DataIntegrityViolationException e) {
+
             eventProcessor.processEvent(xGamificationToken, event);
         }
 
         return ResponseEntity.ok().build();
-    }    
-        
     }
-        
-        
-        
-        
-        
-        
-        
-        
 
+}

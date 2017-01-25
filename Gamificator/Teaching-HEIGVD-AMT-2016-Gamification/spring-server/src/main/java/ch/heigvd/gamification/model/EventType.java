@@ -33,8 +33,8 @@ public class EventType implements Serializable {
 
     @OneToMany(mappedBy = "eventType", cascade = CascadeType.ALL)
     private List<Rule> rules;
-    
-     @OneToMany(mappedBy = "eventType", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "eventType", cascade = CascadeType.ALL)
     private List<Event> events;
 
     public EventType() {

@@ -32,16 +32,10 @@ public class PointAwards implements Serializable {
 
     @ManyToOne
     private PointScale pointScale;
-    
-    
-    
-    
+
     private long point;
-    
-    
-    
-  
-   Date dat;
+
+    Date dat;
 
     private String reason;
 
@@ -71,7 +65,7 @@ public class PointAwards implements Serializable {
         return point;
     }
 
-   public Date getDate() {
+    public Date getDate() {
         return dat;
     }
 

@@ -39,13 +39,16 @@ public class ActionPoints extends ActionType {
         return nbrePoint;
     }
 
-    
-@Transient
-public String getDiscriminatorValue(){
-    DiscriminatorValue val = this.getClass().getAnnotation( DiscriminatorValue.class );
+    /**
+     *
+     * @return
+     */
+    @Transient
+    public String getDiscriminatorValue() {
+        DiscriminatorValue val = this.getClass().getAnnotation(DiscriminatorValue.class);
 
-    return val == null ? null : val.value();
-}
+        return val == null ? null : val.value();
+    }
 
     public void setNbrePoint(int nbrePoint) {
         this.nbrePoint = nbrePoint;

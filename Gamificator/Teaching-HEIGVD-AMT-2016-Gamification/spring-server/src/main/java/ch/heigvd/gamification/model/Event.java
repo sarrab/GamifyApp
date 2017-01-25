@@ -17,20 +17,22 @@ import javax.persistence.ManyToOne;
  *
  * @author Thibaut-PC
  */
-
 @Entity
-public class Event implements Serializable{
-  @Id
+public class Event implements Serializable {
+
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-     @ManyToOne
+    @ManyToOne
     private EndUser endUser;
-     
-      @ManyToOne
+
+    @ManyToOne
     private EventType eventType;
-      
-       @ManyToOne
+
+    @ManyToOne
     private Application app;
+
+    String status;
 
     public void setApp(Application app) {
         this.app = app;
@@ -39,7 +41,7 @@ public class Event implements Serializable{
     public Application getApp() {
         return app;
     }
-      
+
     private Date date;
 
     public Event(Long id, EndUser endUser, EventType eventType) {
@@ -47,10 +49,11 @@ public class Event implements Serializable{
         this.endUser = endUser;
         this.eventType = eventType;
         this.date = new Date();
+        this.status = "ok";
     }
 
     public Event() {
-        
+
     }
 
     public Long getId() {
@@ -69,6 +72,11 @@ public class Event implements Serializable{
         return date;
     }
 
+    public String getStatus() {
+
+        return this.status;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -84,13 +92,10 @@ public class Event implements Serializable{
     public void setDate(Date date) {
         this.date = date;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-   
+
+    public void setStatus(String str) {
+
+        this.status = str;
+    }
+
 }

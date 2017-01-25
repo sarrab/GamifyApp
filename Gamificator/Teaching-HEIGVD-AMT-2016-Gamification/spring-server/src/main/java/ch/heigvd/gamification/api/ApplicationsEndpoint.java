@@ -36,8 +36,8 @@ import org.springframework.web.util.UriComponents;
 @RequestMapping(value = "/applications")
 public class ApplicationsEndpoint implements ApplicationsApi {
 
-    ApplicationRepository apprepository;
-    AuthenKeyRepository authenRepository;
+    private ApplicationRepository apprepository;
+    private AuthenKeyRepository authenRepository;
 
     @Autowired
     public ApplicationsEndpoint(ApplicationRepository apprepository, AuthenKeyRepository authenRepository) {
@@ -47,7 +47,7 @@ public class ApplicationsEndpoint implements ApplicationsApi {
 
     @Override
     @RequestMapping(value = "/{applicationName}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void>  applicationsApplicationNameDelete(@ApiParam(value = "applicationName", required = true) @PathVariable("applicationName") String applicationUsername) {
+    public ResponseEntity<Void> applicationsApplicationNameDelete(@ApiParam(value = "applicationName", required = true) @PathVariable("applicationName") String applicationUsername) {
 
         Application app = apprepository.findByName(applicationUsername);
 
@@ -65,12 +65,12 @@ public class ApplicationsEndpoint implements ApplicationsApi {
 
         Application app = apprepository.findByName(applicationUsername);
         UriComponents uriComponents = MvcUriComponentsBuilder.fromMethodName(BadgesEndpoint.class, "badgesGet", 1).build();
-        
-           if(app == null){
-           
+
+        if (app == null) {
+
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-           }
-           
+        }
+
         ApplicationDTO dto = toDTO(app, uriComponents);
 
         if (dto == null) {
@@ -85,9 +85,9 @@ public class ApplicationsEndpoint implements ApplicationsApi {
     public ResponseEntity<Void> applicationsApplicationNamePut(@ApiParam(value = "applicationName", required = true) @PathVariable("applicationName") String applicationUsername, @ApiParam(value = "Modification of the application") @RequestBody Registration body) {
 
         Application app = apprepository.findByName(applicationUsername);
-        
-        if(app == null){
-        return new ResponseEntity(HttpStatus.NOT_FOUND);
+
+        if (app == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
 
         if (body.getApplicationName() != null) {
@@ -97,10 +97,10 @@ public class ApplicationsEndpoint implements ApplicationsApi {
                 body.setApplicationName(app.getName());
             }
         }
-        
-          if(body.getPassword()!= null){
-            
-            if(!body.getPassword().equals(" ")){
+
+        if (body.getPassword() != null) {
+
+            if (!body.getPassword().equals(" ")) {
                 try {
                     String password = Application.doHash(body.getPassword(), app.getSel());
                     System.out.println("mot de passe update" + password);
@@ -110,15 +110,11 @@ public class ApplicationsEndpoint implements ApplicationsApi {
                 } catch (NoSuchAlgorithmException ex) {
                     Logger.getLogger(ApplicationsEndpoint.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            
-            
+
             }
-            
+
         }
 
-      
-
-        
         apprepository.save(app);
         return new ResponseEntity(HttpStatus.OK);
     }
@@ -141,20 +137,20 @@ public class ApplicationsEndpoint implements ApplicationsApi {
 
             AuthenKey apiKey = new AuthenKey();
             String password = "";
-            
-            if(apprepository.findByName(body.getApplicationName())!= null){
-               
+
+            if (apprepository.findByName(body.getApplicationName()) != null) {
+
                 System.out.println(body.getApplicationName());
-             return new ResponseEntity("name already use", HttpStatus.UNPROCESSABLE_ENTITY);
-          }
-           
+                return new ResponseEntity("name already use", HttpStatus.UNPROCESSABLE_ENTITY);
+            }
+
             Application app = new Application(body.getApplicationName(), body.getPassword());
 
             apiKey.setApp(app);
             try {
                 apprepository.save(app);
             } catch (javax.persistence.PersistenceException e) {
-               return new ResponseEntity("name already use", HttpStatus.UNPROCESSABLE_ENTITY);
+                return new ResponseEntity("name already use", HttpStatus.UNPROCESSABLE_ENTITY);
             }
             authenRepository.save(apiKey);
             return new ResponseEntity(HttpStatus.CREATED);
@@ -174,7 +170,6 @@ public class ApplicationsEndpoint implements ApplicationsApi {
         dto.setBadges(urls);
         dto.setId(app.getId());
         dto.setApplicationName(app.getName());
-      
 
         return dto;
 

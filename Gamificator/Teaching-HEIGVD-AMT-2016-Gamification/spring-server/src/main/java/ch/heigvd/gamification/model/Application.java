@@ -21,7 +21,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -31,7 +30,7 @@ import javax.persistence.Table;
  * @author Thibaut-PC
  */
 @Entity
-@Table(name="application")
+@Table(name = "application")
 public class Application implements Serializable {
 
     @Id
@@ -40,103 +39,88 @@ public class Application implements Serializable {
 
     @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)
     private List<Badge> badges;
-    
-    
+
     @OneToOne(mappedBy = "app", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-      
+
     private AuthenKey appKey;
-    
-    @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)  
+
+    @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)
     private List<Event> event;
- @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)
     private List<EndUser> endusers;
 
-  @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)    
+    @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)
     private List<EventType> eventypes;
-  
-  
-  @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)    
-    private List<PointScale> pointScale ;
+
+    @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)
+    private List<PointScale> pointScale;
 
     @Column(unique = true, nullable = false)
     private String name;
-    
-     @Column(nullable = false)
+
+    @Column(nullable = false)
     private String password;
-     @Column(unique = true, nullable = false)
-     private String sel;
-     
-     
 
-  public final String nextSessionId() {
-      SecureRandom random = new SecureRandom();
-    return new BigInteger(130, random).toString(32);
-  }
+    @Column(unique = true, nullable = false)
+    private String sel;
 
-    public Application(String name, String password) {
-       
-        this.name = name;
-        this.sel = this.nextSessionId();
-          try {
-                 this.password = doHash(password, sel);
-            } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
-                Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
+    public final String nextSessionId() {
+        SecureRandom random = new SecureRandom();
+        return new BigInteger(130, random).toString(32);
     }
 
+    public Application(String name, String password) {
 
-    
+        this.name = name;
+        this.sel = this.nextSessionId();
+        try {
+            this.password = doHash(password, sel);
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
+            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
     public Application() {
 
     }
-    
-    public String getSel(){
-    
-    return this.sel;
-    
+
+    public String getSel() {
+
+        return this.sel;
+
     }
-    
-    public void setSel(String str){
-    
-    this.sel = str;
+
+    public void setSel(String str) {
+
+        this.sel = str;
     }
 
     public AuthenKey getAppKey() {
         return appKey;
     }
 
-   
-
     public void setAppKey(AuthenKey appKey) {
         this.appKey = appKey;
     }
 
-  
-   public List<Event> getEvent() {
+    public List<Event> getEvent() {
         return event;
     }
 
     public void setEvent(List<Event> event) {
         this.event = event;
     }
-    
+
     public void setPassword(String password) {
-      /*try {
-            this.password = doHash(password,getUsername());
-        } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
-            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-      
-      this.password = password;
+
+        this.password = password;
     }
 
-    
     public String getPassword() {
         return password;
     }
-    
 
     public List<EventType> getEventypes() {
         return eventypes;
@@ -161,7 +145,6 @@ public class Application implements Serializable {
     public void setBadges(List<Badge> badges) {
         this.badges = badges;
     }
- 
 
     public Long getId() {
         return id;
@@ -179,14 +162,32 @@ public class Application implements Serializable {
         this.name = name;
     }
 
-    public void add(EndUser endUser){
-     this.endusers.add(endUser);
-    
+    public void add(EndUser endUser) {
+        this.endusers.add(endUser);
+
     }
-    public static void setw(){
+
+    public static void setw() {
     }
-    
-  public static String doHash(String password, String salt) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+
+    public List<PointScale> getPointScale() {
+        return pointScale;
+    }
+
+    public void setPointScale(List<PointScale> pointScale) {
+        this.pointScale = pointScale;
+    }
+
+    /**
+     * methode pour hashé le mot de passe
+     *
+     * @param password
+     * @param salt
+     * @return
+     * @throws UnsupportedEncodingException
+     * @throws NoSuchAlgorithmException
+     */
+    public static String doHash(String password, String salt) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         digest.reset();
         digest.update(salt.getBytes());
@@ -197,11 +198,8 @@ public class Application implements Serializable {
         for (int i = 0; i < byteData.length; i++) {
             sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
         }
-   System.out.println("password" + sb.toString());
+        System.out.println("password" + sb.toString());
         return sb.toString();
-    }  
-    
-  
-  
+    }
 
 }

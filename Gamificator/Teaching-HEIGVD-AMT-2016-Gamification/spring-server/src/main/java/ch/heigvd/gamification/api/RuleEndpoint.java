@@ -36,18 +36,28 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/rules")
 public class RuleEndpoint implements RulesApi {
 
-    RuleRepository rulerepository;
+   private final RuleRepository rulerepository;
 
-    PointScaleRepository pointScaleRepository;
-    EventTypeRepository eventTypeRepository;
-    ApplicationRepository applicationRepository;
-    BadgeRepository badgerepository;
-    ActionBadgeRepository actionBadgerepository;
-    ActionPointRepository actionPointsrepository;
-    ActionTypeRepository actionTypeRepository;
-    AuthenKeyRepository authenkeyRepository;
-     PointScaleRepository pointscaleRepository;
+    private final PointScaleRepository pointScaleRepository;
+    
+    private final EventTypeRepository eventTypeRepository;
+    
+   private final ApplicationRepository applicationRepository;
+   
+    private final BadgeRepository badgerepository;
+    
+     private final ActionBadgeRepository actionBadgerepository;
+     
+    private final ActionPointRepository actionPointsrepository;
+    
+    private final ActionTypeRepository actionTypeRepository;
+    
+    private final AuthenKeyRepository authenkeyRepository;
+    
+    private PointScaleRepository pointscaleRepository;
+    
     final String ACTION_TYPE_POINT_FINAL = "ActionPoints";
+    
     final String ACTION_TYPE_BADGE_FINAL = "ActionBadge";
 
     @Autowired
@@ -61,7 +71,6 @@ public class RuleEndpoint implements RulesApi {
         this.actionPointsrepository = actionPointsrepository;
         this.actionTypeRepository = actionTypeRepository;
         this.authenkeyRepository = authenkeyRepository;
-        this.pointScaleRepository = p;
     }
 
     @Override

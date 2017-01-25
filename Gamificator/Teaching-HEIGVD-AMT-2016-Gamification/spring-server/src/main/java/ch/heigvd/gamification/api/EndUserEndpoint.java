@@ -34,28 +34,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/endUser")
 public class EndUserEndpoint implements EndUserApi {
 
-    EndUserRepository endUserRepository;
+    private final EndUserRepository endUserRepository;
 
-    ApplicationRepository applicationRepository;
-    AuthenKeyRepository auhtenKeyRepository;
-    
-    
-     @Autowired
+    private final ApplicationRepository applicationRepository;
+
+    private final AuthenKeyRepository auhtenKeyRepository;
+
+    @Autowired
     public EndUserEndpoint(EndUserRepository endUserRepository, ApplicationRepository applicationRepository, AuthenKeyRepository auhtenKeyRepository) {
         this.endUserRepository = endUserRepository;
         this.applicationRepository = applicationRepository;
         this.auhtenKeyRepository = auhtenKeyRepository;
     }
 
-   
     @Override
-     @RequestMapping(value = "{endUserID}/badges", method = RequestMethod.GET)
+    @RequestMapping(value = "{endUserID}/badges", method = RequestMethod.GET)
     public ResponseEntity<EndUserReputationDTO> endUserEndUserIDReputationGet(@ApiParam(value = "endUserID", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "endUserID", required = true) @PathVariable("endUserID") Long endUserID) {
-       
+
         AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
-          
-            if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
+
+        if (apiKey == null) {
+            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
         Application app = apiKey.getApp();
 
@@ -78,9 +77,9 @@ public class EndUserEndpoint implements EndUserApi {
                     badgesDTO.add(badgeDto);
                 });
                 return new ResponseEntity(badgesDTO, HttpStatus.OK);
-            }
-            else
+            } else {
                 return new ResponseEntity(HttpStatus.NOT_FOUND);
+            }
 
         }
 
@@ -88,24 +87,22 @@ public class EndUserEndpoint implements EndUserApi {
     }
 
     @Override
-     @RequestMapping(value = "{endUserID}/reputation", method = RequestMethod.GET)        
-   public ResponseEntity<Void> endUserEndUserIDBadgesGet(@ApiParam(value = "endUserID", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "endUserID", required = true) @PathVariable("endUserID") Long endUserID) {
-      
-       AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
-          
-            if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
+    @RequestMapping(value = "{endUserID}/reputation", method = RequestMethod.GET)
+    public ResponseEntity<Void> endUserEndUserIDBadgesGet(@ApiParam(value = "endUserID", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "endUserID", required = true) @PathVariable("endUserID") Long endUserID) {
+
+        AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
+
+        if (apiKey == null) {
+            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
         Application app = apiKey.getApp();
 
         if (app != null) {
 
             EndUser endUser = endUserRepository.findByIdappAndApp(endUserID, app);
-  
-            
-            
+
             if (endUser != null) {
-      
+
                 System.out.println("endUserName" + endUserID);
                 System.out.println("endUser" + endUser.getID());
 
@@ -135,9 +132,8 @@ public class EndUserEndpoint implements EndUserApi {
                 dto.setBadge(badgeDtos);
 
                 return new ResponseEntity(dto, HttpStatus.OK);
-            }
-            else{
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            } else {
+                return new ResponseEntity(HttpStatus.NOT_FOUND);
             }
 
         }
@@ -145,24 +141,20 @@ public class EndUserEndpoint implements EndUserApi {
         return new ResponseEntity("No content is available", HttpStatus.BAD_REQUEST);
     }
 
-    
-
-   
-
     @Override
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<EndUserDTO>> endUserGet(@ApiParam(value = "token that identifies the app sending the request", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken) {
 
         AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
-          
-            if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
+
+        if (apiKey == null) {
+            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
         Application app = apiKey.getApp();
-        if(app != null){
-        return new ResponseEntity<>(StreamSupport.stream(endUserRepository.findAll().spliterator(), true)
-                .map(p -> toDTO(p))
-                .collect(toList()), HttpStatus.OK);
+        if (app != null) {
+            return new ResponseEntity<>(StreamSupport.stream(endUserRepository.findAll().spliterator(), true)
+                    .map(p -> toDTO(p))
+                    .collect(toList()), HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.UNAUTHORIZED);
     }
@@ -170,10 +162,10 @@ public class EndUserEndpoint implements EndUserApi {
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> endUserIdDelete(@ApiParam(value = "id", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "id", required = true) @PathVariable("id") Long id) {
-AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
-          
-            if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
+        AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
+
+        if (apiKey == null) {
+            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
         Application app = apiKey.getApp();
         if (app != null) {
@@ -193,11 +185,10 @@ AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<EndUserDTO> endUserPost(@ApiParam(value = "token that identifies the app sending the request", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "données de l'utilisateur", required = true) @RequestBody EndUserDTO body) {
 
-        
         AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
-          
-            if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
+
+        if (apiKey == null) {
+            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
         Application app = apiKey.getApp();
         EndUser endUser = new EndUser();
@@ -210,13 +201,13 @@ AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
 
                 return new ResponseEntity("this user already exixts", HttpStatus.BAD_REQUEST);
             } else {
-                
+
                 endUser.setName(body.getName());
                 endUser.setApp(app);
                 endUser.setDate(new Date());
                 endUser.setIdapp(endUser.getId());
                 endUserRepository.save(endUser);
-                
+
                 return new ResponseEntity(HttpStatus.CREATED);
 
             }
@@ -230,10 +221,10 @@ AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<EndUserDTO> endUserIdGet(@ApiParam(value = "id", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "id", required = true) @PathVariable("id") Long id) {
-      AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
-          
-            if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
+        AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
+
+        if (apiKey == null) {
+            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
         Application app = apiKey.getApp();
         if (app != null) {
@@ -243,13 +234,11 @@ AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
                 EndUserDTO endUserDto = new EndUserDTO();
 
                 endUserDto.setName(endUser.getName());
-                
-                
+
                 return new ResponseEntity(endUserDto, HttpStatus.OK);
-            }
-            else{
-            
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            } else {
+
+                return new ResponseEntity(HttpStatus.NOT_FOUND);
             }
         }
 
@@ -261,9 +250,9 @@ AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
     public ResponseEntity<Void> endUserIdPut(@ApiParam(value = "id", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "id", required = true) @PathVariable("id") Long id, @ApiParam(value = "Update of a user") @RequestBody EndUserDTO body) {
 
         AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
-          
-            if(apiKey == null){
-        return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
+
+        if (apiKey == null) {
+            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
         Application app = apiKey.getApp();
 
@@ -283,10 +272,9 @@ AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
 
                 }
 
-            }
-            else{
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-            
+            } else {
+                return new ResponseEntity(HttpStatus.NOT_FOUND);
+
             }
 
             endUserRepository.save(endUser);
@@ -297,6 +285,12 @@ AuthenKey apiKey = auhtenKeyRepository.findByAppKey(xGamificationToken);
         return new ResponseEntity("no content available", HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * convertir un endUserDto en enduser
+     *
+     * @param endUser
+     * @return
+     */
     public EndUserDTO toDTO(EndUser endUser) {
         EndUserDTO endUserDto = new EndUserDTO();
 

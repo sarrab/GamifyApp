@@ -17,18 +17,17 @@ import javax.persistence.OneToOne;
  *
  * @author Thibaut-PC
  */
-
 @Entity
 public class AuthenKey implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-     
-     @OneToOne
+
+    @OneToOne
     private Application app;
-     
-      private String appKey;
+
+    private String appKey;
 
     public void setId(Long id) {
         this.id = id;
@@ -45,12 +44,9 @@ public class AuthenKey implements Serializable {
     public Application getApp() {
         return app;
     }
-    
-   
 
     public AuthenKey() {
-        
-        
+
         UUID key = UUID.randomUUID();
         appKey = String.valueOf(key);
     }
@@ -62,7 +58,5 @@ public class AuthenKey implements Serializable {
     public void setAppKey(String appKey) {
         this.appKey = appKey;
     }
-    
-    
-    
+
 }

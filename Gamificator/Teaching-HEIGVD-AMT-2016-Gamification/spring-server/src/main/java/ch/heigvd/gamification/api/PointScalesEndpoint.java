@@ -6,6 +6,7 @@
 package ch.heigvd.gamification.api;
 
 import ch.heigvd.gamification.api.dto.PointScaleDTO;
+import ch.heigvd.gamification.model.Application;
 import ch.heigvd.gamification.model.AuthenKey;
 import ch.heigvd.gamification.services.dao.PointScaleRepository;
 import ch.heigvd.gamification.model.PointScale;
@@ -27,11 +28,11 @@ import org.springframework.web.bind.annotation.*;
  * @author user
  */
 @RestController
-@RequestMapping(value = "/PointScale")
+@RequestMapping(value = "/pointScales")
 public class PointScalesEndpoint implements PointScalesApi {
 
-    private PointScaleRepository pointscaleRepository;
-    private AuthenKeyRepository authenRepository;
+    private final PointScaleRepository pointscaleRepository;
+    private final AuthenKeyRepository authenRepository;
     private final HttpServletRequest request;
 
     @Autowired
@@ -50,7 +51,7 @@ public class PointScalesEndpoint implements PointScalesApi {
             return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
 
-        return new ResponseEntity<List<PointScaleDTO>>(StreamSupport.stream(pointscaleRepository.findAll().spliterator(), true)
+        return new ResponseEntity<>(StreamSupport.stream(pointscaleRepository.findAllByApp(apiKey.getApp()).spliterator(), true)
                 .map(p -> toDTO(p))
                 .collect(toList()), HttpStatus.OK);
     }
@@ -83,7 +84,7 @@ public class PointScalesEndpoint implements PointScalesApi {
             return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
 
-        PointScale p = pointscaleRepository.findOne(pointScaleId);
+        PointScale p = pointscaleRepository.findByIdAndApp(pointScaleId, apiKey.getApp());
 
         if (p == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
@@ -104,7 +105,7 @@ public class PointScalesEndpoint implements PointScalesApi {
             return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
         }
 
-        PointScale pointScale = pointscaleRepository.findOne(pointScaleId);
+        PointScale pointScale = pointscaleRepository.findByIdAndApp(pointScaleId, apiKey.getApp());
 
         if (pointScale == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
@@ -138,16 +139,20 @@ public class PointScalesEndpoint implements PointScalesApi {
         }
 
         PointScale pointScale = new PointScale();
+        Application app = apiKey.getApp();
 
-        if (pointscaleRepository.findByName(body.getName()) != null) {
+        if (pointscaleRepository.findByNameAndApp(body.getName(), apiKey.getApp()) != null) {
 
             return new ResponseEntity("poinscat exist already", HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
         if (body != null) {
+
             pointScale.setDescription(body.getDescription());
             pointScale.setName(body.getName());
             pointScale.setMinpoint(body.getNbrDePoints());
+            pointScale.setApplication(app);
+            pointScale.setApplication(app);
             pointscaleRepository.save(pointScale);
 
             StringBuffer location = request.getRequestURL();
@@ -164,6 +169,11 @@ public class PointScalesEndpoint implements PointScalesApi {
         }
     }
 
+    /**
+     *
+     * @param pointScale
+     * @return
+     */
     public PointScaleDTO toDTO(PointScale pointScale) {
         PointScaleDTO pointscaledto = new PointScaleDTO();
 

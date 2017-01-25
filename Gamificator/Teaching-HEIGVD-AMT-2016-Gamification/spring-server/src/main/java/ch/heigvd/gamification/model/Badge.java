@@ -30,18 +30,15 @@ public class Badge implements Serializable {
     private String image;
     @Column(nullable = false)
     private String name;
-    
-     @Column(nullable = false)
+
+    @Column(nullable = false)
     private String description;
 
     @ManyToOne
     Application app;
 
-    @OneToMany(mappedBy = "badge",  cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "badge", cascade = CascadeType.ALL)
     private List<BadgeAward> badgeAwards;
-
-    
-   
 
     public Badge() {
 
@@ -51,7 +48,6 @@ public class Badge implements Serializable {
         return badgeAwards;
     }
 
-   
     public void setApp(Application app) {
         this.app = app;
     }
@@ -90,7 +86,6 @@ public class Badge implements Serializable {
     public void setBadgeAwards(List<BadgeAward> badgeAwards) {
         this.badgeAwards = badgeAwards;
     }
-
 
     public void setImage(String image) {
         this.image = image;
