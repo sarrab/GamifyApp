@@ -14,7 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import org.hibernate.annotations.ManyToAny;
 
 /**
  *
@@ -26,18 +25,17 @@ public class PointScale implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    @Column(unique = true)
+
+    @Column(nullable = false)
     private String name;
     private String description;
     private int minpoint;
-    
+
     @OneToMany(mappedBy = "pointscale")
     private List<Rule> rules;
-    
+
     @ManyToOne
     private Application app;
-    
 
     public List<Rule> getRules() {
         return rules;
@@ -47,7 +45,6 @@ public class PointScale implements Serializable {
         this.rules = rules;
     }
 
-    
     public PointScale() {
 
     }
@@ -66,18 +63,18 @@ public class PointScale implements Serializable {
         this.minpoint = minpoint;
     }
 
-    
-    public void setApplication(Application app){
-    
-    this.app = app;
+    public void setApplication(Application app) {
+
+        this.app = app;
     }
+
     public int getMinpoint() {
         return minpoint;
     }
-    
-    public Application getApplication(){
-    
-    return this.app;
+
+    public Application getApplication() {
+
+        return this.app;
     }
 
     public String getName() {

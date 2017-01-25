@@ -25,11 +25,10 @@ import javax.persistence.Transient;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="TYPE_ACTION")
+@DiscriminatorColumn(name = "TYPE_ACTION")
 @DiscriminatorValue("MERE")
 public class ActionType implements Serializable {
-  
-    
+
     @OneToMany(mappedBy = "actionType")
     private List<Rule> rules;
 
@@ -49,15 +48,13 @@ public class ActionType implements Serializable {
     public void setRules(List<Rule> rules) {
         this.rules = rules;
     }
-    
-    
-     @Transient
-    public String getDiscriminatorValue(){
-        DiscriminatorValue val = this.getClass().getAnnotation( DiscriminatorValue.class );
+
+    @Transient
+    public String getDiscriminatorValue() {
+        DiscriminatorValue val = this.getClass().getAnnotation(DiscriminatorValue.class);
 
         return val == null ? null : val.value();
     }
-
 
     public List<Rule> getRules() {
         return rules;

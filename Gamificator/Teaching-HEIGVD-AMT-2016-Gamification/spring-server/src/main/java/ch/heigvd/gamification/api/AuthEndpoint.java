@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Thibaut-PC
  */
-
 @RestController
 @RequestMapping(value = "/authentications")
 public class AuthEndpoint implements AuthenticationsApi {
@@ -36,52 +35,46 @@ public class AuthEndpoint implements AuthenticationsApi {
     private ApplicationRepository applicationsRepository;
     private AuthenKeyRepository authenrepository;
 
-
-     @Autowired
+    @Autowired
     public AuthEndpoint(ApplicationRepository applicationsRepository, AuthenKeyRepository authenrepository) {
         this.applicationsRepository = applicationsRepository;
         this.authenrepository = authenrepository;
     }
 
     @Override
-     @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity authenticateApplicationAndGetToken(@ApiParam(value = "The info required to authenticate an application", required = true) @RequestBody Credentials body) {
 
-    
-        
         Application app1 = applicationsRepository.findByName(body.getApplicationName());
-        
-        if(app1 != null){
-        
-        String password = body.getPassword();
-        
-        try {
-            password = Application.doHash(password, app1.getSel());
-            
-        } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
-            Logger.getLogger(AuthEndpoint.class.getName()).log(Level.SEVERE, null, ex);
+
+        if (app1 != null) {
+
+            String password = body.getPassword();
+
+            try {
+                password = Application.doHash(password, app1.getSel());
+
+            } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
+                Logger.getLogger(AuthEndpoint.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            Application app = applicationsRepository.findByPassword(password);
+
+            if (app != null) {
+                Token token = new Token();
+                AuthenKey appKey = authenrepository.findByApp(app);
+                token.setApplicationName(appKey.getAppKey());
+                return ResponseEntity.ok(token);
+            } else {
+                System.err.println("nom autorisé" + password + "" + app1.getSel() + " " + body.getPassword());
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+
+            }
+
         }
 
-        Application app = applicationsRepository.findByPassword(password);
-        
-        
-        
-        if (app != null) {
-            Token token = new Token();
-           AuthenKey appKey = authenrepository.findByApp(app);
-            token.setApplicationName(appKey.getAppKey());
-            return ResponseEntity.ok(token);
-        } else {
-             System.err.println("nom autorisé" +  password + "" + app1.getSel() + " "  + body.getPassword());
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-
-        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
     }
-    
-    
-    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-
-}
 
 }

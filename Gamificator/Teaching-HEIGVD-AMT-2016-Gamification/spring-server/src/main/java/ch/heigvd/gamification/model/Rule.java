@@ -30,8 +30,7 @@ public class Rule implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private ActionType actionType;
-    
-    
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private PointScale pointscale;
 
@@ -42,8 +41,6 @@ public class Rule implements Serializable {
     public void setEventType(EventType eventType) {
         this.eventType = eventType;
     }
-
-    
 
     public Rule() {
     }

@@ -32,10 +32,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LeaderboardEndpoint implements LeaderboardApi {
 
-    EndUserRepository endUserRepository;
-    PointAwardsRepository badgeAwardsRepository;
-    BadgeAwardRepository badgeAwardRepository;
-    AuthenKeyRepository authenKeyRepository;
+    private final EndUserRepository endUserRepository;
+
+    private final PointAwardsRepository badgeAwardsRepository;
+
+    private final BadgeAwardRepository badgeAwardRepository;
+
+    private final AuthenKeyRepository authenKeyRepository;
 
     @Autowired
     public LeaderboardEndpoint(EndUserRepository endUserRepository, PointAwardsRepository badgeAwardsRepository, BadgeAwardRepository badgeAwardRepository, AuthenKeyRepository authenKeyRepository) {
@@ -62,11 +65,11 @@ public class LeaderboardEndpoint implements LeaderboardApi {
             endUsers = endUserRepository.getBestUsers(app);
 
             if (endUsers.isEmpty()) {
-              endUsers = endUserRepository.getBestBadgeUsers(app);
+                endUsers = endUserRepository.getBestBadgeUsers(app);
                 for (int i = 0; i < endUsers.size(); ++i) {
                     LeaderboardDTO tmp = new LeaderboardDTO();
-                 EndUser enduser = (EndUser) endUsers.get(i)[0];
-                                    
+                    EndUser enduser = (EndUser) endUsers.get(i)[0];
+
                     tmp.setName(enduser.getName());
                     tmp.setEndUserId(enduser.getId());
                     List<String> names = new ArrayList<>();

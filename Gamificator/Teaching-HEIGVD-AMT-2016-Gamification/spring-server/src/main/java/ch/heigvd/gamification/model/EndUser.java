@@ -26,32 +26,25 @@ import javax.persistence.OneToMany;
 @Entity
 
 @NamedQueries({
-   
-@NamedQuery(name = "EndUser.getBestUsers", query = "SELECT e, p.pointScale, SUM(p.point)FROM EndUser e, PointAwards p WHERE e.app = :app AND p.enduser = e GROUP BY p.enduser.id, p.pointScale.id"),
-@NamedQuery(name = "EndUser.getBestBadgeUsers", query ="SELECT e, b.badge  FROM EndUser e, BadgeAward b  WHERE e.app = :app AND b.endUser = e"),
-
-})
+    @NamedQuery(name = "EndUser.getBestUsers", query = "SELECT e, p.pointScale, SUM(p.point)FROM EndUser e, PointAwards p WHERE e.app = :app AND p.enduser = e GROUP BY p.enduser.id, p.pointScale.id"),
+    @NamedQuery(name = "EndUser.getBestBadgeUsers", query = "SELECT e, b.badge  FROM EndUser e, BadgeAward b  WHERE e.app = :app AND b.endUser = e"),})
 public class EndUser implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     private Long idapp;
-    
-@OneToMany(mappedBy = "enduser", targetEntity=PointAwards.class, cascade = CascadeType.PERSIST)
+
+    @OneToMany(mappedBy = "enduser", targetEntity = PointAwards.class, cascade = CascadeType.PERSIST)
     private List<PointAwards> pointAwards;
 
-    
-      @OneToMany(mappedBy = "endUser")
-    private List<Event> events  = new ArrayList<>();
-      
-      
-      
-    @OneToMany(mappedBy = "endUser", targetEntity=BadgeAward.class, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "endUser")
+    private List<Event> events = new ArrayList<>();
+
+    @OneToMany(mappedBy = "endUser", targetEntity = BadgeAward.class, cascade = CascadeType.PERSIST)
     private List<BadgeAward> badgeAwards;
-    
-    
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -82,8 +75,6 @@ public class EndUser implements Serializable {
     public List<Event> getEvents() {
         return events;
     }
-
-   
 
     public List<BadgeAward> getBadgeAwards() {
         return badgeAwards;
@@ -141,9 +132,9 @@ public class EndUser implements Serializable {
     public void setID(Long ID) {
         this.id = ID;
     }
-    
-    public void addEvent(Event event){
-    this.events.add(event);
+
+    public void addEvent(Event event) {
+        this.events.add(event);
     }
 
 }

@@ -40,34 +40,32 @@ import org.springframework.stereotype.Service;
  *
  * @author Thibaut-PC
  */
-
 @Service
 public class EventProcessor {
- private final  EventTypeRepository eventTypeRepository;
 
-private  final  EndUserRepository endUserRepository;
+    private final EventTypeRepository eventTypeRepository;
 
-private   final ApplicationRepository ApplicationRepository;
+    private final EndUserRepository endUserRepository;
 
- private  final  RuleRepository ruleRepository;
+    private final ApplicationRepository ApplicationRepository;
 
-  private  final RulePropertiesRepository rulesPropertiesRepository;
+    private final RuleRepository ruleRepository;
 
- private   final PointAwardsRepository pointAwardsrepository;
+    private final RulePropertiesRepository rulesPropertiesRepository;
 
- private   final BadgeAwardRepository badgeAwardRepository;
+    private final PointAwardsRepository pointAwardsrepository;
 
- private   final BadgeRepository badgeRepository;
- 
- private  final EventRepository eventRepository;
- private final  AuthenKeyRepository authenKeyRepository;
+    private final BadgeAwardRepository badgeAwardRepository;
 
-    
-    
- 
- final String ACTION_TYPE_POINT_FINAL = "ActionPoints";
+    private final BadgeRepository badgeRepository;
+
+    private final EventRepository eventRepository;
+
+    private final AuthenKeyRepository authenKeyRepository;
+
+    final String ACTION_TYPE_POINT_FINAL = "ActionPoints";
     final String ACTION_TYPE_BADGE_FINAL = "ActionBadge";
-    
+
     ActionPointRepository actionPointRepository;
 
     public EventProcessor(EventTypeRepository eventTypeRepository, EndUserRepository endUserRepository, ApplicationRepository ApplicationRepository, RuleRepository ruleRepository, RulePropertiesRepository rulesPropertiesRepository, PointAwardsRepository pointAwardsrepository, BadgeAwardRepository badgeAwardRepository, BadgeRepository badgeRepository, EventRepository eventRepository, AuthenKeyRepository authenKeyRepository, ActionPointRepository actionPointRepository) {
@@ -83,29 +81,27 @@ private   final ApplicationRepository ApplicationRepository;
         this.authenKeyRepository = authenKeyRepository;
         this.actionPointRepository = actionPointRepository;
     }
- 
-    
-    
 
     @Async
     @Transactional
     public void processEvent(String xGamificationToken, EventDTO eventDTO) {
-        
-     Long idendUser = eventDTO.getUserId();
+
+        Long idendUser = eventDTO.getUserId();
         DateTime timestamp = eventDTO.getTimeStamp();
         String type = eventDTO.getType();
         EndUser enduser;
-       
-        
-       
+        Event event = new Event();
+
         AuthenKey apiKey = authenKeyRepository.findByAppKey(xGamificationToken);
-          
-            if(apiKey == null){
-                System.err.println("apikey not exist");
+
+        if (apiKey == null) {
+            System.err.println("apikey not exist");
+            eventRepository.save(event);
+            event.setStatus("error_authentification");
+            return;
         }
         Application app = apiKey.getApp();
-            
-       
+
         enduser = endUserRepository.findByIdappAndApp(eventDTO.getUserId(), app);
 
         if (enduser == null) {
@@ -114,57 +110,51 @@ private   final ApplicationRepository ApplicationRepository;
             app.add(enduser);
 
         }
-          
-      
-       Event event = new Event();
+
         EventType eventype = null;
 
         String eventypeName = eventDTO.getType();
 
         eventype = eventTypeRepository.findByEventNameAndApp(eventypeName, app);
-        
-        
-        
-         if(eventype == null){
-           
-             System.err.println("le type d'événement n'existe pas");
-         }
-         
+
+        if (eventype == null) {
+
+            System.err.println("le type d'événement n'existe pas");
+
+            event.setStatus("type event doesn't exist! ");
+
+            eventRepository.save(event);
+            return;
+        }
+
         List<Rule> rules = eventype.getRules();
         if (rules.size() > 0) {
-             
-            for (Rule r : rules) {
-                 
 
-                 if( r.getActionType().getDiscriminatorValue().equalsIgnoreCase(ACTION_TYPE_POINT_FINAL)) {
-                   
-                         //ActionPoints actionPoint = actionPointRepository.findByName(r.getActionType().getName());
-                         System.err.println("le type d'événement n'existe pas");
-                       ActionPoints ap = (ActionPoints) r.getActionType();
-                       pointAwardsrepository.save(new PointAwards(enduser, ap.getNombrePoint(), r.getPointscale()));
-                 }
-                 
-                  if( r.getActionType().getDiscriminatorValue().equalsIgnoreCase(ACTION_TYPE_BADGE_FINAL)){
-                        System.err.println("le type d'événement n'existe pas2");
-                        ActionBadge ab = (ActionBadge) r.getActionType();
-                        badgeAwardRepository.save(new BadgeAward(timestamp.toDate(), ab.getBadge(), enduser));
+            for (Rule r : rules) {
+
+                if (r.getActionType().getDiscriminatorValue().equalsIgnoreCase(ACTION_TYPE_POINT_FINAL)) {
+
+                    System.err.println("le type d'événement n'existe pas");
+                    ActionPoints ap = (ActionPoints) r.getActionType();
+                    pointAwardsrepository.save(new PointAwards(enduser, ap.getNombrePoint(), r.getPointscale()));
                 }
-                  
-          
+
+                if (r.getActionType().getDiscriminatorValue().equalsIgnoreCase(ACTION_TYPE_BADGE_FINAL)) {
+                    System.err.println("le type d'événement n'existe pas2");
+                    ActionBadge ab = (ActionBadge) r.getActionType();
+                    badgeAwardRepository.save(new BadgeAward(timestamp.toDate(), ab.getBadge(), enduser));
+                }
+
             }
-           
+
         }
-        
 
         event.setEndUser(enduser);
         event.setEventType(eventype);
         event.setDate(new Date());
         event.setApp(app);
         eventRepository.save(event);
-       // enduser.addEvent(event);
-       
-      
-        
+
     }
 
 }
