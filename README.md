@@ -6,7 +6,7 @@ The objectif of this project is to develop and test a gamified application platf
 
 ###High level architecture
 
-![](architecture.JPG) 
+![](./Gamificator/docs/archi.JPG) 
 
 As you can see on this architecture, applications which are registrered on our platform can create, get, update and delete **badges**, **pointScales** and **rules**. The users of an application can post events on our platform, and accordingly to the type of the event posted, it is possible to attribute a badge or a point scale to the user. If the user posting the event doesn't exists, we create the user in the application. It is also possible for the application to ask for the leaderboards (list of best users of the application).
 
