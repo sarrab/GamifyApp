@@ -12,7 +12,7 @@ As you can see on this architecture, applications which are registrered on our p
 
 ##Technologies
 
-This project was realized mainly with Spring Boot and Swagger. Indeed, a top-down approach was used in general. At the beginning we started with a swagger specification but we made adjustments to generate only the DtoS classes. The bottom-up approach was also used to expose the documentation of specification within SpringFox.
+This project was realized mainly with Spring Boot and Swagger. Indeed, a top-down approach was used in general. At the beginning we started with a swagger specification but we made adjustments to generate only the interface classes(DTOs)and the API. The bottom-up approach was also used to expose the documentation of specification within SpringFox.
 The following technologies were used:
 
 - [Spring Boot](http://projects.spring.io/spring-boot/)
