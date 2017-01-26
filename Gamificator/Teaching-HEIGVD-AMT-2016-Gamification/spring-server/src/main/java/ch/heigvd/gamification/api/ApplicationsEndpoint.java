@@ -103,7 +103,6 @@ public class ApplicationsEndpoint implements ApplicationsApi {
             if (!body.getPassword().equals(" ")) {
                 try {
                     String password = Application.doHash(body.getPassword(), app.getSel());
-                    System.out.println("mot de passe update" + password);
                     app.setPassword(password);
                 } catch (UnsupportedEncodingException ex) {
                     Logger.getLogger(ApplicationsEndpoint.class.getName()).log(Level.SEVERE, null, ex);
@@ -160,7 +159,7 @@ public class ApplicationsEndpoint implements ApplicationsApi {
         }
     }
 
-    public ApplicationDTO toDTO(ch.heigvd.gamification.model.Application app, UriComponents uriComponents) {
+    public ApplicationDTO toDTO(Application app, UriComponents uriComponents) {
 
         ApplicationDTO dto = new ApplicationDTO();
         List<String> urls = new ArrayList<>();

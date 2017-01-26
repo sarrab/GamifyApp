@@ -134,7 +134,7 @@ paths:
         - $ref: '#/parameters/TokenHeader'
         - in: path
           name: badgeId
-          description: Badge's id
+          description: Id of the badge
           required: true
           type: integer
           format: int64   
@@ -153,7 +153,7 @@ paths:
         - $ref: '#/parameters/TokenHeader'
         - in: path
           name: badgeId
-          description: Badge's id
+          description: Id of the badge
           required: true
           type: integer
           format: int64
@@ -174,7 +174,7 @@ paths:
         - $ref: '#/parameters/TokenHeader'
         - in: path
           name: badgeId
-          description: Badge's id
+          description: Id of the badge
           required: true
           type: integer
           format: int64
@@ -221,7 +221,7 @@ paths:
         - $ref: '#/parameters/TokenHeader'
         - in: path
           name: pointScaleId
-          description: PointScale's id
+          description: Id of the pointScale
           required: true
           type: integer
           format: int64
@@ -240,7 +240,7 @@ paths:
         - $ref: '#/parameters/TokenHeader'
         - in: path
           name: pointScaleId
-          description: PointScale's id
+          description: Id of the pointScale
           required: true
           type: integer
           format: int64
@@ -261,7 +261,7 @@ paths:
         - $ref: '#/parameters/TokenHeader'
         - in: path
           name: pointScaleId
-          description: PointScale's id
+          description: Id of the pointScale
           required: true
           type: integer
           format: int64
@@ -330,7 +330,7 @@ paths:
             $ref: '#/definitions/User'  
   /rules:
     get:
-      description: Retourne l'ensemble des rÃƒÆ’Ã‚Â¨gles de l'application
+      description: Give the list of rules in an application
       produces:
         - application/json
       parameters:
@@ -338,27 +338,26 @@ paths:
       responses:
         200:
           description:
-              Application's rules
+              Rules of the application
           schema:
             type: array
             items:
              $ref: '#/definitions/RuleDTO'
     post:
-      description: crÃƒÆ’Ã‚Â©e une rÃƒÆ’Ã‚Â¨gle dans l'application
+      description: Create a rule in the application
       produces:
         - application/json
       parameters:
         - $ref: '#/parameters/TokenHeader'
         - in: body
           name: body
-          description: paramÃƒÆ’Ã‚Â¨tres de la rÃƒÆ’Ã‚Â¨gles crÃƒÆ’Ã‚Â©ÃƒÆ’Ã‚Â©e
           schema:
             $ref: '#/definitions/RuleDTO'
           required: true
       responses: 
         201:
           description: 
-            OK rÃƒÆ’Ã‚Â¨gle crÃƒÆ’Ã‚Â©ÃƒÆ’Ã‚Â©e
+            OK rule created
           schema:
             $ref: '#/definitions/RuleDTO'
   /rules/{ruleId}:
@@ -370,13 +369,13 @@ paths:
         - $ref: '#/parameters/TokenHeader'
         - in: path
           name: ruleId
-          description: rule's id
+          description: Id of the rule
           required: true
           type: integer
           format: int64
       responses:
         200:
-          description: Ok, Rule's details
+          description: Ok, details of the rule 
           schema:
             $ref: '#/definitions/RuleDTO'
     put:
@@ -389,7 +388,7 @@ paths:
         - $ref: '#/parameters/TokenHeader'
         - in: path
           name: ruleId
-          description: Rule's id
+          description: Id of the rule
           required: true
           type: integer
           format: int64
@@ -410,7 +409,7 @@ paths:
         - $ref: '#/parameters/TokenHeader'
         - in: path
           name: ruleId
-          description: Rule's id
+          description: Id of the rule
           required: true
           type: integer
           format: int64
@@ -456,7 +455,7 @@ paths:
         - $ref: '#/parameters/TokenHeader'
         - in: path
           name: id
-          description: point award's id
+          description: Id of the point award
           required: true
           type: integer
           format: int64
@@ -475,7 +474,7 @@ paths:
         - $ref: '#/parameters/TokenHeader'
         - in: path
           name: id
-          description: point award's id
+          description: Id of the point award
           required: true
           type: integer
           format: int64
@@ -495,7 +494,7 @@ paths:
       parameters:
         - in: path
           name: id
-          description: point award's id
+          description: id of the point award
           required: true
           type: integer
           format: int64
@@ -557,7 +556,7 @@ paths:
         - $ref: '#/parameters/TokenHeader'
         - in: path
           name: endUser'ID
-          description: user's id
+          description: Id of the user
           required: true
           type: integer
           format: int64 
@@ -577,7 +576,7 @@ paths:
         - $ref: '#/parameters/TokenHeader'
         - in: path
           name: endUser'ID
-          description: endUser'ID
+          description: Id of the endUser
           required: true
           type: integer
           format: int64 
@@ -596,13 +595,13 @@ paths:
         - $ref: '#/parameters/TokenHeader'
         - in: path
           name: id
-          description: user's id
+          description: Id of the user 
           required: true
           type: integer
           format: int64
       responses:
         200:
-          description: Ok, user's details
+          description: Ok, details of the user
           schema:
             $ref: '#/definitions/EndUserDTO'
     put:
@@ -615,7 +614,7 @@ paths:
         - $ref: '#/parameters/TokenHeader'
         - in: path
           name: id
-          description: user's id
+          description: Id of the user
           required: true
           type: integer
           format: int64
@@ -637,7 +636,7 @@ paths:
         - $ref: '#/parameters/TokenHeader'
         - in: path
           name: id
-          description: user's id
+          description: Id of the user
           required: true
           type: integer
           format: int64     
@@ -650,10 +649,7 @@ definitions:
     properties:
       name:
         type: string
-        description: user's name
-      id:
-        type: integer
-        format: int64
+        description: Name of the user
   LeaderboardDTO:
     type: object
     properties:
@@ -661,15 +657,15 @@ definitions:
         type: integer
         format: int32
         description: Number of points earned by a leader
-      endUserId:
-        type: integer
-        format: int64
       name:
         type: string
         description: Name of the leader
       namePointscale:
         type: string
         description: Name of the leader  
+      endUserId:
+        type: integer
+        format: int64
       badges:
         type: array
         items:
@@ -730,14 +726,13 @@ definitions:
         format: int64
       name:
         type: string
-        description: Badge name.
+        description: Badge name
       description:
         type: string
         description: Description du badge
       nbrDePoints:
         type: integer
         format: int32
-        
   EventDTO:
     type: object
     description: Event produced in an application
@@ -749,10 +744,6 @@ definitions:
         type: integer
         format: int64
         description: Id of the user producing the event
-      properties:
-        type: array
-        items:
-            type: string
       timeStamp:
         type: string
         format: date-time
@@ -768,9 +759,8 @@ definitions:
     type: object
     properties:
       userId:
-        type: string
-      numberOfEvents:
         type: integer
+        format: int64
   Token:
     type: object
     properties:
@@ -799,7 +789,6 @@ definitions:
       ActionId:
         type: integer
         format: int64
-
   PointsAwardDTO:
     type: object
     properties:
@@ -810,7 +799,6 @@ definitions:
         type: integer
         format: int64
         description: Nomber of points given
-
   EndUserReputationDTO:
     type: object
     properties:
@@ -822,7 +810,6 @@ definitions:
         type: integer
         format: int64
         description: Nomber of points given
-
 parameters:
   TokenHeader:
     description: token that identifies the app sending the request

@@ -66,7 +66,7 @@ public class AuthEndpoint implements AuthenticationsApi {
                 token.setApplicationName(appKey.getAppKey());
                 return ResponseEntity.ok(token);
             } else {
-                System.err.println("nom autorisé" + password + "" + app1.getSel() + " " + body.getPassword());
+
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
             }

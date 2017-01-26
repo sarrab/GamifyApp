@@ -118,4 +118,5 @@ public class LeaderboardEndpoint implements LeaderboardApi {
 
         return new ResponseEntity("content no available", HttpStatus.BAD_REQUEST);
     }
+
 }
