@@ -1,0 +1,819 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Gamification platform
+  description: |
+    **API specification of the Gamification platform**
+
+    You can try all HTTP operation described in this Swagger spec.
+    
+    Find source code of this API [here](https://github.com/sarrab/GamifyApp.git)
+host: localhost:8090
+basePath: /api
+schemes:
+  - http
+  - https
+paths:
+  /applications:
+    get: 
+      description: Give list of all applications
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK, Applications summary
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ApplicationDTO'
+    post:
+      description: Register a new application
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: Application to add
+          schema:
+            $ref: '#/definitions/Registration'
+          required: true
+      responses:
+        201:
+          description: OK, Application created
+  /applications/{applicationName}:
+    get:
+      description: Give the application summary 
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: applicationName
+          description: Name of the application
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok, Application details
+          schema:
+            $ref: '#/definitions/ApplicationDTO'
+    put:
+      description: Modify the application
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: applicationName
+          description: Name of the application
+          required: true
+          type: string
+        - name: body
+          in: body
+          description: Modification of the application
+          schema:
+            $ref: '#/definitions/Registration'
+          required: false
+      responses:
+        200:
+          description: OK, Application modified
+    delete:
+      description: Delete an application
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: applicationName
+          description: Name of the application
+          required: true
+          type: string
+      responses:
+        200:
+          description: OK, Application deleted
+  /badges:
+    get: 
+      description: Give the list of all badges in the application 
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+      responses:
+        200:
+          description: OK, Badges summary
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BadgeDTO'
+    post:
+      description: Create a badge in the application
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: Badge to add
+          schema:
+            $ref: '#/definitions/BadgeDTO'
+          required: true
+        - $ref: '#/parameters/TokenHeader'
+      responses:
+        201:
+          description: OK, Badge created
+  /badges/{badgeId}:
+    get:
+      description: Give the badge details
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - in: path
+          name: badgeId
+          description: Id of the badge
+          required: true
+          type: integer
+          format: int64   
+      responses:
+        200:
+          description: Ok, Badge details
+          schema:
+            $ref: '#/definitions/BadgeDTO'
+    put:
+      description: Modify a badge
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - in: path
+          name: badgeId
+          description: Id of the badge
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: Modification of the badge
+          schema:
+            $ref: '#/definitions/BadgeDTO'
+          required: false
+      responses:
+        200:
+          description: OK, Badge modified
+    delete:
+      description: Delete the badge
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - in: path
+          name: badgeId
+          description: Id of the badge
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: OK, Badge deleted
+  /pointScales:
+    get: 
+      description: Give the list of all pointScales of the application 
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+      responses:
+        200:
+          description: OK, pointScales summary
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PointScaleDTO'
+    post:
+      description: Create a pointScale in the application
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - name: body
+          in: body
+          description: PointScale to add
+          schema:
+            $ref: '#/definitions/PointScaleDTO'
+          required: true
+      responses:
+        201:
+          description: OK, PointScale created
+  /pointScales/{pointScaleId}:
+    get:
+      description: Give the pointScale details
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - in: path
+          name: pointScaleId
+          description: Id of the pointScale
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Ok, PointScale details
+          schema:
+            $ref: '#/definitions/PointScaleDTO'
+    put:
+      description: Modify the pointScale
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - in: path
+          name: pointScaleId
+          description: Id of the pointScale
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: Modification of the pointScale
+          schema:
+            $ref: '#/definitions/PointScaleDTO'
+          required: false
+      responses:
+        200:
+          description: OK, PointScale modified
+    delete:
+      description: Delete the pointScale
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - in: path
+          name: pointScaleId
+          description: Id of the pointScale
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: OK, PointScale deleted
+  /events:
+    post:
+      description:  Report that a new event has happened in the gamified application
+      operationId: reportEvent
+      consumes:
+      - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - name: event
+          in: body
+          description: The event that occured in the realm of the gamified application
+          schema:
+            $ref: '#/definitions/EventDTO'
+          required: true
+      responses:
+        202:
+          description:
+              The platform has accepted the event and will process it (asynchronously)
+          schema: 
+            $ref: '#/definitions/EventDTO'   
+  /authentications:
+    post:
+      operationId: authenticateApplicationAndGetToken
+      consumes:
+      - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: The info required to authenticate an application
+          schema:
+            $ref: '#/definitions/Credentials'
+          required: true
+      responses:
+        200:
+          description: Authentication sucessful
+          schema:
+            $ref: '#/definitions/Token'
+        401:
+          description: Authentication failed
+  /users/{id}:
+    get:
+      description:  Retrieve one user by id
+      operationId: findUserById
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - name: id
+          in: path
+          description: id of the user to fetch
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        200:
+          description:
+              Returns the specified user state
+          schema:
+            $ref: '#/definitions/User'  
+  /rules:
+    get:
+      description: Give the list of rules in an application
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+      responses:
+        200:
+          description:
+              Rules of the application
+          schema:
+            type: array
+            items:
+             $ref: '#/definitions/RuleDTO'
+    post:
+      description: Create a rule in the application
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RuleDTO'
+          required: true
+      responses: 
+        201:
+          description: 
+            OK rule created
+          schema:
+            $ref: '#/definitions/RuleDTO'
+  /rules/{ruleId}:
+    get:
+      description: Give the rule details
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - in: path
+          name: ruleId
+          description: Id of the rule
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Ok, details of the rule 
+          schema:
+            $ref: '#/definitions/RuleDTO'
+    put:
+      description: Modify the rule
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - in: path
+          name: ruleId
+          description: Id of the rule
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: Modification of the Rule
+          schema:
+            $ref: '#/definitions/RuleDTO'
+          required: false
+      responses:
+        200:
+          description: OK, Rule modified
+    delete:
+      description: Delete a rule
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - in: path
+          name: ruleId
+          description: Id of the rule
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: OK, Rule deleted
+  /pointsAwards:
+    get:
+      description: Give the set of points earned by the user
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+      responses:
+        200:
+          description:
+              Point award
+          schema:
+            $ref: '#/definitions/PointsAwardDTO'
+    post:
+      description: Create a point award for a user
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PointsAwardDTO'
+          required: true
+      responses:
+        201:
+          description:
+            OK award created
+          schema:
+            $ref: '#/definitions/PointsAwardDTO'
+  /pointsAwards/{id}:
+    get:
+      description: Give pointAward details
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - in: path
+          name: id
+          description: Id of the point award
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Ok, point award's details
+          schema:
+            $ref: '#/definitions/PointsAwardDTO'
+    put:
+      description: Modify point award
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - in: path
+          name: id
+          description: Id of the point award
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: Modification of the point award
+          schema:
+            $ref: '#/definitions/PointsAwardDTO'
+          required: false
+      responses:
+        200:
+          description: OK, point award modified
+    delete:
+      description: Delete a point award
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          description: id of the point award
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: OK, point award deleted
+  /leaderboard:
+    get:
+      description: Give the list of best users
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+      responses:
+        200:
+          description:
+              leaders
+          schema:
+            $ref: '#/definitions/LeaderboardDTO'
+  /endUser:
+    get:
+      description: Give the list of all users in an application
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+      responses:
+        200:
+          description:
+              liste des utilisateurs
+          schema:
+            type: array
+            items:
+             $ref: '#/definitions/EndUserDTO'
+    post:
+      description: Create an end user
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EndUserDTO'
+          required: true
+      responses:
+        201:
+          description:
+            OK endUser created
+          schema:
+            $ref: '#/definitions/EndUserDTO'
+            
+  /endUser/{endUser'ID}/reputation:
+    get:
+      description: Give the reputation of a user
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - in: path
+          name: endUser'ID
+          description: Id of the user
+          required: true
+          type: integer
+          format: int64 
+          
+      responses:
+        200:
+          description:
+              List of users
+          schema:
+            $ref: '#/definitions/EndUserReputationDTO'
+  /endUser/{endUser'ID}/badges:
+    get:
+      description: Give all badges of a user
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - in: path
+          name: endUser'ID
+          description: Id of the endUser
+          required: true
+          type: integer
+          format: int64 
+        
+      responses:
+        200:
+          description:
+              liste des utilisateurs
+            
+  /endUser/{id}:
+    get:
+      description: User details
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - in: path
+          name: id
+          description: Id of the user 
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Ok, details of the user
+          schema:
+            $ref: '#/definitions/EndUserDTO'
+    put:
+      description: Modify a user
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - in: path
+          name: id
+          description: Id of the user
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: Update of a user
+          schema:
+            $ref: '#/definitions/EndUserDTO'
+          required: false
+      responses:
+        200:
+          description: OK, user updated
+          
+    delete:
+      description: Delete a user
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/TokenHeader'
+        - in: path
+          name: id
+          description: Id of the user
+          required: true
+          type: integer
+          format: int64     
+      responses:
+        200:
+          description: OK, user deleted
+definitions:
+  EndUserDTO:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name of the user
+  LeaderboardDTO:
+    type: object
+    properties:
+      points:
+        type: integer
+        format: int32
+        description: Number of points earned by a leader
+      name:
+        type: string
+        description: Name of the leader
+      namePointscale:
+        type: string
+        description: Name of the leader  
+      endUserId:
+        type: integer
+        format: int64
+      badges:
+        type: array
+        items:
+            type: string
+        description: List of badges of a leader
+  ApplicationDTO:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      applicationName:
+        type: string
+        description: Name of the application
+      badges:
+        type: array
+        items:
+            type: string
+            format: uri
+        description: List of all badges of the application
+  Registration:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      applicationName:
+        type: string
+        description: Name of the application
+      password:
+        type: string
+        format: password
+        description: Password to authenticate the application
+  BadgeDTO:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+        description: Name of the badge
+      description:
+        type: string
+        description: Description of the badge
+      imageURI:
+        type: string
+        format: uri
+        description: Image of thedu badge
+      applicationName:
+        type: string
+        description: Name of the application that create the badge
+  PointScaleDTO:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+        description: Badge name
+      description:
+        type: string
+        description: Description du badge
+      nbrDePoints:
+        type: integer
+        format: int32
+  EventDTO:
+    type: object
+    description: Event produced in an application
+    properties:
+      type:
+        type: string
+        description: type of event
+      userId:
+        type: integer
+        format: int64
+        description: Id of the user producing the event
+      timeStamp:
+        type: string
+        format: date-time
+        description: Time when event is posted
+  Credentials:
+    type: object
+    properties:
+      applicationName:
+        type: string
+      password:
+        type: string
+  User:
+    type: object
+    properties:
+      userId:
+        type: integer
+        format: int64
+  Token:
+    type: object
+    properties:
+      applicationName:
+        type: string
+  RuleDTO:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      event:
+        type: string
+        description: type of event
+      action:
+        type: string
+        description: type of action
+      pointScale:
+        type: string
+      points:
+        type: integer
+        format: int32
+      badgeId:
+        type: integer
+        format: int64
+      ActionId:
+        type: integer
+        format: int64
+  PointsAwardDTO:
+    type: object
+    properties:
+      motif:
+        type: string
+        description: Raison for giving a point
+      points:
+        type: integer
+        format: int64
+        description: Nomber of points given
+  EndUserReputationDTO:
+    type: object
+    properties:
+      badge:
+          type: array
+          items:
+            $ref: '#/definitions/BadgeDTO'
+      points:
+        type: integer
+        format: int64
+        description: Nomber of points given
+parameters:
+  TokenHeader:
+    description: token that identifies the app sending the request
+    name: X-Gamification-Token
+    in: header
+    required: true
+    type: string
