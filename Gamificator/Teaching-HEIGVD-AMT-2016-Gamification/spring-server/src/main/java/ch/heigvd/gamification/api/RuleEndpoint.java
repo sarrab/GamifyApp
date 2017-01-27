@@ -38,261 +38,261 @@ public class RuleEndpoint implements RulesApi {
 
    private final RuleRepository rulerepository;
 
-    private final PointScaleRepository pointScaleRepository;
-    
-    private final EventTypeRepository eventTypeRepository;
-    
+   private final PointScaleRepository pointScaleRepository;
+
+   private final EventTypeRepository eventTypeRepository;
+
    private final ApplicationRepository applicationRepository;
-   
-    private final BadgeRepository badgerepository;
-    
-     private final ActionBadgeRepository actionBadgerepository;
-     
-    private final ActionPointRepository actionPointsrepository;
-    
-    private final ActionTypeRepository actionTypeRepository;
-    
-    private final AuthenKeyRepository authenkeyRepository;
-    
-    private PointScaleRepository pointscaleRepository;
-    
-    final String ACTION_TYPE_POINT_FINAL = "ActionPoints";
-    
-    final String ACTION_TYPE_BADGE_FINAL = "ActionBadge";
 
-    @Autowired
-    public RuleEndpoint(RuleRepository rulerepository, PointScaleRepository pointScaleRepository, EventTypeRepository eventTypeRepository, ApplicationRepository applicationRepository, BadgeRepository badgerepository, ActionBadgeRepository actionBadgerepository, ActionPointRepository actionPointsrepository, ActionTypeRepository actionTypeRepository, AuthenKeyRepository authenkeyRepository, PointScaleRepository p) {
-        this.rulerepository = rulerepository;
-        this.pointScaleRepository = pointScaleRepository;
-        this.eventTypeRepository = eventTypeRepository;
-        this.applicationRepository = applicationRepository;
-        this.badgerepository = badgerepository;
-        this.actionBadgerepository = actionBadgerepository;
-        this.actionPointsrepository = actionPointsrepository;
-        this.actionTypeRepository = actionTypeRepository;
-        this.authenkeyRepository = authenkeyRepository;
-    }
+   private final BadgeRepository badgerepository;
 
-    @Override
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<RuleDTO>> rulesGet(@ApiParam(value = "token that identifies the app sending the request", required = true) @RequestHeader(value = "X-Gamification-Token", required = false) String xGamificationToken) {
-        AuthenKey apiKey = authenkeyRepository.findByAppKey(xGamificationToken);
+   private final ActionBadgeRepository actionBadgerepository;
 
-        if (apiKey == null) {
-            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
-        }
-        Application app = apiKey.getApp();
+   private final ActionPointRepository actionPointsrepository;
 
-        if (app != null) {
-            return new ResponseEntity<>(StreamSupport.stream(rulerepository.findAll().spliterator(), true)
-                    .map(p -> toDTO(p))
-                    .collect(toList()), HttpStatus.OK);
-        }
+   private final ActionTypeRepository actionTypeRepository;
 
-        return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+   private final AuthenKeyRepository authenkeyRepository;
 
-    }
+   private PointScaleRepository pointscaleRepository;
 
-    @Override
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<RuleDTO> rulesPost(@ApiParam(value = "token that identifies the app sending the request", required = true) @RequestHeader(value = "X-Gamification-Token", required = false) String xGamificationToken, @ApiParam(value = "paramètres de la règles créée", required = true) @RequestBody RuleDTO body) {
+   final String ACTION_TYPE_POINT_FINAL = "ActionPoints";
 
-        AuthenKey apiKey = authenkeyRepository.findByAppKey(xGamificationToken);
+   final String ACTION_TYPE_BADGE_FINAL = "ActionBadge";
 
-        if (apiKey == null) {
-            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
-        };
+   @Autowired
+   public RuleEndpoint(RuleRepository rulerepository, PointScaleRepository pointScaleRepository, EventTypeRepository eventTypeRepository, ApplicationRepository applicationRepository, BadgeRepository badgerepository, ActionBadgeRepository actionBadgerepository, ActionPointRepository actionPointsrepository, ActionTypeRepository actionTypeRepository, AuthenKeyRepository authenkeyRepository, PointScaleRepository p) {
+      this.rulerepository = rulerepository;
+      this.pointScaleRepository = pointScaleRepository;
+      this.eventTypeRepository = eventTypeRepository;
+      this.applicationRepository = applicationRepository;
+      this.badgerepository = badgerepository;
+      this.actionBadgerepository = actionBadgerepository;
+      this.actionPointsrepository = actionPointsrepository;
+      this.actionTypeRepository = actionTypeRepository;
+      this.authenkeyRepository = authenkeyRepository;
+   }
 
-        Application app = apiKey.getApp();
+   @Override
+   @RequestMapping(method = RequestMethod.GET)
+   public ResponseEntity<List<RuleDTO>> rulesGet(@ApiParam(value = "token that identifies the app sending the request", required = true) @RequestHeader(value = "X-Gamification-Token", required = false) String xGamificationToken) {
+      AuthenKey apiKey = authenkeyRepository.findByAppKey(xGamificationToken);
 
-        EventType eventype = new EventType();
-        Rule rule = new Rule();
-        ActionType action;
+      if (apiKey == null) {
+         return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
+      }
+      Application app = apiKey.getApp();
 
-        if (app != null) {
+      if (app != null) {
+         return new ResponseEntity<>(StreamSupport.stream(rulerepository.findAll().spliterator(), true)
+                 .map(p -> toDTO(p))
+                 .collect(toList()), HttpStatus.OK);
+      }
 
-            eventype = eventTypeRepository.findByEventNameAndApp(body.getEvent(), app);
-            if (eventype == null) {
+      return new ResponseEntity(HttpStatus.UNAUTHORIZED);
 
-                eventype = new EventType(body.getEvent(), app);
-                eventTypeRepository.save(eventype);
+   }
 
-            }
+   @Override
+   @RequestMapping(method = RequestMethod.POST)
+   public ResponseEntity<Void> rulesPost(@ApiParam(value = "token that identifies the app sending the request", required = true) @RequestHeader(value = "X-Gamification-Token", required = false) String xGamificationToken, @ApiParam(value = "paramètres de la règles créée", required = true) @RequestBody RuleDTO body) {
 
-            rule.setEventyp(eventype);
+      AuthenKey apiKey = authenkeyRepository.findByAppKey(xGamificationToken);
 
-            PointScale pointScale = pointScaleRepository.findByName(body.getPointScale());
+      if (apiKey == null) {
+         return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
+      };
 
+      Application app = apiKey.getApp();
+
+      EventType eventype = new EventType();
+      Rule rule = new Rule();
+      ActionType action;
+
+      if (app != null) {
+
+         eventype = eventTypeRepository.findByEventNameAndApp(body.getEvent(), app);
+         if (eventype == null) {
+
+            eventype = new EventType(body.getEvent(), app);
+            eventTypeRepository.save(eventype);
+
+         }
+
+         rule.setEventyp(eventype);
+
+         PointScale pointScale = pointScaleRepository.findByName(body.getPointScale());
+         if (body.getAction().equals("ActionPoints")) {
             if (pointScale != null) {
-                rule.setPointscale(pointScale);
+               rule.setPointscale(pointScale);
 
             } else {
 
-                return new ResponseEntity("pointScale is not exist", HttpStatus.NOT_FOUND);
+               return new ResponseEntity("pointScale is not exist", HttpStatus.NOT_FOUND);
 
             }
-            ActionType actiontype = new ActionType();
-            List<ActionType> actiontypes = new ArrayList<>();
+         }
+         ActionType actiontype = new ActionType();
+         List<ActionType> actiontypes = new ArrayList<>();
 
-            actiontype = actionTypeRepository.findOne(body.getActionId());
+         actiontype = actionTypeRepository.findOne(body.getActionId());
 
-            if (actiontype == null) {
-               
-                if (body.getAction().equalsIgnoreCase(ACTION_TYPE_POINT_FINAL)) {
+         if (actiontype == null) {
 
-                   // ActionPoints actionpoint = new ActionPoints();
+            if (body.getAction().equalsIgnoreCase(ACTION_TYPE_POINT_FINAL)) {
 
-                    ActionPoints actionpoint1 = new ActionPoints();
-                    PointScale p = pointScaleRepository.findByName(body.getPointScale());
-                    actionpoint1.setNombrePoint(p.getMinpoint());
-                    actionpoint1.setName("ActionPoints");
-                    actiontype = actionpoint1;
+               // ActionPoints actionpoint = new ActionPoints();
+               ActionPoints actionpoint1 = new ActionPoints();
+               PointScale p = pointScaleRepository.findByName(body.getPointScale());
+               actionpoint1.setNombrePoint(p.getMinpoint());
+               actionpoint1.setName("ActionPoints");
+               actiontype = actionpoint1;
 
-                    actionTypeRepository.save(actiontype);
+               actionTypeRepository.save(actiontype);
 
-                }
-                System.out.println(body.getAction());
-                if (body.getAction().equals(ACTION_TYPE_BADGE_FINAL)) {
-                    ActionBadge actionbadge = new ActionBadge();
-                    Badge badge;
-                    badge = badgerepository.findOne(body.getBadgeId());
+            }
+            System.out.println(body.getAction());
+            if (body.getAction().equals(ACTION_TYPE_BADGE_FINAL)) {
+               ActionBadge actionbadge = new ActionBadge();
+               Badge badge;
+               badge = badgerepository.findOne(body.getBadgeId());
 
-                    if (badge != null) {
+               if (badge != null) {
 
-                        ActionBadge actionBadge = new ActionBadge();
+                  ActionBadge actionBadge = new ActionBadge();
 
-                        actionbadge.setName("ActionBadge");
-                        actionbadge.setBadge(badge);
-                        actionBadge.setBadge(badge);
-                        actionBadge.setName(body.getAction());
-                        actiontype = actionBadge;
+                  actionbadge.setName("ActionBadge");
+                  actionbadge.setBadge(badge);
+                  actionBadge.setBadge(badge);
+                  actionBadge.setName(body.getAction());
+                  actiontype = actionBadge;
 
-                    }
+               }
 
-                }
-                /*else {
+            }
+            /*else {
                     return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
                 }*/
+         }
+         actionTypeRepository.save(actiontype);
+         rule.setActionType(actiontype);
+
+         rulerepository.save(rule);
+
+         return new ResponseEntity(HttpStatus.CREATED);
+      }
+
+      return new ResponseEntity("content is available", HttpStatus.UNAUTHORIZED);
+
+   }
+
+   @Override
+   @RequestMapping(value = "/{ruleId}", method = RequestMethod.DELETE)
+   public ResponseEntity<Void> rulesRuleIdDelete(@ApiParam(value = "ruleId", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "ruleId", required = true) @PathVariable("ruleId") Long ruleId) {
+
+      AuthenKey apiKey = authenkeyRepository.findByAppKey(xGamificationToken);
+      if (apiKey == null) {
+         return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
+      }
+
+      Rule rule = rulerepository.findOne(ruleId);
+
+      if (rule != null) {
+         rulerepository.delete(rule);
+         return new ResponseEntity(HttpStatus.OK);
+      } else {
+         return new ResponseEntity(HttpStatus.NOT_FOUND);
+      }
+   }
+
+   @Override
+   public ResponseEntity<RuleDTO> rulesRuleIdGet(@ApiParam(value = "ruleId", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "ruleId", required = true) @PathVariable("ruleId") Long ruleId) {
+
+      AuthenKey apiKey = authenkeyRepository.findByAppKey(xGamificationToken);
+      if (apiKey == null) {
+         return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
+      }
+      Rule rule = rulerepository.findOne(ruleId);
+
+      if (rule != null) {
+         RuleDTO dto = toDTO(rule);
+
+         return new ResponseEntity(dto, HttpStatus.OK);
+      } else {
+
+         return new ResponseEntity(HttpStatus.NOT_FOUND);
+      }
+
+   }
+
+   @Override
+   @RequestMapping(value = "{ruleId}", method = RequestMethod.PUT)
+   public ResponseEntity<Void> rulesRuleIdPut(@ApiParam(value = "token that identifies the app sending the request", required = true)
+           @RequestHeader(value = "X-Gamification-Token", required = false) String xGamificationToken, @ApiParam(value = "ruleId", required = true)
+           @PathVariable("ruleId") Long ruleId, @ApiParam(value = "Modification of the Rule")
+           @RequestBody RuleDTO body) {
+
+      AuthenKey apiKey = authenkeyRepository.findByAppKey(xGamificationToken);
+
+      if (apiKey == null) {
+         return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
+      }
+
+      Application app = apiKey.getApp();
+
+      if (app != null) {
+         Rule rule = rulerepository.findOne(ruleId);
+
+         if (!body.getAction().equals(" ")) {
+
+            ActionType ap = actionTypeRepository.findOne(body.getBadgeId());
+
+            if (ap != null) {
+               rule.setActionType(ap);
             }
-            actionTypeRepository.save(actiontype);
-            rule.setActionType(actiontype);
+         }
 
-            rulerepository.save(rule);
+         if (!body.getEvent().equals(" ")) {
+            rule.getEventType().setEventName(body.getEvent());
+            eventTypeRepository.save(rule.getEventType());
+         } else {
+            body.setEvent(rule.getEventType().getEventName());
+         }
 
-            return new ResponseEntity(HttpStatus.CREATED);
-        }
+         if (!body.getPointScale().equals(" ")) {
+            rule.getPointscale().setName(body.getPointScale());
 
-        return new ResponseEntity("content is available", HttpStatus.UNAUTHORIZED);
+         } else {
+            body.setPointScale(rule.getEventType().getEventName());
+         }
 
-    }
+         rulerepository.save(rule);
+         return new ResponseEntity(HttpStatus.OK);
 
-    @Override
-    @RequestMapping(value = "/{ruleId}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> rulesRuleIdDelete(@ApiParam(value = "ruleId", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "ruleId", required = true) @PathVariable("ruleId") Long ruleId) {
+      }
 
-        AuthenKey apiKey = authenkeyRepository.findByAppKey(xGamificationToken);
-        if (apiKey == null) {
-            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
-        }
+      return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+   }
 
-        Rule rule = rulerepository.findOne(ruleId);
+   public RuleDTO toDTO(Rule rule) {
+      RuleDTO ruleDto = new RuleDTO();
 
-        if (rule != null) {
-            rulerepository.delete(rule);
-            return new ResponseEntity(HttpStatus.OK);
-        } else {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
-    }
+      ruleDto.setAction(rule.getActionType().getName());
+      switch (rule.getActionType().getClass().getSimpleName()) {
+         case "ActionPoints":
+            ActionPoints ap = (ActionPoints) rule.getActionType();
+            ruleDto.setPoints(ap.getNbrePoint());
+            break;
+         case "ActionBadge":
+            ActionBadge ab = (ActionBadge) rule.getActionType();
+            ruleDto.setBadgeId(ab.getId());
+      }
+      ruleDto.setEvent(rule.getEventType().getEventName());
+      ruleDto.setPointScale(rule.getPointscale().getName());
+      ruleDto.setId(rule.getId());
 
-    @Override
-    public ResponseEntity<RuleDTO> rulesRuleIdGet(@ApiParam(value = "ruleId", required = true) @RequestHeader(value = "X-Gamification-Token", required = true) String xGamificationToken, @ApiParam(value = "ruleId", required = true) @PathVariable("ruleId") Long ruleId) {
-
-        AuthenKey apiKey = authenkeyRepository.findByAppKey(xGamificationToken);
-        if (apiKey == null) {
-            return new ResponseEntity("apikey not exist", HttpStatus.BAD_REQUEST);
-        }
-        Rule rule = rulerepository.findOne(ruleId);
-
-        if (rule != null) {
-            RuleDTO dto = toDTO(rule);
-
-            return new ResponseEntity(dto, HttpStatus.OK);
-        } else {
-
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
-
-    }
-
-    @Override
-    @RequestMapping(value = "{ruleId}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> rulesRuleIdPut(@ApiParam(value = "token that identifies the app sending the request", required = true)
-            @RequestHeader(value = "X-Gamification-Token", required = false) String xGamificationToken, @ApiParam(value = "ruleId", required = true)
-            @PathVariable("ruleId") Long ruleId, @ApiParam(value = "Modification of the Rule")
-            @RequestBody RuleDTO body) {
-
-        AuthenKey apiKey = authenkeyRepository.findByAppKey(xGamificationToken);
-
-        if (apiKey == null) {
-            return new ResponseEntity("apikey not exist", HttpStatus.UNAUTHORIZED);
-        }
-
-        Application app = apiKey.getApp();
-
-        if (app != null) {
-            Rule rule = rulerepository.findOne(ruleId);
-
-            if (!body.getAction().equals(" ")) {
-
-                ActionType ap = actionTypeRepository.findOne(body.getBadgeId());
-
-                if (ap != null) {
-                    rule.setActionType(ap);
-                }
-            }
-
-            if (!body.getEvent().equals(" ")) {
-                rule.getEventType().setEventName(body.getEvent());
-                eventTypeRepository.save(rule.getEventType());
-            } else {
-                body.setEvent(rule.getEventType().getEventName());
-            }
-
-            if (!body.getPointScale().equals(" ")) {
-                rule.getPointscale().setName(body.getPointScale());
-
-            } else {
-                body.setPointScale(rule.getEventType().getEventName());
-            }
-
-            rulerepository.save(rule);
-            return new ResponseEntity(HttpStatus.OK);
-
-        }
-
-        return new ResponseEntity(HttpStatus.UNAUTHORIZED);
-    }
-
-    public RuleDTO toDTO(Rule rule) {
-        RuleDTO ruleDto = new RuleDTO();
-
-        ruleDto.setAction(rule.getActionType().getName());
-        switch (rule.getActionType().getClass().getSimpleName()) {
-            case "ActionPoints":
-                ActionPoints ap = (ActionPoints) rule.getActionType();
-                ruleDto.setPoints(ap.getNbrePoint());
-                break;
-            case "ActionBadge":
-                ActionBadge ab = (ActionBadge) rule.getActionType();
-                ruleDto.setBadgeId(ab.getId());
-        }
-        ruleDto.setEvent(rule.getEventType().getEventName());
-        ruleDto.setPointScale(rule.getPointscale().getName());
-        ruleDto.setId(rule.getId());
-
-        return ruleDto;
-    }
+      return ruleDto;
+   }
 
 }

@@ -15,12 +15,13 @@ import ch.heigvd.gamification.api.dto.PointScaleDTO;
 import ch.heigvd.gamification.api.dto.Registration;
 import ch.heigvd.gamification.api.dto.RuleDTO;
 import ch.heigvd.gamification.api.dto.Token;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import java.io.Console;
 import java.util.List;
 import java.util.Map;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.joda.time.DateTime;
 import static org.junit.Assert.assertEquals;
 
@@ -29,8 +30,6 @@ import static org.junit.Assert.assertEquals;
  * @author user
  */
 public class SimpleEventProcessingSteps {
-
-   private Registration registration;
 
    private int applicationsCounter = 1;
 
@@ -56,7 +55,9 @@ public class SimpleEventProcessingSteps {
 
    private Token token;
 
-   private Credentials credentials;
+   private Long actionIdBadge = 5L;
+
+   private Long actionIdPointScale = 9L;
 
    private BadgeDTO badge;
 
@@ -74,24 +75,26 @@ public class SimpleEventProcessingSteps {
 
    private EventDTO event = new EventDTO();
 
+   private RuleDTO rule;
+
    private DateTime timeStamp;
+   private List<BadgeDTO> badges;
+   private List<PointScaleDTO> pointScales;
 
-   @Given("^I have one application payload$")
-   public void i_have_one_application_payload() throws Throwable {
-      registration = new Registration();
-      randomApplicationName = "random-app-" + (applicationsCounter++) + "-" + System.currentTimeMillis();
-      registration.setApplicationName(randomApplicationName);
-      registration.setPassword(DUMMY_PASSWORD);
-   }
+   @Given("^a token for a registred application$")
+   public void a_token_for_a_registred_application() throws Throwable {
 
-   @When("^I POST it to /applications endpoint$")
-   public void i_POST_it_to_applications_endpoint() throws Throwable {
-      try {
-         ApiResponse response = api.applicationsPostWithHttpInfo(registration);
-         statusCode = response.getStatusCode();
-      } catch (ApiException e) {
-         statusCode = e.getCode();
-      }
+      Registration applicationRegistration = new Registration();
+      randomApplicationName = "random-app-toto" + (applicationsCounter++) + "-" + System.currentTimeMillis();
+      applicationRegistration.setApplicationName(randomApplicationName);
+      applicationRegistration.setPassword(DUMMY_PASSWORD);
+      api.applicationsPost(applicationRegistration);
+
+      Credentials credentials = new Credentials();
+      credentials.setApplicationName(randomApplicationName);
+      credentials.setPassword(DUMMY_PASSWORD);
+
+      token = api.authenticateApplicationAndGetToken(credentials);
    }
 
    @Then("^I receive a (\\d+) code status$")
@@ -99,27 +102,9 @@ public class SimpleEventProcessingSteps {
       assertEquals(arg1, statusCode);
    }
 
-   @When("^I POST it to /authentications endpoint$")
-   public void i_POST_it_to_authentications_endpoint() throws Throwable {
-      credentials = new Credentials();
-      credentials.setApplicationName(registration.getApplicationName());
-      credentials.setPassword(DUMMY_PASSWORD);
-      try {
-         ApiResponse<Token> response = api.authenticateApplicationAndGetTokenWithHttpInfo(credentials);
-         statusCode = response.getStatusCode();
-      } catch (ApiException e) {
-         statusCode = e.getCode();
-      }
-   }
-
-   @Then("^I receive token$")
-   public void i_receive_token() throws Throwable {
-      token = api.authenticateApplicationAndGetToken(credentials);
-   }
-
    @Given("^I have one pointScale payload$")
    public void i_have_one_pointScale_payload() throws Throwable {
-      randomPointScaleName = "pointScale-name-" + (pointScalesCounter++) + '-' + System.currentTimeMillis();
+      randomPointScaleName = "pointScale-name-toto" + (pointScalesCounter++) + '-' + System.currentTimeMillis();
       pointScale = new PointScaleDTO();
       pointScale.setNbrDePoints(nbrDePoints);
       pointScale.setName(randomPointScaleName);
@@ -146,7 +131,7 @@ public class SimpleEventProcessingSteps {
 
    @Given("^I have one badge payload$")
    public void i_have_one_badge_payload() throws Throwable {
-      randomBadgeName = "badge-name-" + (badgesCounter++) + '-' + System.currentTimeMillis();
+      randomBadgeName = "badge-name" + (badgesCounter++) + '-' + System.currentTimeMillis();
       badge = new BadgeDTO();
       badge.setImageURI(imageURI);
       badge.setName(randomBadgeName);
@@ -157,6 +142,7 @@ public class SimpleEventProcessingSteps {
    public void i_POST_it_to_badges_endpoint() throws Throwable {
       try {
          ApiResponse response = api.badgesPostWithHttpInfo(badge, token.getApplicationName());
+
          Map<String, List<String>> headers = response.getHeaders();
          String locationHeader = headers.get("Location").get(0);
          String[] locationParts = locationHeader.split("\\/");
@@ -172,16 +158,30 @@ public class SimpleEventProcessingSteps {
    @Given("^I have a rule payload to give a badge$")
    public void i_have_a_rule_payload_to_give_a_badge() throws Throwable {
       ruleBadge = new RuleDTO();
-      ruleBadge.setAction("ActionBadge");
-      ruleBadge.setActionId(Long.MIN_VALUE);
+      ruleBadge.setAction("ActionPoints");
+      ruleBadge.setActionId(actionIdBadge);
       ruleBadge.setBadgeId(badge.getId());
       ruleBadge.setEvent("Concern badge");
+      ruleBadge.setPointScale("name");
+     ruleBadge.setPoints(5);
    }
 
    @When("^I POST it to /rules endpoint$")
    public void i_POST_it_to_rules_endpoint() throws Throwable {
+
       try {
          ApiResponse response = api.rulesPostWithHttpInfo(token.getApplicationName(), ruleBadge);
+         statusCode = response.getStatusCode();
+      } catch (ApiException e) {
+         statusCode = e.getCode();
+      }
+   }
+   
+   @When("^I POST it to the /rules endpoint$")
+   public void i_POST_it_to_the_rules_endpoint() throws Throwable {
+
+      try {
+         ApiResponse response = api.rulesPostWithHttpInfo(token.getApplicationName(), rulePointScale);
          statusCode = response.getStatusCode();
       } catch (ApiException e) {
          statusCode = e.getCode();
@@ -192,18 +192,18 @@ public class SimpleEventProcessingSteps {
    public void i_have_a_rule_payload_to_give_a_pointScale() throws Throwable {
       rulePointScale = new RuleDTO();
       rulePointScale.setAction("ActionPoints");
-      rulePointScale.setActionId(Long.MAX_VALUE);
+      rulePointScale.setActionId(actionIdPointScale);
       rulePointScale.setEvent("concern points");
       rulePointScale.setPointScale(pointScale.getName());
       rulePointScale.setPoints(nbrDePoints);
+      rulePointScale.setBadgeId(actionIdBadge);//.....
    }
 
    @Given("^I have an event payload concerning a badge$")
    public void i_have_an_event_payload_concerning_a_badge() throws Throwable {
       eventBadge = new EventDTO();
       eventBadge.setTimeStamp(timeStamp);
-      eventBadge.setType(ruleBadge.getEvent());
-      eventBadge.setUserId(Long.MIN_VALUE);
+      eventBadge.setType(rule.getEvent());
       event = eventBadge;
    }
 
@@ -221,9 +221,28 @@ public class SimpleEventProcessingSteps {
    public void i_have_an_event_payload_concerning_a_pointScale() throws Throwable {
       eventPointScale = new EventDTO();
       eventPointScale.setTimeStamp(timeStamp);
-      eventPointScale.setType(rulePointScale.getEvent());
-      eventPointScale.setUserId(Long.MAX_VALUE);
+      eventPointScale.setType(rule.getEvent());
       event = eventPointScale;
    }
 
+   @Then("^I ask for list of badges with a GET on the /badges endpoint$")
+   public void i_ask_for_list_of_badges_with_a_GET_on_the_badges_endpoint() throws Throwable {
+      badges = api.badgesGet(token.getApplicationName());
+   }
+
+   @Then("^I see my badge in list$")
+   public void i_see_my_badge_in_list() throws Throwable {
+      assertThat(badges).extracting("name").contains(badge.getName());
+   }
+
+   @When("^I ask for list of pointScales with a GET on the /pointScales endpoint$")
+   public void i_ask_for_list_of_pointScales_with_a_GET_on_the_pointScales_endpoint() throws Throwable {
+
+      pointScales = api.pointScalesGet(token.getApplicationName());
+   }
+
+   @When("^I see my pointScale in list$")
+   public void i_see_my_pointScale_in_list() throws Throwable {
+      assertThat(pointScales).extracting("id").contains(pointScale.getId());
+   }
 }
