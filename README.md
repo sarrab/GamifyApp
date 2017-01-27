@@ -75,5 +75,8 @@ To run the tests, you may follow these steps:
 2. Open the project with an IDE (Netbeans for example).
 3. click Test
 
+### Présentation
+ You can find our présentation [Here](https://github.com/sarrab/GamifyApp/tree/master/Gamificator/docs/Gamification-API-Presentation.pdf)
+
 ###Collaborators
 Togue Kamga Thibaut, Norah Jeannine and Sarra Berich
