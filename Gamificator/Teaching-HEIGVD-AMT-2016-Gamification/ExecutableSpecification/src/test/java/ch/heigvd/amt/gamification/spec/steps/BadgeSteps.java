@@ -5,7 +5,6 @@
  */
 package ch.heigvd.amt.gamification.spec.steps;
 
-//import static ch.heigvd.amt.gamification.spec.steps.ApplicationSteps.DUMMY_PASSWORD;
 import ch.heigvd.gamification.ApiException;
 import ch.heigvd.gamification.ApiResponse;
 import ch.heigvd.gamification.api.DefaultApi;
@@ -81,12 +80,12 @@ public class BadgeSteps {
    public void i_POST_it_to_the_badges_endpoint() throws Throwable {
       try {
          ApiResponse response = api.badgesPostWithHttpInfo(badge, token.getApplicationName());
-         Map<String,List<String>> headers = response.getHeaders();
+         Map<String, List<String>> headers = response.getHeaders();
          String locationHeader = headers.get("Location").get(0);
          String[] locationParts = locationHeader.split("\\/");
          String badgeIdString = locationParts[locationParts.length - 1];
          badge.setId(Long.parseLong(badgeIdString));
-         
+
          statusCode = response.getStatusCode();
       } catch (ApiException e) {
          statusCode = e.getCode();
@@ -143,7 +142,7 @@ public class BadgeSteps {
          ApiResponse response = api.badgesBadgeIdDeleteWithHttpInfo(token.getApplicationName(), badgeId);
          statusCode = response.getStatusCode();
       } catch (ApiException e) {
-        statusCode = e.getCode();
+         statusCode = e.getCode();
       }
    }
 

@@ -78,8 +78,6 @@ public class SimpleEventProcessingSteps {
    private RuleDTO rule;
 
    private DateTime timeStamp;
-   private List<BadgeDTO> badges;
-   private List<PointScaleDTO> pointScales;
 
    @Given("^a token for a registred application$")
    public void a_token_for_a_registred_application() throws Throwable {
@@ -162,8 +160,6 @@ public class SimpleEventProcessingSteps {
       ruleBadge.setActionId(actionIdBadge);
       ruleBadge.setBadgeId(badge.getId());
       ruleBadge.setEvent("Concern badge");
-      ruleBadge.setPointScale("name");
-     ruleBadge.setPoints(5);
    }
 
    @When("^I POST it to /rules endpoint$")
@@ -176,7 +172,7 @@ public class SimpleEventProcessingSteps {
          statusCode = e.getCode();
       }
    }
-   
+
    @When("^I POST it to the /rules endpoint$")
    public void i_POST_it_to_the_rules_endpoint() throws Throwable {
 
@@ -196,7 +192,6 @@ public class SimpleEventProcessingSteps {
       rulePointScale.setEvent("concern points");
       rulePointScale.setPointScale(pointScale.getName());
       rulePointScale.setPoints(nbrDePoints);
-      rulePointScale.setBadgeId(actionIdBadge);//.....
    }
 
    @Given("^I have an event payload concerning a badge$")
@@ -223,26 +218,5 @@ public class SimpleEventProcessingSteps {
       eventPointScale.setTimeStamp(timeStamp);
       eventPointScale.setType(rule.getEvent());
       event = eventPointScale;
-   }
-
-   @Then("^I ask for list of badges with a GET on the /badges endpoint$")
-   public void i_ask_for_list_of_badges_with_a_GET_on_the_badges_endpoint() throws Throwable {
-      badges = api.badgesGet(token.getApplicationName());
-   }
-
-   @Then("^I see my badge in list$")
-   public void i_see_my_badge_in_list() throws Throwable {
-      assertThat(badges).extracting("name").contains(badge.getName());
-   }
-
-   @When("^I ask for list of pointScales with a GET on the /pointScales endpoint$")
-   public void i_ask_for_list_of_pointScales_with_a_GET_on_the_pointScales_endpoint() throws Throwable {
-
-      pointScales = api.pointScalesGet(token.getApplicationName());
-   }
-
-   @When("^I see my pointScale in list$")
-   public void i_see_my_pointScale_in_list() throws Throwable {
-      assertThat(pointScales).extracting("id").contains(pointScale.getId());
    }
 }

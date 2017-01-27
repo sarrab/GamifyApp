@@ -7,15 +7,11 @@ Scenario: create a badge for that application
 Given I have one badge payload
 When I POST it to /badges endpoint
 Then I receive a 201 code status
-And I ask for list of badges with a GET on the /badges endpoint
-Then I see my badge in list
 
 Scenario: create a pointScale for that application
 Given I have one pointScale payload
 When I POST it to /pointScales endpoint
 Then I receive a 201 code status 
-When I ask for list of pointScales with a GET on the /pointScales endpoint
-Then I see my pointScale in list
 
 Scenario: create a rule to give a badge
 Given I have one badge payload
